@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="Web Developer: Sinan Şahin - sinan.sahin@omu.edu.tr">
+
+  <title>Topluluklar Bilgi Sistemi</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' =>
+  true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' =>
+  true %>
+  <%= csrf_meta_tags %></head>
+<body class="body-home">
+  <div class="container">
+    <br />
+    <%= flash_messages %>
+    <%= yield %></div>
+
+  <!-- BEGIN # MODAL LOGIN -->
+  <div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header" align="center">
+          <%= image_tag("omu_logo.png", height: '125', width: '125') %>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+          </button>
+        </div>
+
+        <!-- Begin # DIV Form -->
+        <div id="div-forms">
+
+          <!-- Begin # Login Form -->
+          <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name), html: { id: 'login-form' }) do |f| %>
+          <div class="modal-body">
+            <div id="div-login-msg">
+              <div id="icon-login-msg" class="glyphicon glyphicon-chevron-right"></div>
+              <span id="text-login-msg">Kullanıcı adınızı ve şifresinizi yazınız.</span>
+            </div>
+            <%= f.input :email, placeholder: "Kullanıcı Adınız", label: false, required: false, autofocus: true, input_html: { id: 'login_username', class: 'form-control' } %>
+            <%= f.input :password, placeholder: "Şifreniz", label: false, required: false, input_html: { id: 'login_password', class: 'form-control' } %>
+            <%= f.input :remember_me, label: "Beni Hatırla", as: :boolean if devise_mapping.rememberable? %>
+          </div>
+          <div class="modal-footer">
+            <div class="form-actions">
+              <!-- <button type="submit" class="btn btn-primary btn-lg btn-block">Giriş</button>
+            -->
+              <%= f.button :submit, "Giriş", class: "btn btn-primary btn-lg btn-block" %>
+            </div>
+              <!--  <div>
+              <button id="login_lost_btn" type="button" class="btn btn-link">Şifremi unuttum</button>
+              <button id="login_register_btn" type="button" class="btn btn-link">Kayıt Ol</button>
+            </div>
+            -->
+          </div>
+
+      <!-- <div class="form-actions"></div>
+    -->
+    <% end %>
+    <!-- End # Login Form -->
+
+    <!-- Begin | Lost Password Form -->
+    <form id="lost-form" style="display:none;">
+      <div class="modal-body">
+        <div id="div-lost-msg">
+          <div id="icon-lost-msg" class="glyphicon glyphicon-chevron-right"></div>
+          <span id="text-lost-msg">Mail adresinizi yazınız</span>
+        </div>
+        <input id="lost_email" class="form-control" type="text" placeholder="E-Posta" required></div>
+      <div class="modal-footer">
+        <div>
+          <button type="submit" class="btn btn-primary btn-lg btn-block">Gönder</button>
+        </div>
+        <div>
+          <button id="lost_login_btn" type="button" class="btn btn-link">Giriş Yap</button>
+          <button id="lost_register_btn" type="button" class="btn btn-link">Kayıt Ol</button>
+        </div>
+      </div>
+    </form>
+    <!-- End | Lost Password Form -->
+
+    <!-- Begin | Register Form -->
+    <form id="register-form" style="display:none;">
+      <div class="modal-body">
+        <div id="div-register-msg">
+          <div id="icon-register-msg" class="glyphicon glyphicon-chevron-right"></div>
+          <span id="text-register-msg">Hesap Oluştur</span>
+        </div>
+        <input id="register_username" class="form-control" type="text" placeholder="Kullanıcı Adı" required>
+        <input id="register_email" class="form-control" type="text" placeholder="E-Mail" required>
+        <input id="register_password" class="form-control" type="password" placeholder="Şifre" required></div>
+      <div class="modal-footer">
+        <div>
+          <button type="submit" class="btn btn-primary btn-lg btn-block">Hesap Oluştur</button>
+        </div>
+        <div>
+          <button id="register_login_btn" type="button" class="btn btn-link">Giriş Yap</button>
+          <button id="register_lost_btn" type="button" class="btn btn-link">Şifremi Kaybettim</button>
+        </div>
+      </div>
+    </form>
+    <!-- End | Register Form --> </div>
+  <!-- End # DIV Form -->
+
+</div>
+</div>
+</div>
+<!-- END # MODAL LOGIN -->
+
+<!-- BEGIN # MODAL LOGIN -->
+<div class="modal fade" id="event-responses-modal" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header" align="center">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+        </button>
+        <h4 id="event-modal-title"></h4>
+      </div>
+
+      <div class="modal-body">
+        <table class="table table-striped" id="event-responses-table">
+          <thead id="tblHead">
+            <tr>
+              <th>Durum</th>
+              <th>Açıklama</th>
+              <th>Tarih</th>
+            </tr>
+          </thead>
+          <tbody id="event-responses-table-body">
+          </tbody>
+        </table>
+      </div>
+      <div class="modal-footer" id="event-responses-table-footer">
+        <div>
+          <% if user_signed_in? %>
+            <%= simple_form_for :event_response, :url => event_response_create_path, html: {id: "event-response-form"} do |f| %>
+              <div class="form-inputs">
+                <%= f.input :explanation, placeholder: "Açıklama(opsiyonel)", label: false %>
+                <%= f.input :event_id, :as => :hidden, :input_html => { :class => "event-id-modal"} %>
+                <%= f.input :event_status_id, :as => :hidden, :input_html => { :id => "event-status-id-modal" } %>
+              </div>
+              <div class="form-actions">
+                <button type="button" class="btn btn-primary pull-right" style="margin-left: 5px" data-dismiss="modal">Kapat</button>
+                <% if current_user.admin? %>
+                  <button type="button" class="btn btn-danger pull-right form-response-button admin-reject">Reddet</button>
+                  <button type="button" class="btn btn-success pull-right form-response-button admin-confirm">Onayla</button>
+                <% elsif current_user.president? %>
+                  <button type="button" class="btn btn-success pull-right form-response-button president-resend">Onay için yeniden gönder</button>
+                <% elsif current_user.advisor? %>
+                  <button type="button" class="btn btn-danger pull-right form-response-button advisor-reject">Reddet</button>
+                  <button type="button" class="btn btn-success pull-right form-response-button advisor-confirm">Onayla</button>
+                <% else %>
+                <% end %>
+              </div>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+<!-- END # MODAL LOGIN -->
+
+</body>
+</html>

@@ -1,0 +1,46 @@
+<div class="row">
+  <%= render 'home/navbarDefault' %>
+</div>
+<div class="row">
+  <div class="col-md-12">
+  <ol class="breadcrumb">
+    <li><%= link_to 'Anasayfa', root_path %></li>
+    <li class="active">Topluluk Akademik Dönem Tanımlamaları</li>
+  </ol>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Topluluk Akademik Dönem Tanımlamaları</h3>
+      </div>
+      <div class="panel-body">
+      <p align="right">
+      <!-- <%= link_to 'Yeni Topluluk Akademik Dönem Tanımlaması', new_club_period_path, class: "btn btn-default" %> -->
+        </p>
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th>Topluluk</th>
+      <th>Akademik Dönem</th>
+      <!-- <th colspan="3"></th> -->
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @club_periods.each do |club_period| %>
+      <tr>
+        <td><%= club_period.club.name %></td>
+        <td><%= club_period.academic_period.name %></td>
+<!--         <td><%= link_to '<i class="fa fa-eye" title="Göster"></i>'.html_safe, club_period %></td>
+        <td><%= link_to '<i class="fa fa-pencil" title="Düzenle"></i>'.html_safe, edit_club_period_path(club_period) %></td>
+        <td><%= link_to '<i class="fa fa-trash" title="Sil"></i>'.html_safe, club_period, method: :delete, data: { confirm: 'Topluluk dönemini silmek istediğinize emin misiniz?' } %></td> -->
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+
+      <br>
+      </div>
+
+    </div>
+  </div>
+</div>

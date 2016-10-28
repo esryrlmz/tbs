@@ -1,0 +1,46 @@
+<div class="row">
+  <%= render 'home/navbarDefault' %>
+</div>
+<div class="row">  
+<div class="col-md-12">
+<ol class="breadcrumb">
+    <li><%= link_to 'Anasayfa', root_path %></li>
+    <li class="active">Rol Ayarları</li>
+  </ol>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Rol Ayarları</h3>
+      </div>
+      <div class="panel-body">
+<table class="table table-hover" id="roles">
+  <thead>
+    <tr>
+      <th></th>
+      <th>Kullanıcı Adı</th>
+      <th>Topluluk</th>
+      <th>Rol Tipi</th>
+      <th>İptal Talebi Açıklaması</th>
+      <th>Dönem</th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @roles.each do |role| %>
+      <tr>
+        <td></td>
+        <td><%= link_to role.user.name_surname, role %></td>
+        <td><%= role.club_period.club.name if role.club_period.present? %></td>
+        <td><%= role.role_type.name %></td>
+        <td><%= role.explanation %></td>
+        <td><%= role.club_period.academic_period.name if role.club_period.present? %></td>
+        <td><%= link_to '<i class="fa fa-trash" title="Sil"></i>'.html_safe, role, method: :delete, data: { confirm: 'Bu rolü silmek istediğinize emin misiniz?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<br />
+</div>
+</div>
+</div>
+</div>

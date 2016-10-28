@@ -1,0 +1,32 @@
+<div class="row">
+  <%= render 'home/navbarDefault' %>
+</div>
+<div class="row">
+  <div class="col-md-12">
+    <ol class="breadcrumb">
+    <li><%= link_to 'Anasayfa', root_path %></li>
+    <li><%= link_to 'Topluluk Akademik Dönem Tanımlamaları',club_periods_path %></li>
+    <li class="active">Topluluk Akademik Dönem Tanımlaması Detay</li>
+  </ol>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Topluluk Akademik Dönem Tanımlaması Detay</h3>
+      </div>
+      <div class="panel-body">
+<p>
+  <strong>Topluluk:</strong>
+  <%= @club_period.club.name %>
+</p>
+
+<p>
+  <strong>Akademik Dönem Adı:</strong>
+  <%= @club_period.academic_period.name %>
+</p>
+
+<%= link_to 'Düzenle', edit_club_period_path(@club_period), class: "btn btn-success" %> |
+<%= link_to 'Geri',club_periods_path, class: "btn btn-info" %>
+</div>
+    </div>
+  </div>
+</div>
+

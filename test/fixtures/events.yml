@@ -1,0 +1,31 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+ club_periods_id: 
+  event_category_id: 
+  title: 
+  speakers: 
+  datetime: 
+  content: 
+  location: 
+  requirements: MyString
+  text,: MyString
+  event_status_id: 
+  confirm_is_required: 
+  event_confirm_result: 
+  image: MyString
+
+two:
+ club_period_id: 
+  event_category_id: 
+  title: 
+  speakers: 
+  datetime: 
+  content: 
+  location: 
+  requirements: MyString
+  text,: MyString
+  event_status_id: 
+  confirm_is_required: 
+  event_confirm_result: 
+  image: MyString

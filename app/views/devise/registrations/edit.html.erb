@@ -1,0 +1,44 @@
+<div class="row">
+<%= render 'home/navbarDefault'%>
+<div class="col-md-12 panel">
+<br />
+<div class="col-md-3">
+    
+</div>
+<div class="col-md-6 panel panel-default">
+  <div class="panel-heading">
+      <h3 class="panel-title">Düzenle <%= resource_name.to_s.humanize %></h3>
+    </div>
+    <div class="panel-body">
+<%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <% if current_user.present? && current_user.advisor? %>
+      <%= f.input :is_passive, label: "Hesabı pasife al" %>
+    <% end %>
+    <%= f.input :email, required: true, autofocus: true %>
+    <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+      <p>Currently waiting confirmation for: <%= resource.unconfirmed_email %></p>
+    <% end %>
+    <%= has_avatar_or_not(current_user, nil, 200) %>
+    <%= f.input :image, type: :file, label: "Fotoğraf:" %>
+    <%= f.input :password, autocomplete: "off", hint: "Değiştirmek istemiyorsan boş bırak", required: false %>
+    <%= f.input :password_confirmation, required: false %>
+    <%= f.input :current_password, hint: "Değişiklikleri onaylamak için şifrenize ihtiyaç var", required: true %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit, "Kaydet" %>
+  </div>
+<% end %>
+
+<h3>Cancel my account</h3>
+
+<p>Unhappy? <%= link_to "Hesabımı iptal et", registration_path(resource_name), data: { confirm: "Emin misin?" }, method: :delete %></p>
+
+<%= link_to "Geri", :back %>
+</div>
+</div>
+</div>
+</div>

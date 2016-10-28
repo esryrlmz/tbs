@@ -1,0 +1,16 @@
+<%= simple_form_for(@club) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :club_category_id, collection: ClubCategory.all, label: 'Kategori Seçiniz:',:include_blank => false %>
+    <%= f.input :logo, type: :file, label: "Logo:" %>
+    <%= f.input :name, label: "Topluluk Adı:" %>
+    <%= f.input :short_name, label: "Kısa Adı:"  %>
+    <%= f.input :description, label: "Açıklaması:" %>
+    <%= f.input :creation_date, label: "Kuruluş Tarihi:" %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.submit 'Kaydet', class: "btn btn-success" %>
+  </div>
+<% end %>

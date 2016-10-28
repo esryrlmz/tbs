@@ -1,0 +1,42 @@
+<div class="row">
+  <%= render 'home/navbarDefault' %>
+</div>
+<div class="row">
+  <div class="col-md-12">
+  <ol class="breadcrumb">
+    <li><%= link_to 'Anasayfa', root_path %></li>
+    <li class="active">Etkinlik Kategorileri</li>
+  </ol>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Etkinlik Yerleri</h3>
+      </div>
+      <div class="panel-body">
+        
+      <p align="right"><%= link_to 'Yeni Etkinlik Yeri Oluştur', new_event_location_path, class: "btn btn-default" %></p>
+      <table class="table table-hover" id="event_locations">
+        <thead>
+          <tr>
+            <th>Adı</th>
+            <th></th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% @event_locations.each do |event_location| %>
+            <tr>
+              <td><%= event_location.name %></td>
+              <td><%= link_to '<i class="fa fa-eye" title="Göster"></i>'.html_safe, event_location, :style=>'margin-right: 20px;' %><%= link_to '<i class="fa fa-pencil" title="Düzenle"></i>'.html_safe, edit_event_location_path(event_location), :style=>'margin-right: 20px;' %><%= link_to '<i class="fa fa-trash" title="Sil"></i>'.html_safe, event_location, method: :delete, data: { confirm: 'Etkinlik yerini silmek istediğinize emin misiniz?' } %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+
+      <br>
+
+      
+      </div>
+    </div>
+  </div>
+</div>
+

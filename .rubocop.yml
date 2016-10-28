@@ -1,0 +1,25 @@
+#Rails:
+#  Enabled: true
+inherit_from: .rubocop_todo.yml
+
+Style/IndentationConsistency:
+  Enabled: true
+  EnforcedStyle: rails
+
+Style/IndentationWidth:
+  Enabled: true
+  Width: 2
+
+Style/ConditionalAssignment:
+  Enabled: false
+
+AllCops:
+  Include:
+    - '**/Rakefile'
+    - '**/config.ru'
+  Exclude:
+    - 'db/schema.rb'
+    - 'vendor/bundle/**/*'
+    - 'bundle/**/*'
+    - 'config/**/*'
+    - 'bin/*'

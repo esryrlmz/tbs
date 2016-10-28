@@ -1,0 +1,65 @@
+<div class="col-md-12">
+<div class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <%= link_to "TBS", clubs_path, class: "navbar-brand" %>
+    </div>
+    <div class="navbar-collapse collapse navbar-responsive-collapse">
+      <ul class="nav navbar-nav">
+        <li><%= link_to '<i class="fa fa-cubes"></i> Topluluklar'.html_safe, clubs_path %></li>
+        <li><%= link_to '<i class="fa fa-calendar-check-o"></i> Etkinlikler'.html_safe, events_path %></li>
+        <li><%= link_to '<i class="fa fa-bullhorn"></i> Sksdb Duyuruları'.html_safe, system_announcments_path %></li>
+        <% if user_signed_in? && (current_user.admin? || current_user.president? || current_user.advisor?) %>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Yönetim<span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <% if current_user.admin? %>
+                <li><%= link_to "Topluluk Kategorileri",  club_categories_path %></li>
+                <li><%= link_to "Topluluk İletişim Bilgileri", club_contacts_path  %></li>
+                <li><%= link_to "Topluluk Ayarları", club_settings_path  %></li>
+                <li><%= link_to "Yönetim Kurulları", club_board_of_directors_path %></li>
+                <li><%= link_to "Denetim Kurulları", club_board_of_supervisories_path %></li>
+                <li role="separator" class="divider"></li>
+                <li><%= link_to "Etkinlik Yerleri", event_locations_path %></li>
+                <li><%= link_to "Etkinlik Kategorileri", event_categories_path  %></li>
+                <li role="separator" class="divider"></li>
+                <li><%= link_to "Roller", roles_path  %></li>
+                <li><%= link_to "Üyelik İptal Talepleri", unsubscribe_request_path  %></li>
+                <li role="separator" class="divider"></li>
+                <li><%= link_to "Akademik Dönem Tanımları", academic_periods_path  %></li>
+              <% elsif current_user.advisor? %>
+                <li><%= link_to "Duyurular", announcments_path %></li>
+                <li><%= link_to "Slide Ayarları", club_slides_path %></li>
+              <% elsif current_user.president? %>
+                <li><%= link_to "Duyurular", announcments_path %></li>
+                <li><%= link_to "Üyeler", club_users_path %></li>
+              <% else %>
+              <% end %>
+            </ul>
+          </li>
+        <% end %>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><%= has_avatar_or_not(current_user, 20, 20, :style => "border-radius: 3px;", :class => "img-rounded") %></i>
+          <%= user_signed_in? ? current_user.full_name : "Misafir Kullanıcı" %> <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <% if user_signed_in? %>
+              <li><%= link_to "Profilim",  edit_user_registration_path(current_user) %></li>
+              <li><%= link_to "Çıkış Yap",  destroy_user_session_path , method: :delete %></li>
+            <% else %>
+              <!-- <li><%= link_to "Giriş Yap", new_user_session_path %></li> -->
+              <li><a href="#" role="button" data-toggle="modal" data-target="#login-modal">Giriş Yap</a></li>
+            <% end %>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+</div>

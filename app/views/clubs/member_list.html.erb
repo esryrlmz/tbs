@@ -1,0 +1,38 @@
+<div class="row">
+  <%= render 'home/navbarDefault' %>
+</div>
+<div class="row">
+  <div class="col-md-12">
+    <ol class="breadcrumb">
+        <li><%= link_to 'Anasayfa', root_path %></li>
+        <li><%= link_to 'Topluluklar', clubs_path %></li>
+        <li class="active">Topluluk Üye Listesi</li>
+    </ol>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4 class="panel-title">Topluluk Üye Listesi</h4>
+      </div>
+      <div class="panel-body">
+      <h3><%= @member_lists.count %> Üye Bulunmaktadır.</h3>
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>No</th>
+              <th>Adı Soyadı</th>
+            </tr>
+
+          </thead>
+
+          <tbody>
+            <% @member_lists.each do |member_list| %>
+              <tr>
+                <td><%= member_list.user.user_name %></td>
+                <td><%= member_list.user.name_surname %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div> 
+</div>

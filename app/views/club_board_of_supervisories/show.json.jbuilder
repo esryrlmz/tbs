@@ -1,0 +1,1 @@
+json.extract! @club_board_of_supervisory, :id, :period_id, :principal_member_one, :principal_member_two, :principal_member_three, :reserve_member_one, :reserve_member_two, :reserve_member_three, :created_at, :updated_at

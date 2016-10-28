@@ -1,0 +1,48 @@
+<div class="row">
+  <%= render 'home/navbarDefault' %>
+</div>
+<div class="row">  
+<div class="col-md-12">
+<ol class="breadcrumb">
+    <li><%= link_to 'Anasayfa', root_path %></li>
+    <li class="active">Üyeler</li>
+  </ol>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Üyeler</h3>
+      </div>
+      <div class="panel-body">
+<table class="table table-hover" id="club_users_index">
+  <thead>
+    <tr>
+      <th></th>
+      <th>Kullanıcı Adı</th>
+      <th>Rol Tipi</th>
+      <th>Durum</th>
+      <th>Email</th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @roles.each do |role| %>
+      <tr>
+        <td></td>
+        <td><%= link_to role.user.name_surname, role %></td>
+        <td><%= role.role_type.name %></td>
+        <td><%= role.status ? "Üye" : role.explanation.present? ? role.explanation : "İptal onayı bekleniyor" %></td>
+        <td><%= role.user.email %></td>
+        <td>
+          <% if current_user.president? %>
+            <%= link_to '<i class="fa fa-pencil" title="Düzenle"></i>'.html_safe, edit_role_path(role) %>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<br />
+</div>
+</div>
+</div>
+</div>

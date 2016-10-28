@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  period_id: 1
+  title: MyString
+  content: MyText
+  is_view: false
+  is_advisor_confirmation: false
+
+two:
+  period_id: 1
+  title: MyString
+  content: MyText
+  is_view: false
+  is_advisor_confirmation: false

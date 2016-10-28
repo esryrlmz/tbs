@@ -1,0 +1,2 @@
+module ClubSlidesHelper
+end

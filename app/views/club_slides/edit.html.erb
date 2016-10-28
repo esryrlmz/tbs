@@ -1,0 +1,28 @@
+<div class="row">
+  <%= render 'home/navbarDefault' %>
+</div>
+<div class="row">
+  <div class="col-md-3">
+    <%= render 'home/sidebarAdvisor' %>
+  </div>
+  <div class="col-md-9">
+    <ol class="breadcrumb">
+    <li><%= link_to 'Anasayfa', root_path %></li>
+    <li><%= link_to 'Topluluk Sayfası Slayt Alanı', club_slides_path %></li>
+    <li class="active">Topluluk Sayfası Slaytı Düzenle</li>
+  </ol>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Topluluk Sayfası Slaytı Düzenle</h3>
+      </div>
+      <div class="panel-body">
+<%= render 'form' %>
+<br />
+<%= link_to 'Göster', @club_slide, class: "btn btn-success" %> |
+<%= link_to 'Geri', club_slides_path, class: "btn btn-info" %>
+	</div>
+    </div>
+  </div>
+</div>
+
+

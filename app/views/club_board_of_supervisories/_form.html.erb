@@ -1,0 +1,17 @@
+<%= simple_form_for(@club_board_of_supervisory) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :club_period_id, collection: Club.all.flat_map { |club| [[club.name, club.active_club_period.id]] }, label: false, prompt: 'Topluluk Seçiniz', :input_html => { :id => "clubs_for_director" } %>
+    <%= f.input :principal_member_one,:collection => @club_board_of_supervisory.present? && @club_board_of_supervisory.club_period.present? ? @club_board_of_supervisory.club_period.roles.map { |role| role.user} : [],:label_method => :full_name,:value_method => :id, label: "1. Asıl Üye", :include_blank => false, :input_html => { :class => "club_directors" } %>
+    <%= f.input :principal_member_two,:collection => @club_board_of_supervisory.present? && @club_board_of_supervisory.club_period.present? ? @club_board_of_supervisory.club_period.roles.map { |role| role.user} : [],:label_method => :full_name,:value_method => :id, label: "2. Asıl Üye" ,:include_blank => false, :input_html => { :class => "club_directors" } %>
+    <%= f.input :principal_member_three,:collection => @club_board_of_supervisory.present? && @club_board_of_supervisory.club_period.present? ? @club_board_of_supervisory.club_period.roles.map { |role| role.user} : [],:label_method => :full_name,:value_method => :id, label: "3. Asıl Üye" ,:include_blank => false, :input_html => { :class => "club_directors" } %>
+    <%= f.input :reserve_member_one,:collection => @club_board_of_supervisory.present? && @club_board_of_supervisory.club_period.present? ? @club_board_of_supervisory.club_period.roles.map { |role| role.user} : [],:label_method => :full_name,:value_method => :id, label: "1. Yedek Üye" ,:include_blank => false, :input_html => { :class => "club_directors" } %>
+    <%= f.input :reserve_member_two,:collection => @club_board_of_supervisory.present? && @club_board_of_supervisory.club_period.present? ? @club_board_of_supervisory.club_period.roles.map { |role| role.user} : [],:label_method => :full_name,:value_method => :id, label: "1. Yedek Üye" ,:include_blank => false, :input_html => { :class => "club_directors" } %>
+    <%= f.input :reserve_member_three,:collection => @club_board_of_supervisory.present? && @club_board_of_supervisory.club_period.present? ? @club_board_of_supervisory.club_period.roles.map { |role| role.user} : [],:label_method => :full_name,:value_method => :id, label: "2. Yedek Üye" ,:include_blank => false, :input_html => { :class => "club_directors" } %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.submit "Kaydet", class: "btn btn-success" %>
+  </div>
+<% end %>

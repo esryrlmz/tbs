@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  period_id: 1
+  principal_member_one: 1
+  principal_member_two: 1
+  principal_member_three: 1
+  reserve_member_one: 1
+  reserve_member_two: 1
+  reserve_member_three: 1
+
+two:
+  period_id: 1
+  principal_member_one: 1
+  principal_member_two: 1
+  principal_member_three: 1
+  reserve_member_one: 1
+  reserve_member_two: 1
+  reserve_member_three: 1
