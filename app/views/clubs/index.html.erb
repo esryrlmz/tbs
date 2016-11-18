@@ -30,18 +30,22 @@
 
           <tbody>
             <% @clubs.each do |club| %>
-            <tr">
+            <tr>
               <td></td>
               <td class="center">
-                <%= has_club_logo_or_not(club) %></td>
+                <%= club_logo_or_not?(club) %></td>
               <td class="center">
                 <%= link_to club.name, club %></td>
               <td class="center">
                 <%= club.club_category.name %></td>
               <td class="center">
+                <%if club.active_clup_period?%>
                 <%= club.active_club_period.club_members.count %></td>
+                <%else%>
+                 <p>O </p>
+                 <%end%>
               <td class="center">
-                <%= club.active_club_period.club.club_setting.is_active ? "Aktif" : "Pasif" %></td>
+                <%= club.active_clup_period? ? "Aktif" : "Pasif" %></td>
               <td class="center">
                 <%= link_to '<i class="fa fa-trash" title="Sil"></i>
               '.html_safe, club, method: :delete, data: { confirm: 'Topluluğu silmek istediğinize emin misiniz?' } %>
@@ -95,7 +99,12 @@
                   <td></td>
                   <td> <%= link_to club.name, club %> </td>
                   <td> <%= club.club_category.name %> </td>
-                  <td> <%= club.active_club_period.club_members.count %> </td>
+                  <td>   <%if club.active_clup_period?%>
+                    <%= club.active_club_period.club_members.count %></td>
+                    <%else%>
+                     <p>O </p>
+                     <%end%>
+                   </td>
                 </tr>
               <% end %>
             </tbody>
@@ -118,7 +127,13 @@
                     <td></td>
                     <td> <%= link_to club.name, club %> </td>
                     <td> <%= club.club_category.name %> </td>
-                    <td> <%= club.active_club_period.club_members.count %> </td>
+                    <td>   <%if club.active_clup_period?%>
+
+                      <%= club.active_club_period.club_members.count %></td>
+                      <%else%>
+                       <p>O </p>
+                       <%end%>
+                      </td>
                   </tr>
                 <% end %>
               </tbody>

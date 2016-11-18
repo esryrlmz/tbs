@@ -2,18 +2,16 @@
 
 class EventPolicy < ApplicationPolicy
   def index?
-  	 true
+    true
   end
 
   def show?
     if @user.present? && (@user.admin? || @user.president?(@record.club_period.id) || @user.advisor?(@record.club_period.id))
       true
+    elsif @record.event_responses.last.event_status.id == 2
+      true
     else
-      if @record.event_responses.last.event_status.id == 2
-        true
-      else
-        false
-      end
+      false
     end
   end
 

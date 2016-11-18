@@ -3,15 +3,95 @@
 
   <div class="form-inputs">
   	<% if current_user.admin? %>
-	    <%= f.input :user_id, collection: User.all, label_method: :name_surname,label: false, prompt: 'Kullanıcı Seçiniz', :input_html => { :id => "users" } %>
-	    <%= f.input :club_period_id, collection: Club.all.flat_map { |club| [[club.name, club.active_club_period.id]] }, label: false, prompt: 'Topluluk Seçiniz', :input_html => { :id => "clubs" } %>
-      <%= f.input :role_type_id, collection: RoleType.all, label: false, prompt: 'Rol Tipi Seçiniz', :input_html => { :id => "role_types" } %>
-    <% end %>
-    <%= f.input :status, label: "Topluluk üyeliği aktif" %>
-    <%= f.input :explanation, label: "Üyelik iptal talebi açıklaması" %>
+
+    <div class="row form-group">
+      <label class="control-label col-md-3 col-sm-3 col-xs-3">Toluluk  Seçiniz</label>
+      <div class="col-md-6 col-sm-6 col-xs-6">
+        <%= f.input :club_period_id, collection: Club.all.flat_map { |club| [[club.name, club.active_club_period.id]] }, label: false,  :input_html => { :id => "clubs" } %>
+      </div>
+      <div class="col-md-3 col-sm-3 col-xs-3 ">
+      </div>
+    </div>
+    <div class="row form-group">
+      <label class="control-label col-md-3 col-sm-3 col-xs-3">Kullanıcı Seçiniz</label>
+      <div class="col-md-6 col-sm-6 col-xs-6">
+        <%= f.input :user_id, collection: User.where.not(idnumber: nil) , label_method: :name_surname,label: false, :input_html => { :id => "academic" } %>
+      </div>
+      <div class="col-md-3 col-sm-3 col-xs-3 ">
+        <button type="button" class="btn btn-default btn-md" data-toggle="modal" data-target=".bs-ubs">
+          <i class="glyphicon glyphicon-search" aria-hidden="true"></i></span>
+        </button>
+      </div>
+    </div>
+    <div class="row form-group">
+      <label class="control-label col-md-3 col-sm-3 col-xs-3">Yetki  Seçiniz</label>
+      <div class="col-md-6 col-sm-6 col-xs-6">
+        <%= f.input :role_type_id, collection: RoleType.all.where.not(name: "Başkan").where.not(name:"üye"), label: false,  :input_html => { :id => "academic_role" } %>
+     </div>
+      <div class="col-md-3 col-sm-3 col-xs-3 ">
+
+
+      </div>
+    </div>
+    	          <% end %>
+
+    <div class="row form-group">
+      <label class="control-label col-md-3 col-sm-3 col-xs-3">Üyelik iptal talebi açıklaması</label>
+      <div class="col-md-6 col-sm-6 col-xs-6">
+        <%= f.input :explanation, label: false %>
+      </div>
+      <div class="col-md-3 col-sm-3 col-xs-3 ">
+          <%= f.input :status, label: "Topluluk üyeliği aktif" %>
+      </div>
+    </div>
+
+
   </div>
 
   <div class="form-actions">
     <%= f.submit "Kaydet", class: "btn btn-success" %>
   </div>
 <% end %>
+
+
+
+
+<div class="modal fade bs-ubs" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content ">
+      <div class="modal-header ">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
+        </button>
+        <h4 class="modal-title" id="myModalLabel">Ubs Sisteminden Akademisyen Bul</h4>
+      </div>
+      <div class="modal-body panel">
+        <div class="row ">
+          <label class="control-label col-md-3 col-sm-3 col-xs-3">Tc Kimlik Numarası:</label>
+          <div class="col-md-9 col-sm-9 col-xs-9">
+            <input name="ubs_no" id="idnumber" type="text" value="">
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <label class="control-label col-md-3 col-sm-3 col-xs-3"></label>
+        <div class="col-md-9 col-sm-9 col-xs-9">
+          <button type="button" class="btn btn-default btn-md ubs_find">
+            <i class="glyphicon glyphicon-search" aria-hidden="true"></i></span> Topluluga Ekle
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+$(".ubs_find").bind('click', function(){
+    var idnumber = document.getElementById("idnumber").value;
+    var club_id=document.getElementById("clubs").value;
+    $.ajax({
+          url: '/find_personel',
+          type: 'GET',
+          data: {"idnumber": idnumber,"club_id": club_id}
+        });
+});
+</script>

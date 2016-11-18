@@ -2,7 +2,7 @@
 
 class EventRequestPolicy < ApplicationPolicy
   def index?
-  	 @user.admin? || @user.advisor? || @user.president?
+    @user.admin? || @user.advisor? || @user.president?
   end
 
   def show?

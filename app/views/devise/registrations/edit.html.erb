@@ -2,12 +2,12 @@
 <%= render 'home/navbarDefault'%>
 <div class="col-md-12 panel">
 <br />
-<div class="col-md-3">
-    
-</div>
-<div class="col-md-6 panel panel-default">
+<div class="row">
+
+
+<div class="col-md-5 panel panel-default">
   <div class="panel-heading">
-      <h3 class="panel-title">Düzenle <%= resource_name.to_s.humanize %></h3>
+      <h3 class="panel-title">Düzenle <%= current_user.name_surname %></h3>
     </div>
     <div class="panel-body">
 <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
@@ -21,7 +21,7 @@
     <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
       <p>Currently waiting confirmation for: <%= resource.unconfirmed_email %></p>
     <% end %>
-    <%= has_avatar_or_not(current_user, nil, 200) %>
+    <%= avatar_or_not?(current_user, nil, 200) %>
     <%= f.input :image, type: :file, label: "Fotoğraf:" %>
     <%= f.input :password, autocomplete: "off", hint: "Değiştirmek istemiyorsan boş bırak", required: false %>
     <%= f.input :password_confirmation, required: false %>
@@ -33,12 +33,57 @@
   </div>
 <% end %>
 
-<h3>Cancel my account</h3>
-
-<p>Unhappy? <%= link_to "Hesabımı iptal et", registration_path(resource_name), data: { confirm: "Emin misin?" }, method: :delete %></p>
+<p> <%= link_to "Hesabımı iptal et", registration_path(resource_name), data: { confirm: "Emin misin?" }, method: :delete %></p>
 
 <%= link_to "Geri", :back %>
 </div>
 </div>
+<div class="col-md-1"></div>
+<div class="col-md-5 panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-title">Ubs Profilim</h3>
+    </div>
+    <div class="panel-body">
+      <li class="list-group-item">
+        <div class="row">
+          <div class="col-md-5"><b>Öğrenci Numarası</b></div>
+          <div class="col-md-7"> <%= current_user.ubs_no%></div>
+        </div>
+      </li>
+      <br/>
+      <li class="list-group-item">
+       <div class="row">
+         <div class="col-md-5"><b>Ad Soyad:</b></div>
+         <div class="col-md-7"> <%= current_user.profile.full_name%></div>
+       </div>
+     </li>
+     <br/>
+      <li class="list-group-item">
+      <div class="row">
+        <div class="col-md-5"><b>Fakülte:</b></div>
+        <div class="col-md-7"> <%= current_user.profile.faculty%></div>
+      </div>
+    </li>
+
+   <br/>
+    <li class="list-group-item">
+    <div class="row">
+      <div class="col-md-5"><b>Bölüm </b></div>
+      <div class="col-md-7"> <%= current_user.profile.program%></div>
+    </div>
+  </li>
+     <br/>
+  <li class="list-group-item">
+  <div class="row">
+    <div class="col-md-5"><b>Disiplin Cezası Varmı? </b></div>
+    <div class="col-md-7"> <%= current_user.crime?%></div>
+  </div>
+</li>
+
+    </div>
+</div>
+</div>
+
+
 </div>
 </div>

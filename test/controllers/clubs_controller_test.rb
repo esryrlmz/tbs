@@ -5,18 +5,18 @@ class ClubsControllerTest < ActionController::TestCase
     @club = clubs(:one)
   end
 
-  test "should get index" do
+  test 'should get index' do
     get :index
     assert_response :success
     assert_not_nil assigns(:clubs)
   end
 
-  test "should get new" do
+  test 'should get new' do
     get :new
     assert_response :success
   end
 
-  test "should create club" do
+  test 'should create club' do
     assert_difference('Club.count') do
       post :create, club: { creation_date: @club.creation_date, description: @club.description, name: @club.name, short_name: @club.short_name }
     end
@@ -24,22 +24,22 @@ class ClubsControllerTest < ActionController::TestCase
     assert_redirected_to club_path(assigns(:club))
   end
 
-  test "should show club" do
+  test 'should show club' do
     get :show, id: @club
     assert_response :success
   end
 
-  test "should get edit" do
+  test 'should get edit' do
     get :edit, id: @club
     assert_response :success
   end
 
-  test "should update club" do
+  test 'should update club' do
     patch :update, id: @club, club: { creation_date: @club.creation_date, description: @club.description, name: @club.name, short_name: @club.short_name }
     assert_redirected_to club_path(assigns(:club))
   end
 
-  test "should destroy club" do
+  test 'should destroy club' do
     assert_difference('Club.count', -1) do
       delete :destroy, id: @club
     end

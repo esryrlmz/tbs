@@ -5,18 +5,18 @@ class AcademicPeriodsControllerTest < ActionController::TestCase
     @academic_period = academic_periods(:one)
   end
 
-  test "should get index" do
+  test 'should get index' do
     get :index
     assert_response :success
     assert_not_nil assigns(:academic_periods)
   end
 
-  test "should get new" do
+  test 'should get new' do
     get :new
     assert_response :success
   end
 
-  test "should create academic_period" do
+  test 'should create academic_period' do
     assert_difference('AcademicPeriod.count') do
       post :create, academic_period: { is_active: @academic_period.is_active, name: @academic_period.name }
     end
@@ -24,22 +24,22 @@ class AcademicPeriodsControllerTest < ActionController::TestCase
     assert_redirected_to academic_period_path(assigns(:academic_period))
   end
 
-  test "should show academic_period" do
+  test 'should show academic_period' do
     get :show, id: @academic_period
     assert_response :success
   end
 
-  test "should get edit" do
+  test 'should get edit' do
     get :edit, id: @academic_period
     assert_response :success
   end
 
-  test "should update academic_period" do
+  test 'should update academic_period' do
     patch :update, id: @academic_period, academic_period: { is_active: @academic_period.is_active, name: @academic_period.name }
     assert_redirected_to academic_period_path(assigns(:academic_period))
   end
 
-  test "should destroy academic_period" do
+  test 'should destroy academic_period' do
     assert_difference('AcademicPeriod.count', -1) do
       delete :destroy, id: @academic_period
     end

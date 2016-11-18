@@ -1,0 +1,59 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-9">
+      <div class="col-lg-9">
+        <div >
+          <h6 class="description">Denetim Kurulu</h6>
+          <div class="row pt-md">
+            <% if @club_view_board_of_supervisor %>
+            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 profile">
+              <div class="img-box">
+                <%= avatar_or_not?(@club_period.club_board_of_supervisory.principal_member_first, nil, 150, :class => "img-responsive") %>
+              </div>
+              <h1><%=  @club_period.club_board_of_supervisory.principal_member_first.name_surname %></h1>
+              <h2>Asıl Üye</h2>
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 profile">
+              <div class="img-box">
+                <%= avatar_or_not?(@club_period.club_board_of_supervisory.principal_member_second, nil, 150, :class => "img-responsive") %>
+              </div>
+              <h1><%=  @club_period.club_board_of_supervisory.principal_member_second.name_surname %></h1>
+              <h2>Asıl Üye</h2>
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 profile">
+              <div class="img-box">
+                <%= avatar_or_not?(@club_period.club_board_of_supervisory.principal_member_third, nil, 150, :class => "img-responsive") %>
+              </div>
+              <h1><%=  @club_period.club_board_of_supervisory.principal_member_third.name_surname %></h1>
+              <h2>Asıl Üye</h2>
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 profile">
+              <div class="img-box">
+                <%= avatar_or_not?(@club_period.club_board_of_supervisory.reserve_member_first, nil, 150, :class => "img-responsive") %>
+              </div>
+              <h1><%=  @club_period.club_board_of_supervisory.reserve_member_first.name_surname %></h1>
+              <h2>Yedek Üye</h2>
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 profile">
+              <div class="img-box">
+                <%= avatar_or_not?(@club_period.club_board_of_supervisory.reserve_member_second, nil, 150, :class => "img-responsive") %>
+              </div>
+              <h1><%=  @club_period.club_board_of_supervisory.reserve_member_second.name_surname %></h1>
+              <h2>Yedek Üye</h2>
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 profile">
+              <div class="img-box">
+                <%= avatar_or_not?(@club_period.club_board_of_supervisory.reserve_member_third, nil, 150, :class => "img-responsive") %>
+              </div>
+              <h1><%=  @club_period.club_board_of_supervisory.reserve_member_third.name_surname %></h1>
+              <h2>Yedek Üye</h2>
+            </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%= link_to "Denetim Kurulu Düzenle", @club_period.club_board_of_supervisory.present? ? edit_club_board_of_supervisory_path(@club_period.club_board_of_supervisory)  : new_club_board_of_supervisory_path %>

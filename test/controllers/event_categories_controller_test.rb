@@ -5,18 +5,18 @@ class EventCategoriesControllerTest < ActionController::TestCase
     @event_category = event_categories(:one)
   end
 
-  test "should get index" do
+  test 'should get index' do
     get :index
     assert_response :success
     assert_not_nil assigns(:event_categories)
   end
 
-  test "should get new" do
+  test 'should get new' do
     get :new
     assert_response :success
   end
 
-  test "should create event_category" do
+  test 'should create event_category' do
     assert_difference('EventCategory.count') do
       post :create, event_category: { name: @event_category.name }
     end
@@ -24,22 +24,22 @@ class EventCategoriesControllerTest < ActionController::TestCase
     assert_redirected_to event_category_path(assigns(:event_category))
   end
 
-  test "should show event_category" do
+  test 'should show event_category' do
     get :show, id: @event_category
     assert_response :success
   end
 
-  test "should get edit" do
+  test 'should get edit' do
     get :edit, id: @event_category
     assert_response :success
   end
 
-  test "should update event_category" do
+  test 'should update event_category' do
     patch :update, id: @event_category, event_category: { name: @event_category.name }
     assert_redirected_to event_category_path(assigns(:event_category))
   end
 
-  test "should destroy event_category" do
+  test 'should destroy event_category' do
     assert_difference('EventCategory.count', -1) do
       delete :destroy, id: @event_category
     end

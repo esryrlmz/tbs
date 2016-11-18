@@ -5,18 +5,18 @@ class ClubBoardOfDirectorsControllerTest < ActionController::TestCase
     @club_board_of_director = club_board_of_directors(:one)
   end
 
-  test "should get index" do
+  test 'should get index' do
     get :index
     assert_response :success
     assert_not_nil assigns(:club_board_of_directors)
   end
 
-  test "should get new" do
+  test 'should get new' do
     get :new
     assert_response :success
   end
 
-  test "should create club_board_of_director" do
+  test 'should create club_board_of_director' do
     assert_difference('ClubBoardOfDirector.count') do
       post :create, club_board_of_director: { accountant_id: @club_board_of_director.accountant_id, period_id: @club_board_of_director.period_id, member_one: @club_board_of_director.member_one, member_three: @club_board_of_director.member_three, member_two: @club_board_of_director.member_two, president_id: @club_board_of_director.president_id, secretary_id: @club_board_of_director.secretary_id, vice_president_id: @club_board_of_director.vice_president_id }
     end
@@ -24,22 +24,22 @@ class ClubBoardOfDirectorsControllerTest < ActionController::TestCase
     assert_redirected_to club_board_of_director_path(assigns(:club_board_of_director))
   end
 
-  test "should show club_board_of_director" do
+  test 'should show club_board_of_director' do
     get :show, id: @club_board_of_director
     assert_response :success
   end
 
-  test "should get edit" do
+  test 'should get edit' do
     get :edit, id: @club_board_of_director
     assert_response :success
   end
 
-  test "should update club_board_of_director" do
+  test 'should update club_board_of_director' do
     patch :update, id: @club_board_of_director, club_board_of_director: { accountant_id: @club_board_of_director.accountant_id, period_id: @club_board_of_director.period_id, member_one: @club_board_of_director.member_one, member_three: @club_board_of_director.member_three, member_two: @club_board_of_director.member_two, president_id: @club_board_of_director.president_id, secretary_id: @club_board_of_director.secretary_id, vice_president_id: @club_board_of_director.vice_president_id }
     assert_redirected_to club_board_of_director_path(assigns(:club_board_of_director))
   end
 
-  test "should destroy club_board_of_director" do
+  test 'should destroy club_board_of_director' do
     assert_difference('ClubBoardOfDirector.count', -1) do
       delete :destroy, id: @club_board_of_director
     end

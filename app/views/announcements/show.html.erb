@@ -1,0 +1,75 @@
+<% if user_signed_in? and (current_user.admin? or current_user.advisor? or current_user.president?) %>
+<div class="row">
+  <%= render 'home/navbarDefault' %>
+</div>
+<div class="row">
+  <div class="col-md-12">
+  <ol class="breadcrumb">
+    <li><%= link_to 'Anasayfa', root_path %></li>
+    <li><%= link_to 'Topluluk Duyuruları', announcements_path %></li>
+    <li class="active">Topluluk Duyurusu Detay</li>
+  </ol>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Topluluk Duyurusu Detay</h3>
+      </div>
+      <div class="panel-body">
+<p>
+  <strong>Topluluk:</strong>
+  <%= @announcement.club_period.club.name %>
+</p>
+
+<p>
+  <strong>Başlık:</strong>
+  <%= @announcement.title %>
+</p>
+
+<p>
+  <strong>İçerik:</strong>
+  <%= @announcement.content %>
+</p>
+
+<p>
+  <strong>Görünür mü?:</strong>
+  <%= @announcement.is_view %>
+</p>
+
+<p>
+  <strong>Akademik Danışman Onayı?:</strong>
+  <%= @announcement.is_advisor_confirmation %>
+</p>
+<br />
+<%= link_to 'Düzenle', edit_announcement_path(@announcement), class: "btn btn-success" %> |
+<%= link_to 'Geri', announcements_path, class: "btn btn-info" %>
+</div>
+    </div>
+  </div>
+</div>
+</div>
+<% else %>
+<% if @announcement.is_view %>
+<div class="row">
+  <%= render 'home/navbarDefault' %>
+</div>
+<div class="row">
+  <div class="col-md-12">
+     <ol class="breadcrumb">
+    <li><%= link_to 'Anasayfa', root_path %></li>
+    <li><%= link_to @announcement.club_period.club.name, club_path(@announcement.club_period.club) %></li>
+    <li class="active"><%= @announcement.title %></li>
+  </ol>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title"><%=@announcement.club_period.club.name%> / <%= @announcement.title %></h3>
+      </div>
+      <div class="panel-body">
+        <div class="page-header">
+          <h1><%= @announcement.title %></h1>
+        </div>
+        <p><%= @announcement.content %></p>
+      </div>
+    </div>
+  </div>
+</div>
+<% end %>
+<% end %>

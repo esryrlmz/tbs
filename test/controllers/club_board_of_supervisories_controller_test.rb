@@ -5,18 +5,18 @@ class ClubBoardOfSupervisoriesControllerTest < ActionController::TestCase
     @club_board_of_supervisory = club_board_of_supervisories(:one)
   end
 
-  test "should get index" do
+  test 'should get index' do
     get :index
     assert_response :success
     assert_not_nil assigns(:club_board_of_supervisories)
   end
 
-  test "should get new" do
+  test 'should get new' do
     get :new
     assert_response :success
   end
 
-  test "should create club_board_of_supervisory" do
+  test 'should create club_board_of_supervisory' do
     assert_difference('ClubBoardOfSupervisory.count') do
       post :create, club_board_of_supervisory: { period_id: @club_board_of_supervisory.period_id, principal_member_one: @club_board_of_supervisory.principal_member_one, principal_member_three: @club_board_of_supervisory.principal_member_three, principal_member_two: @club_board_of_supervisory.principal_member_two, reserve_member_one: @club_board_of_supervisory.reserve_member_one, reserve_member_three: @club_board_of_supervisory.reserve_member_three, reserve_member_two: @club_board_of_supervisory.reserve_member_two }
     end
@@ -24,22 +24,22 @@ class ClubBoardOfSupervisoriesControllerTest < ActionController::TestCase
     assert_redirected_to club_board_of_supervisory_path(assigns(:club_board_of_supervisory))
   end
 
-  test "should show club_board_of_supervisory" do
+  test 'should show club_board_of_supervisory' do
     get :show, id: @club_board_of_supervisory
     assert_response :success
   end
 
-  test "should get edit" do
+  test 'should get edit' do
     get :edit, id: @club_board_of_supervisory
     assert_response :success
   end
 
-  test "should update club_board_of_supervisory" do
+  test 'should update club_board_of_supervisory' do
     patch :update, id: @club_board_of_supervisory, club_board_of_supervisory: { period_id: @club_board_of_supervisory.period_id, principal_member_one: @club_board_of_supervisory.principal_member_one, principal_member_three: @club_board_of_supervisory.principal_member_three, principal_member_two: @club_board_of_supervisory.principal_member_two, reserve_member_one: @club_board_of_supervisory.reserve_member_one, reserve_member_three: @club_board_of_supervisory.reserve_member_three, reserve_member_two: @club_board_of_supervisory.reserve_member_two }
     assert_redirected_to club_board_of_supervisory_path(assigns(:club_board_of_supervisory))
   end
 
-  test "should destroy club_board_of_supervisory" do
+  test 'should destroy club_board_of_supervisory' do
     assert_difference('ClubBoardOfSupervisory.count', -1) do
       delete :destroy, id: @club_board_of_supervisory
     end

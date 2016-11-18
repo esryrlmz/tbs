@@ -8,10 +8,8 @@
   <meta name="author" content="Web Developer: Sinan Şahin - sinan.sahin@omu.edu.tr">
 
   <title>Topluluklar Bilgi Sistemi</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' =>
-  true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' =>
-  true %>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %></head>
 <body class="body-home">
   <div class="container">
@@ -40,7 +38,7 @@
               <div id="icon-login-msg" class="glyphicon glyphicon-chevron-right"></div>
               <span id="text-login-msg">Kullanıcı adınızı ve şifresinizi yazınız.</span>
             </div>
-            <%= f.input :email, placeholder: "Kullanıcı Adınız", label: false, required: false, autofocus: true, input_html: { id: 'login_username', class: 'form-control' } %>
+            <%= f.input :ubs_no, placeholder: "Kullanıcı Adınız", label: false, required: false, autofocus: true, input_html: { id: 'login_username', class: 'form-control' } %>
             <%= f.input :password, placeholder: "Şifreniz", label: false, required: false, input_html: { id: 'login_password', class: 'form-control' } %>
             <%= f.input :remember_me, label: "Beni Hatırla", as: :boolean if devise_mapping.rememberable? %>
           </div>

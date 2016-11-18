@@ -2,18 +2,18 @@
 
 class HomePolicy < ApplicationPolicy
   def index?
-  	 true
+    true
   end
 
-  def dashboardAdmin?
+  def dashboard_admin?
     @user.admin?
   end
 
-  def dashboardAdvisor?
+  def dashboard_advisor?
     @user.advisor?
   end
 
-  def dashboardClub?
+  def dashboard_club?
     @user.president?
   end
 end

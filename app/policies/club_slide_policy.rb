@@ -2,7 +2,7 @@
 
 class ClubSlidePolicy < ApplicationPolicy
   def index?
-  	 @user.advisor?
+    @user.advisor?
   end
 
   def show?

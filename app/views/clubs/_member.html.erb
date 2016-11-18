@@ -1,0 +1,31 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-9">
+      <div class="col-lg-9">
+        <div id="club_users_collapse" class="collapse">
+          <h6 class="description">Topluluk Üyeleri</h6>
+          <table class="table table-hover" id="club_users">
+            <thead>
+              <tr>
+                <th></th>
+                <th></th>
+                <th>Adı Soyadı</th>
+                <th>Rolü</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @club_members.each do |role| %>
+                <tr>
+                  <td></td>
+                  <td class="center"><%= avatar_or_not?(role.user, 25, 25) %></td>
+                  <td class="center"><%= role.user.name_surname %></td>
+                  <td class="center"><%= role.role_type.name %></td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

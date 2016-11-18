@@ -1,0 +1,2 @@
+module SystemAnnouncementsHelper
+end

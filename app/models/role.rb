@@ -5,9 +5,9 @@ class Role < ActiveRecord::Base
   def rol_name
     if club
       if club_exception
-        role_type.name+" - "+club.name+" / "+club_exception.academic_period.name
+        role_type.name + ' - ' + club.name + ' / ' + club_exception.academic_period.name
       else
-        role_type.name+" - "+club.name
+        role_type.name + ' - ' + club.name
       end
     else
       role_type.name

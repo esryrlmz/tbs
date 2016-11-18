@@ -2,7 +2,7 @@
 
 class ClubPolicy < ApplicationPolicy
   def index?
-  	 true
+    true
   end
 
   def show?

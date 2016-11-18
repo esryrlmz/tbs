@@ -2,7 +2,7 @@
 
 class EventCategoryPolicy < ApplicationPolicy
   def index?
-  	 true
+    true
   end
 
   def show?

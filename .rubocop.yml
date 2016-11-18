@@ -6,6 +6,11 @@ Style/ConditionalAssignment:
 Style/AsciiComments:
   Enabled: false
 
+ClassLength:
+  Max: 250
+MethodLength:
+  Max: 250
+
 AllCops:
   Include:
     - '**/Rakefile'

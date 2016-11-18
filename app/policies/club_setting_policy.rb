@@ -2,7 +2,7 @@
 
 class ClubSettingPolicy < ApplicationPolicy
   def index?
-  	 @user.admin?
+    @user.admin?
   end
 
   def show?

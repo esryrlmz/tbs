@@ -1,0 +1,76 @@
+<% if user_signed_in? and current_user.admin? %>
+<div class="row">
+  <%= render 'home/navbarDefault' %>
+</div>
+<div class="row">
+  <div class="col-md-12">
+    <ol class="breadcrumb">
+    <li><%= link_to 'Anasayfa', root_path %></li>
+    <li><%= link_to 'Sksdb Duyuruları', system_announcements_path %></li>
+    <li class="active">Sksdb Duyurusu Detay</li>
+  </ol>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Sksdb Duyurusu Detay</h3>
+      </div>
+      <div class="panel-body">
+<p>
+  <strong>Başlık:</strong>
+  <%= @system_announcement.title %>
+</p>
+
+<p>
+  <strong>İçerik:</strong>
+  <%= @system_announcement.content %>
+</p>
+
+<p>
+  <strong>Görünür Mü?:</strong>
+  <%= @system_announcement.is_view %>
+</p>
+<%= link_to 'Düzenle', edit_system_announcement_path(@system_announcement), class: "btn btn-success" %> |
+<%= link_to 'Geri', system_announcements_path, class: "btn btn-info" %>
+</div>
+    </div>
+  </div>
+</div>
+<% else %>
+<% if @system_announcement.is_view %>
+<div class="row">
+  <%= render 'home/navbarDefault' %>
+</div>
+<div class="row">
+<div class="col-md-12"> 
+<ol class="breadcrumb">
+    <li><%= link_to 'Anasayfa', root_path %></li>
+    <li><%= link_to 'Sksdb Duyuruları', system_announcements_path %></li>
+    <li class="active"><%= @system_announcement.title %></li>
+</ol>
+  <div class="panel panel-default">
+    <div class="panel-body" style="margin-top: -40px;">
+    <div class="row">
+      <div class="col-md-8">
+        <div class="page-header">
+            <h1><%= @system_announcement.title %></h1>
+         </div>
+        <p>
+          <%= @system_announcement.content %>
+        </p>
+      </div>
+      <div class="col-md-4">
+        <div class="page-header">
+            <h1>Diğerleri</h1>
+         </div>
+        <ul class="list-group">
+        <% @system_announcements.each do |system_announcement| %>
+        <li class="list-group-item"><i class="fa fa-link" aria-hidden="true"></i> <%= link_to system_announcement.title, system_announcement %></li>
+        <% end %>
+        </ul>
+      </div>
+    </div>
+    </div>
+  </div>
+  </div>
+  </div>
+<% end %>
+<% end %>

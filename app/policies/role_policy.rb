@@ -1,9 +1,8 @@
 # encoding: utf-8
 
 class RolePolicy < ApplicationPolicy
-
   def index?
-  	 @user.admin?
+    @user.admin?
   end
 
   def new?

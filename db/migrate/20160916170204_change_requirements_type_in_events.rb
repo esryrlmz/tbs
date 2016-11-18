@@ -1,5 +1,5 @@
 class ChangeRequirementsTypeInEvents < ActiveRecord::Migration
   def change
-  	 change_column :events, :requirements, :text
+    change_column :events, :requirements, :text
   end
 end

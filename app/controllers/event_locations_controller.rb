@@ -2,30 +2,22 @@ class EventLocationsController < ApplicationController
   before_action :set_event_location, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!
 
-  # GET /event_locations
-  # GET /event_locations.json
   def index
     @event_locations = EventLocation.all
     authorize @event_locations
   end
 
-  # GET /event_locations/1
-  # GET /event_locations/1.json
   def show
   end
 
-  # GET /event_locations/new
   def new
     @event_location = EventLocation.new
     authorize @event_location
   end
 
-  # GET /event_locations/1/edit
   def edit
   end
 
-  # POST /event_locations
-  # POST /event_locations.json
   def create
     @event_location = EventLocation.new(event_location_params)
     authorize @event_location
@@ -40,8 +32,6 @@ class EventLocationsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /event_locations/1
-  # PATCH/PUT /event_locations/1.json
   def update
     authorize @event_location
     respond_to do |format|
@@ -55,8 +45,6 @@ class EventLocationsController < ApplicationController
     end
   end
 
-  # DELETE /event_locations/1
-  # DELETE /event_locations/1.json
   def destroy
     authorize @event_location
     @event_location.destroy
@@ -67,13 +55,12 @@ class EventLocationsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_event_location
-      @event_location = EventLocation.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def event_location_params
-      params.fetch(:event_location, {}).permit(:name)
-    end
+  def set_event_location
+    @event_location = EventLocation.find(params[:id])
+  end
+
+  def event_location_params
+    params.fetch(:event_location, {}).permit(:name)
+  end
 end

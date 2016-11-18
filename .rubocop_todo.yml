@@ -10,8 +10,8 @@
 # Configuration parameters: AllowSafeAssignment.
 Lint/AssignmentInCondition:
   Exclude:
-    - 'app/controllers/club_board_of_directors_controller.rb'
-    - 'app/controllers/club_board_of_supervisories_controller.rb'
+  #  - 'app/controllers/club_board_of_directors_controller.rb'
+  #  - 'app/controllers/club_board_of_supervisories_controller.rb'
 
 # Offense count: 1
 # Cop supports --auto-correct.
@@ -19,7 +19,7 @@ Lint/AssignmentInCondition:
 # SupportedStyles: either, start_of_block, start_of_line
 Lint/BlockAlignment:
   Exclude:
-    - 'app/helpers/application_helper.rb'
+    #- 'app/helpers/application_helper.rb'
 
 # Offense count: 2
 # Cop supports --auto-correct.
@@ -27,27 +27,27 @@ Lint/BlockAlignment:
 # SupportedStyles: start_of_line, def
 Lint/DefEndAlignment:
   Exclude:
-    - 'app/models/club.rb'
-    - 'app/models/system_announcment.rb'
+  #  - 'app/models/club.rb'
+  #   - 'app/models/system_announcement.rb'
 
 # Offense count: 6
 Lint/ShadowingOuterLocalVariable:
   Exclude:
-    - 'app/controllers/announcments_controller.rb'
-    - 'app/controllers/events_controller.rb'
+    #- 'app/controllers/announcments_controller.rb'
+    #- 'app/controllers/events_controller.rb'
 
 # Offense count: 3
 # Cop supports --auto-correct.
 # Configuration parameters: AllowUnusedKeywordArguments, IgnoreEmptyMethods.
 Lint/UnusedMethodArgument:
   Exclude:
-    - 'app/controllers/application_controller.rb'
-    - 'app/helpers/application_helper.rb'
+    #- 'app/controllers/application_controller.rb'
+    #- 'app/helpers/application_helper.rb'
 
 # Offense count: 28
 Lint/UselessAssignment:
   Exclude:
-    - 'db/seeds.rb'
+    #- 'db/seeds.rb'
 
 # Offense count: 23
 Metrics/AbcSize:
@@ -83,20 +83,20 @@ Metrics/PerceivedComplexity:
 # SupportedStyles: always, conditionals
 Style/AndOr:
   Exclude:
-    - 'app/controllers/clubs_controller.rb'
-    - 'app/uploaders/file_uploader.rb'
-    - 'app/uploaders/image_uploader.rb'
+    #- 'app/controllers/clubs_controller.rb'
+    #- 'app/uploaders/file_uploader.rb'
+    #- 'app/uploaders/image_uploader.rb'
 
 # Offense count: 20
 Style/AsciiComments:
   Exclude:
-    - 'app/controllers/club_board_of_directors_controller.rb'
-    - 'app/controllers/club_board_of_supervisories_controller.rb'
-    - 'app/controllers/events_controller.rb'
-    - 'app/controllers/roles_controller.rb'
-    - 'app/helpers/application_helper.rb'
-    - 'app/models/user.rb'
-    - 'db/seeds.rb'
+    #- 'app/controllers/club_board_of_directors_controller.rb'
+    #- 'app/controllers/club_board_of_supervisories_controller.rb'
+    #- 'app/controllers/events_controller.rb'
+    #- 'app/controllers/roles_controller.rb'
+    #- 'app/helpers/application_helper.rb'
+    #- 'app/models/user.rb'
+    #- 'db/seeds.rb'
 
 # Offense count: 2
 # Cop supports --auto-correct.
@@ -107,20 +107,20 @@ Style/AsciiComments:
 # IgnoredMethods: lambda, proc, it
 Style/BlockDelimiters:
   Exclude:
-    - 'app/controllers/application_controller.rb'
+  #  - 'app/controllers/application_controller.rb'
 
 # Offense count: 1
 # Configuration parameters: EnforcedStyle, SupportedStyles.
 # SupportedStyles: nested, compact
 Style/ClassAndModuleChildren:
   Exclude:
-    - 'test/test_helper.rb'
+  #  - 'test/test_helper.rb'
 
 # Offense count: 1
 # Cop supports --auto-correct.
 Style/CommentIndentation:
   Exclude:
-    - 'app/models/club.rb'
+    #- 'app/models/club.rb'
 
 # Offense count: 115
 Style/Documentation:
@@ -131,39 +131,39 @@ Style/Documentation:
 # Configuration parameters: AllowAdjacentOneLineDefs.
 Style/EmptyLineBetweenDefs:
   Exclude:
-    - 'app/controllers/home_controller.rb'
-    - 'app/models/user.rb'
+  #  - 'app/controllers/home_controller.rb'
+  #  - 'app/models/user.rb'
 
 # Offense count: 2
 # Cop supports --auto-correct.
 Style/EmptyLines:
   Exclude:
-    - 'app/controllers/application_controller.rb'
-    - 'db/migrate/20160119141013_devise_create_users.rb'
+  #  - 'app/controllers/application_controller.rb'
+  #  - 'db/migrate/20160119141013_devise_create_users.rb'
 
 # Offense count: 19
 # Cop supports --auto-correct.
 Style/EmptyLinesAroundAccessModifier:
   Exclude:
-    - 'app/controllers/academic_periods_controller.rb'
-    - 'app/controllers/announcments_controller.rb'
-    - 'app/controllers/club_board_of_directors_controller.rb'
-    - 'app/controllers/club_board_of_supervisories_controller.rb'
-    - 'app/controllers/club_categories_controller.rb'
-    - 'app/controllers/club_contacts_controller.rb'
-    - 'app/controllers/club_periods_controller.rb'
-    - 'app/controllers/club_settings_controller.rb'
-    - 'app/controllers/club_slides_controller.rb'
-    - 'app/controllers/clubs_controller.rb'
-    - 'app/controllers/event_categories_controller.rb'
-    - 'app/controllers/event_locations_controller.rb'
-    - 'app/controllers/event_response_controller.rb'
-    - 'app/controllers/events_controller.rb'
-    - 'app/controllers/role_types_controller.rb'
-    - 'app/controllers/roles_controller.rb'
-    - 'app/controllers/system_announcments_controller.rb'
-    - 'app/uploaders/file_uploader.rb'
-    - 'app/uploaders/image_uploader.rb'
+  #  - 'app/controllers/academic_periods_controller.rb'
+  #  - 'app/controllers/announcments_controller.rb'
+  #  - 'app/controllers/club_board_of_directors_controller.rb'
+  #  - 'app/controllers/club_board_of_supervisories_controller.rb'
+  #  - 'app/controllers/club_categories_controller.rb'
+  #  - 'app/controllers/club_contacts_controller.rb'
+  #  - 'app/controllers/club_periods_controller.rb'
+  #  - 'app/controllers/club_settings_controller.rb'
+  #  - 'app/controllers/club_slides_controller.rb'
+  #  - 'app/controllers/clubs_controller.rb'
+  #  - 'app/controllers/event_categories_controller.rb'
+  #  - 'app/controllers/event_locations_controller.rb'
+  #  - 'app/controllers/event_response_controller.rb'
+  #  - 'app/controllers/events_controller.rb'
+  #  - 'app/controllers/role_types_controller.rb'
+  #  - 'app/controllers/roles_controller.rb'
+  #  - 'app/controllers/system_announcments_controller.rb'
+  #  - 'app/uploaders/file_uploader.rb'
+  #  - 'app/uploaders/image_uploader.rb'
 
 # Offense count: 24
 # Cop supports --auto-correct.
@@ -171,35 +171,35 @@ Style/EmptyLinesAroundAccessModifier:
 # SupportedStyles: empty_lines, empty_lines_except_namespace, no_empty_lines
 Style/EmptyLinesAroundClassBody:
   Exclude:
-    - 'app/policies/role_policy.rb'
-    - 'app/uploaders/file_uploader.rb'
-    - 'app/uploaders/image_uploader.rb'
-    - 'test/controllers/event_response_controller_test.rb'
-    - 'test/controllers/home_controller_test.rb'
-    - 'test/policies/advisor_policy_test.rb'
-    - 'test/policies/announcment_policy_test.rb'
-    - 'test/policies/assistant_consultant_policy_test.rb'
-    - 'test/policies/club_board_of_director_policy_test.rb'
-    - 'test/policies/club_board_of_supervisory_policy_test.rb'
-    - 'test/policies/club_category_policy_test.rb'
-    - 'test/policies/club_contact_policy_test.rb'
-    - 'test/policies/club_period_policy_test.rb'
-    - 'test/policies/club_policy_test.rb'
-    - 'test/policies/club_setting_policy_test.rb'
-    - 'test/policies/event_category_policy_test.rb'
-    - 'test/policies/event_policy_test.rb'
-    - 'test/policies/event_request_policy_test.rb'
-    - 'test/policies/home_policy_test.rb'
-    - 'test/policies/role_policy_test.rb'
-    - 'test/policies/roles_user_policy_test.rb'
-    - 'test/policies/system_announcment_policy_test.rb'
+  #  - 'app/policies/role_policy.rb'
+  #  - 'app/uploaders/file_uploader.rb'
+  #  - 'app/uploaders/image_uploader.rb'
+  #  - 'test/controllers/event_response_controller_test.rb'
+  #  - 'test/controllers/home_controller_test.rb'
+  #  - 'test/policies/advisor_policy_test.rb'
+  #  - 'test/policies/announcment_policy_test.rb'
+  #  - 'test/policies/assistant_consultant_policy_test.rb'
+  #  - 'test/policies/club_board_of_director_policy_test.rb'
+  #  - 'test/policies/club_board_of_supervisory_policy_test.rb'
+  #  - 'test/policies/club_category_policy_test.rb'
+  #  - 'test/policies/club_contact_policy_test.rb'
+  #  - 'test/policies/club_period_policy_test.rb'
+  #  - 'test/policies/club_policy_test.rb'
+  #  - 'test/policies/club_setting_policy_test.rb'
+  #  - 'test/policies/event_category_policy_test.rb'
+  #  - 'test/policies/event_policy_test.rb'
+  #  - 'test/policies/event_request_policy_test.rb'
+  #  - 'test/policies/home_policy_test.rb'
+  #  - 'test/policies/role_policy_test.rb'
+  #  - 'test/policies/roles_user_policy_test.rb'
+  #  - 'test/policies/system_announcment_policy_test.rb'
 
 # Offense count: 3
 # Cop supports --auto-correct.
 Style/EmptyLinesAroundMethodBody:
   Exclude:
-    - 'app/helpers/application_helper.rb'
-    - 'db/migrate/20160120061300_add_first_name_and_last_name_and_program_id_to_user.rb'
+  #  - 'app/helpers/application_helper.rb'
+  #  - 'db/migrate/20160120061300_add_first_name_and_last_name_and_program_id_to_user.rb'
 
 # Offense count: 1
 # Cop supports --auto-correct.
@@ -207,25 +207,25 @@ Style/EmptyLinesAroundMethodBody:
 # SupportedStyles: empty_lines, empty_lines_except_namespace, no_empty_lines
 Style/EmptyLinesAroundModuleBody:
   Exclude:
-    - 'app/helpers/application_helper.rb'
+  #  - 'app/helpers/application_helper.rb'
 
 # Offense count: 5
 # Cop supports --auto-correct.
 # Configuration parameters: AllowForAlignment, ForceEqualSignAlignment.
 Style/ExtraSpacing:
   Exclude:
-    - 'app/policies/announcment_policy.rb'
-    - 'test/controllers/event_locations_controller_test.rb'
-    - 'test/controllers/events_controller_test.rb'
+  #  - 'app/policies/announcment_policy.rb'
+  #  - 'test/controllers/event_locations_controller_test.rb'
+  #  - 'test/controllers/events_controller_test.rb'
 
 # Offense count: 4
 # Configuration parameters: MinBodyLength.
 Style/GuardClause:
   Exclude:
-    - 'app/controllers/club_board_of_directors_controller.rb'
-    - 'app/controllers/club_board_of_supervisories_controller.rb'
-    - 'app/controllers/clubs_controller.rb'
-    - 'app/models/user.rb'
+  #  - 'app/controllers/club_board_of_directors_controller.rb'
+  #  - 'app/controllers/club_board_of_supervisories_controller.rb'
+  #  - 'app/controllers/clubs_controller.rb'
+  #  - 'app/models/user.rb'
 
 # Offense count: 18
 # Cop supports --auto-correct.
@@ -233,21 +233,21 @@ Style/GuardClause:
 # SupportedStyles: ruby19, hash_rockets, no_mixed_keys, ruby19_no_mixed_keys
 Style/HashSyntax:
   Exclude:
-    - 'app/controllers/academic_periods_controller.rb'
-    - 'app/controllers/application_controller.rb'
-    - 'app/controllers/club_periods_controller.rb'
-    - 'app/controllers/events_controller.rb'
-    - 'app/helpers/application_helper.rb'
-    - 'app/policies/application_policy.rb'
-    - 'db/migrate/20160817135002_add_is_active_to_club_setting.rb'
-    - 'db/migrate/20160829134502_add_confirmation_attributes_to_event.rb'
+  #  - 'app/controllers/academic_periods_controller.rb'
+  #  - 'app/controllers/application_controller.rb'
+  #  - 'app/controllers/club_periods_controller.rb'
+  #  - 'app/controllers/events_controller.rb'
+  #  - 'app/helpers/application_helper.rb'
+  #  - 'app/policies/application_policy.rb'
+  #  - 'db/migrate/20160817135002_add_is_active_to_club_setting.rb'
+  #  - 'db/migrate/20160829134502_add_confirmation_attributes_to_event.rb'
 
 # Offense count: 3
 Style/IfInsideElse:
   Exclude:
-    - 'app/controllers/club_board_of_directors_controller.rb'
-    - 'app/controllers/club_board_of_supervisories_controller.rb'
-    - 'app/policies/event_policy.rb'
+  #  - 'app/controllers/club_board_of_directors_controller.rb'
+  #  - 'app/controllers/club_board_of_supervisories_controller.rb'
+  #  - 'app/policies/event_policy.rb'
 
 # Offense count: 2
 # Cop supports --auto-correct.
@@ -255,7 +255,7 @@ Style/IfInsideElse:
 # SupportedStyles: special_inside_parentheses, consistent, align_braces
 Style/IndentHash:
   Exclude:
-    - 'app/helpers/application_helper.rb'
+  #  - 'app/helpers/application_helper.rb'
 
 # Offense count: 43
 # Cop supports --auto-correct.
@@ -263,71 +263,71 @@ Style/IndentHash:
 # SupportedStyles: normal, rails
 Style/IndentationConsistency:
   Exclude:
-    - 'app/controllers/academic_periods_controller.rb'
-    - 'app/controllers/announcments_controller.rb'
-    - 'app/controllers/application_controller.rb'
-    - 'app/controllers/club_board_of_directors_controller.rb'
-    - 'app/controllers/club_board_of_supervisories_controller.rb'
-    - 'app/controllers/club_categories_controller.rb'
-    - 'app/controllers/club_contacts_controller.rb'
-    - 'app/controllers/club_periods_controller.rb'
-    - 'app/controllers/club_settings_controller.rb'
-    - 'app/controllers/club_slides_controller.rb'
-    - 'app/controllers/clubs_controller.rb'
-    - 'app/controllers/event_categories_controller.rb'
-    - 'app/controllers/event_locations_controller.rb'
-    - 'app/controllers/event_response_controller.rb'
-    - 'app/controllers/events_controller.rb'
-    - 'app/controllers/role_types_controller.rb'
-    - 'app/controllers/roles_controller.rb'
-    - 'app/controllers/system_announcments_controller.rb'
-    - 'app/uploaders/file_uploader.rb'
-    - 'app/uploaders/image_uploader.rb'
+    # - 'app/controllers/academic_periods_controller.rb'
+    # - 'app/controllers/announcments_controller.rb'
+    # - 'app/controllers/application_controller.rb'
+    # - 'app/controllers/club_board_of_directors_controller.rb'
+    # - 'app/controllers/club_board_of_supervisories_controller. rb'
+    # - 'app/controllers/club_categories_controller.rb'
+    # - 'app/controllers/club_contacts_controller.rb'
+    # - 'app/controllers/club_periods_controller.rb'
+    # - 'app/controllers/club_settings_controller.rb'
+    # - 'app/controllers/club_slides_controller.rb'
+    # - 'app/controllers/clubs_controller.rb'
+    # - 'app/controllers/event_categories_controller.rb'
+    # - 'app/controllers/event_locations_controller.rb'
+    # - 'app/controllers/event_response_controller.rb'
+    # - 'app/controllers/events_controller.rb'
+    # - 'app/controllers/role_types_controller.rb'
+    # - 'app/controllers/roles_controller.rb'
+    # - 'app/controllers/system_announcments_controller.rb'
+    # - 'app/uploaders/file_uploader.rb'
+    # - 'app/uploaders/image_uploader.rb'
 
 # Offense count: 2
 # Cop supports --auto-correct.
 Style/LeadingCommentSpace:
   Exclude:
-    - 'app/controllers/clubs_controller.rb'
-    - 'app/controllers/system_announcments_controller.rb'
+  #  - 'app/controllers/clubs_controller.rb'
+  #  - 'app/controllers/system_announcments_controller.rb'
 
 # Offense count: 4
 # Cop supports --auto-correct.
 Style/MethodCallParentheses:
   Exclude:
-    - 'app/models/user.rb'
+    # - 'app/models/user.rb'
 
 # Offense count: 6
 # Configuration parameters: EnforcedStyle, SupportedStyles.
 # SupportedStyles: snake_case, camelCase
 Style/MethodName:
   Exclude:
-    - 'app/controllers/home_controller.rb'
-    - 'app/policies/home_policy.rb'
+    #- 'app/controllers/home_controller.rb'
+    #- 'app/policies/home_policy.rb'
 
 # Offense count: 2
 # Cop supports --auto-correct.
 Style/MultilineBlockLayout:
   Exclude:
-    - 'app/controllers/application_controller.rb'
+  # - 'app/controllers/application_controller.rb'
 
 # Offense count: 1
 # Cop supports --auto-correct.
 Style/MutableConstant:
   Exclude:
-    - 'app/helpers/application_helper.rb'
+  #  - 'app/helpers/application_helper.rb'
 
 # Offense count: 2
 Style/NestedTernaryOperator:
   Exclude:
-    - 'app/policies/announcment_policy.rb'
-    - 'app/policies/system_announcment_policy.rb'
+  #  - 'app/policies/announcment_policy.rb'
+  #  - 'app/policies/system_announcment_policy.rb'
 
 # Offense count: 1
 # Cop supports --auto-correct.
 Style/Not:
   Exclude:
-    - 'app/controllers/clubs_controller.rb'
+  #  - 'app/controllers/clubs_controller.rb'
 
 # Offense count: 2
 # Configuration parameters: NamePrefix, NamePrefixBlacklist, NameWhitelist.
@@ -336,30 +336,30 @@ Style/Not:
 # NameWhitelist: is_a?
 Style/PredicateName:
   Exclude:
-    - 'spec/**/*'
-    - 'app/helpers/application_helper.rb'
+  #  - 'spec/**/*'
+  #  - 'app/helpers/application_helper.rb'
 
 # Offense count: 16
 # Cop supports --auto-correct.
 Style/RedundantSelf:
   Exclude:
-    - 'app/models/club.rb'
-    - 'app/models/club_period.rb'
-    - 'app/models/user.rb'
+#    - 'app/models/club.rb'
+#    - 'app/models/club_period.rb'
+#    - 'app/models/user.rb'
 
 # Offense count: 9
 # Cop supports --auto-correct.
 Style/SpaceAfterColon:
   Exclude:
-    - 'db/seeds.rb'
+  #  - 'db/seeds.rb'
 
 # Offense count: 8
 # Cop supports --auto-correct.
 Style/SpaceAfterComma:
   Exclude:
-    - 'app/controllers/club_board_of_directors_controller.rb'
-    - 'app/controllers/club_board_of_supervisories_controller.rb'
-    - 'db/seeds.rb'
+  #  - 'app/controllers/club_board_of_directors_controller.rb'
+  #  - 'app/controllers/club_board_of_supervisories_controller.rb'
+  #  - 'db/seeds.rb'
 
 # Offense count: 10
 # Cop supports --auto-correct.
@@ -367,23 +367,23 @@ Style/SpaceAfterComma:
 # SupportedStyles: space, no_space
 Style/SpaceAroundEqualsInParameterDefault:
   Exclude:
-    - 'app/controllers/club_board_of_directors_controller.rb'
-    - 'app/controllers/club_board_of_supervisories_controller.rb'
-    - 'app/helpers/application_helper.rb'
-    - 'app/models/user.rb'
+  #  - 'app/controllers/club_board_of_directors_controller.rb'
+  #  - 'app/controllers/club_board_of_supervisories_controller.rb'
+  #  - 'app/helpers/application_helper.rb'
+  #  - 'app/models/user.rb'
 
 # Offense count: 23
 # Cop supports --auto-correct.
 # Configuration parameters: AllowForAlignment.
 Style/SpaceAroundOperators:
   Exclude:
-    - 'app/controllers/announcments_controller.rb'
-    - 'app/models/club_period.rb'
-    - 'app/models/role.rb'
-    - 'app/models/user.rb'
-    - 'app/policies/announcment_policy.rb'
-    - 'db/seeds.rb'
-    - 'test/controllers/club_periods_controller_test.rb'
+  #  - 'app/controllers/announcments_controller.rb'
+  #  - 'app/models/club_period.rb'
+  #  - 'app/models/role.rb'
+  #  - 'app/models/user.rb'
+  #  - 'app/policies/announcment_policy.rb'
+  #  - 'db/seeds.rb'
+  #  - 'test/controllers/club_periods_controller_test.rb'
 
 # Offense count: 28
 # Cop supports --auto-correct.
@@ -391,13 +391,13 @@ Style/SpaceAroundOperators:
 # SupportedStyles: space, no_space
 Style/SpaceBeforeBlockBraces:
   Exclude:
-    - 'app/controllers/announcments_controller.rb'
-    - 'app/controllers/club_board_of_directors_controller.rb'
-    - 'app/controllers/club_board_of_supervisories_controller.rb'
-    - 'app/controllers/events_controller.rb'
-    - 'app/controllers/roles_controller.rb'
-    - 'app/models/club_period.rb'
-    - 'app/models/user.rb'
+  #  - 'app/controllers/announcments_controller.rb'
+  #  - 'app/controllers/club_board_of_directors_controller.rb'
+  #  - 'app/controllers/club_board_of_supervisories_controller.rb'
+  #  - 'app/controllers/events_controller.rb'
+  #  - 'app/controllers/roles_controller.rb'
+  #  - 'app/models/club_period.rb'
+  #  - 'app/models/user.rb'
 
 # Offense count: 18
 # Cop supports --auto-correct.
@@ -405,9 +405,9 @@ Style/SpaceBeforeBlockBraces:
 # SupportedStyles: space, no_space
 Style/SpaceInsideBlockBraces:
   Exclude:
-    - 'app/controllers/clubs_controller.rb'
-    - 'app/controllers/events_controller.rb'
-    - 'app/models/user.rb'
+  #  - 'app/controllers/clubs_controller.rb'
+  #  - 'app/controllers/events_controller.rb'
+  #  - 'app/models/user.rb'
 
 # Offense count: 10
 # Cop supports --auto-correct.
@@ -415,9 +415,9 @@ Style/SpaceInsideBlockBraces:
 # SupportedStyles: space, no_space, compact
 Style/SpaceInsideHashLiteralBraces:
   Exclude:
-    - 'app/helpers/application_helper.rb'
-    - 'test/controllers/event_locations_controller_test.rb'
-    - 'test/controllers/events_controller_test.rb'
+  #  - 'app/helpers/application_helper.rb'
+  #  - 'test/controllers/event_locations_controller_test.rb'
+  #  - 'test/controllers/events_controller_test.rb'
 
 # Offense count: 1305
 # Cop supports --auto-correct.
@@ -425,40 +425,40 @@ Style/SpaceInsideHashLiteralBraces:
 # SupportedStyles: single_quotes, double_quotes
 Style/StringLiterals:
   Exclude:
-    - 'app/controllers/club_board_of_directors_controller.rb'
-    - 'app/controllers/club_board_of_supervisories_controller.rb'
-    - 'app/controllers/clubs_controller.rb'
-    - 'app/controllers/event_response_controller.rb'
-    - 'app/controllers/home_controller.rb'
-    - 'app/controllers/roles_controller.rb'
-    - 'app/controllers/system_announcments_controller.rb'
-    - 'app/helpers/application_helper.rb'
-    - 'app/models/club.rb'
-    - 'app/models/club_period.rb'
-    - 'app/models/role.rb'
-    - 'app/models/system_announcment.rb'
-    - 'app/models/user.rb'
-    - 'db/migrate/20160119141013_devise_create_users.rb'
-    - 'db/seeds.rb'
-    - 'test/controllers/academic_periods_controller_test.rb'
-    - 'test/controllers/announcments_controller_test.rb'
-    - 'test/controllers/club_board_of_directors_controller_test.rb'
-    - 'test/controllers/club_board_of_supervisories_controller_test.rb'
-    - 'test/controllers/club_categories_controller_test.rb'
-    - 'test/controllers/club_contacts_controller_test.rb'
-    - 'test/controllers/club_periods_controller_test.rb'
-    - 'test/controllers/club_settings_controller_test.rb'
-    - 'test/controllers/club_slides_controller_test.rb'
-    - 'test/controllers/clubs_controller_test.rb'
-    - 'test/controllers/event_categories_controller_test.rb'
-    - 'test/controllers/event_locations_controller_test.rb'
-    - 'test/controllers/event_requests_controller_test.rb'
-    - 'test/controllers/event_response_controller_test.rb'
-    - 'test/controllers/events_controller_test.rb'
-    - 'test/controllers/home_controller_test.rb'
-    - 'test/controllers/role_types_controller_test.rb'
-    - 'test/controllers/roles_controller_test.rb'
-    - 'test/controllers/system_announcments_controller_test.rb'
+    #- 'app/controllers/club_board_of_directors_controller.rb'
+    #- 'app/controllers/club_board_of_supervisories_controller.rb'
+    #- 'app/controllers/clubs_controller.rb'
+    #- 'app/controllers/event_response_controller.rb'
+    #- 'app/controllers/home_controller.rb'
+    #- 'app/controllers/roles_controller.rb'
+    #- 'app/controllers/system_announcments_controller.rb'
+    #- 'app/helpers/application_helper.rb'
+    #- 'app/models/club.rb'
+    #- 'app/models/club_period.rb'
+    #- 'app/models/role.rb'
+    #- 'app/models/system_announcement.rb'
+    #- 'app/models/user.rb'
+    #- 'db/migrate/20160119141013_devise_create_users.rb'
+    #- 'db/seeds.rb'
+    #- 'test/controllers/academic_periods_controller_test.rb'
+    #- 'test/controllers/announcments_controller_test.rb'
+    #- 'test/controllers/club_board_of_directors_controller_test.rb'
+    #- 'test/controllers/club_board_of_supervisories_controller_test.rb'
+    #- 'test/controllers/club_categories_controller_test.rb'
+    #- 'test/controllers/club_contacts_controller_test.rb'
+    #- 'test/controllers/club_periods_controller_test.rb'
+    #- 'test/controllers/club_settings_controller_test.rb'
+    #- 'test/controllers/club_slides_controller_test.rb'
+    #- 'test/controllers/clubs_controller_test.rb'
+    #- 'test/controllers/event_categories_controller_test.rb'
+    #- 'test/controllers/event_locations_controller_test.rb'
+    #- 'test/controllers/event_requests_controller_test.rb'
+    #- 'test/controllers/event_response_controller_test.rb'
+    #- 'test/controllers/events_controller_test.rb'
+    #- 'test/controllers/home_controller_test.rb'
+    #- 'test/controllers/role_types_controller_test.rb'
+    #- 'test/controllers/roles_controller_test.rb'
+    #- 'test/controllers/system_announcments_controller_test.rb'
 
 # Offense count: 2
 # Cop supports --auto-correct.
@@ -466,53 +466,53 @@ Style/StringLiterals:
 # IgnoredMethods: respond_to, define_method
 Style/SymbolProc:
   Exclude:
-    - 'app/controllers/club_periods_controller.rb'
-    - 'app/controllers/events_controller.rb'
+  #  - 'app/controllers/club_periods_controller.rb'
+  #  - 'app/controllers/events_controller.rb'
 
 # Offense count: 87
 # Cop supports --auto-correct.
 Style/Tab:
   Exclude:
-    - 'app/models/academic_period.rb'
-    - 'app/models/announcment.rb'
-    - 'app/models/club.rb'
-    - 'app/models/club_board_of_director.rb'
-    - 'app/models/club_board_of_supervisory.rb'
-    - 'app/models/club_contact.rb'
-    - 'app/models/club_period.rb'
-    - 'app/models/club_setting.rb'
-    - 'app/models/club_slide.rb'
-    - 'app/models/event_category.rb'
-    - 'app/models/event_response.rb'
-    - 'app/models/event_status.rb'
-    - 'app/models/role_type.rb'
-    - 'app/models/system_announcment.rb'
-    - 'app/policies/academic_period_policy.rb'
-    - 'app/policies/announcment_policy.rb'
-    - 'app/policies/assistant_consultant_policy.rb'
-    - 'app/policies/club_board_of_director_policy.rb'
-    - 'app/policies/club_board_of_supervisory_policy.rb'
-    - 'app/policies/club_category_policy.rb'
-    - 'app/policies/club_contact_policy.rb'
-    - 'app/policies/club_period_policy.rb'
-    - 'app/policies/club_policy.rb'
-    - 'app/policies/club_setting_policy.rb'
-    - 'app/policies/club_slide_policy.rb'
-    - 'app/policies/event_category_policy.rb'
-    - 'app/policies/event_location_policy.rb'
-    - 'app/policies/event_policy.rb'
-    - 'app/policies/event_request_policy.rb'
-    - 'app/policies/home_policy.rb'
-    - 'app/policies/role_policy.rb'
-    - 'app/policies/system_announcment_policy.rb'
-    - 'db/migrate/20160119101623_rename_column_exception_id_to_club_id_table_club_contacts.rb'
-    - 'db/migrate/20160119101928_rename_column_exception_id_to_club_id_table_club_settings.rb'
-    - 'db/migrate/20160120061300_add_first_name_and_last_name_and_program_id_to_user.rb'
-    - 'db/migrate/20160122191537_change_category_id_to_club_category_id_from_clubs.rb'
-    - 'db/migrate/20160222092521_add_logo_to_user.rb'
-    - 'db/migrate/20160222162310_add_image_to_users.rb'
-    - 'db/migrate/20160916170204_change_requirements_type_in_events.rb'
-    - 'db/migrate/20160916180358_rename_is_activein_usersto_is_passive.rb'
+  #  - 'app/models/academic_period.rb'
+  #  - 'app/models/announcement.rb'
+  #  - 'app/models/club.rb'
+  #  - 'app/models/club_board_of_director.rb'
+  #  - 'app/models/club_board_of_supervisory.rb'
+  #  - 'app/models/club_contact.rb'
+  #  - 'app/models/club_period.rb'
+  #  - 'app/models/club_setting.rb'
+  #  - 'app/models/club_slide.rb'
+  #  - 'app/models/event_category.rb'
+  #  - 'app/models/event_response.rb'
+  #  - 'app/models/event_status.rb'
+  #  - 'app/models/role_type.rb'
+  #  - 'app/models/system_announcement.rb'
+  #  - 'app/policies/academic_period_policy.rb'
+  #  - 'app/policies/announcment_policy.rb'
+  #  - 'app/policies/assistant_consultant_policy.rb'
+  #  - 'app/policies/club_board_of_director_policy.rb'
+  #  - 'app/policies/club_board_of_supervisory_policy.rb'
+  #  - 'app/policies/club_category_policy.rb'
+  #  - 'app/policies/club_contact_policy.rb'
+  #  - 'app/policies/club_period_policy.rb'
+  #  - 'app/policies/club_policy.rb'
+  #  - 'app/policies/club_setting_policy.rb'
+  #  - 'app/policies/club_slide_policy.rb'
+  #  - 'app/policies/event_category_policy.rb'
+  #  - 'app/policies/event_location_policy.rb'
+  #  - 'app/policies/event_policy.rb'
+  #  - 'app/policies/event_request_policy.rb'
+  #  - 'app/policies/home_policy.rb'
+  #  - 'app/policies/role_policy.rb'
+  #  - 'app/policies/system_announcment_policy.rb'
+  #  - 'db/migrate/20160119101623_rename_column_exception_id_to_club_id_table_club_contacts.rb'
+  #  - 'db/migrate/20160119101928_rename_column_exception_id_to_club_id_table_club_settings.rb'
+  #  - 'db/migrate/20160120061300_add_first_name_and_last_name_and_program_id_to_user.rb'
+  #  - 'db/migrate/20160122191537_change_category_id_to_club_category_id_from_clubs.rb'
+  #  - 'db/migrate/20160222092521_add_logo_to_user.rb'
+  #  - 'db/migrate/20160222162310_add_image_to_users.rb'
+  #  - 'db/migrate/20160916170204_change_requirements_type_in_events.rb'
+  #  - 'db/migrate/20160916180358_rename_is_activein_usersto_is_passive.rb'
 
 # Offense count: 1
 # Cop supports --auto-correct.
@@ -520,7 +520,7 @@ Style/Tab:
 # SupportedStyles: require_parentheses, require_no_parentheses
 Style/TernaryParentheses:
   Exclude:
-    - 'app/policies/system_announcment_policy.rb'
+  #  - 'app/policies/system_announcment_policy.rb'
 
 # Offense count: 21
 # Cop supports --auto-correct.
@@ -528,38 +528,38 @@ Style/TernaryParentheses:
 # SupportedStyles: final_newline, final_blank_line
 Style/TrailingBlankLines:
   Exclude:
-    - 'app/models/user.rb'
-    - 'app/policies/academic_period_policy.rb'
-    - 'app/policies/advisor_policy.rb'
-    - 'app/policies/announcment_policy.rb'
-    - 'app/policies/assistant_consultant_policy.rb'
-    - 'app/policies/club_board_of_director_policy.rb'
-    - 'app/policies/club_board_of_supervisory_policy.rb'
-    - 'app/policies/club_category_policy.rb'
-    - 'app/policies/club_contact_policy.rb'
-    - 'app/policies/club_period_policy.rb'
-    - 'app/policies/club_policy.rb'
-    - 'app/policies/club_setting_policy.rb'
-    - 'app/policies/club_slide_policy.rb'
-    - 'app/policies/event_category_policy.rb'
-    - 'app/policies/event_location_policy.rb'
-    - 'app/policies/event_policy.rb'
-    - 'app/policies/event_request_policy.rb'
-    - 'app/policies/home_policy.rb'
-    - 'app/policies/role_policy.rb'
-    - 'app/policies/system_announcment_policy.rb'
-    - 'lib/custom_failure.rb'
+  #  - 'app/models/user.rb'
+  #  - 'app/policies/academic_period_policy.rb'
+  #  - 'app/policies/advisor_policy.rb'
+  #  - 'app/policies/announcment_policy.rb'
+  #  - 'app/policies/assistant_consultant_policy.rb'
+  #  - 'app/policies/club_board_of_director_policy.rb'
+  #  - 'app/policies/club_board_of_supervisory_policy.rb'
+  #  - 'app/policies/club_category_policy.rb'
+  #  - 'app/policies/club_contact_policy.rb'
+  #  - 'app/policies/club_period_policy.rb'
+  #  - 'app/policies/club_policy.rb'
+  #  - 'app/policies/club_setting_policy.rb'
+  #  - 'app/policies/club_slide_policy.rb'
+  #  - 'app/policies/event_category_policy.rb'
+  #  - 'app/policies/event_location_policy.rb'
+  #  - 'app/policies/event_policy.rb'
+  #  - 'app/policies/event_request_policy.rb'
+  #  - 'app/policies/home_policy.rb'
+  #  - 'app/policies/role_policy.rb'
+  #  - 'app/policies/system_announcment_policy.rb'
+  #  - 'lib/custom_failure.rb'
 
 # Offense count: 25
 # Cop supports --auto-correct.
 Style/TrailingWhitespace:
   Exclude:
-    - 'app/controllers/announcments_controller.rb'
-    - 'app/controllers/application_controller.rb'
-    - 'app/controllers/club_board_of_directors_controller.rb'
-    - 'app/controllers/club_board_of_supervisories_controller.rb'
-    - 'app/helpers/application_helper.rb'
-    - 'app/models/club.rb'
-    - 'app/models/user.rb'
-    - 'app/policies/system_announcment_policy.rb'
-    - 'db/seeds.rb'
+  #  - 'app/controllers/announcments_controller.rb'
+  #  - 'app/controllers/application_controller.rb'
+  #  - 'app/controllers/club_board_of_directors_controller.rb'
+  #  - 'app/controllers/club_board_of_supervisories_controller.rb'
+  #  - 'app/helpers/application_helper.rb'
+  #  - 'app/models/club.rb'
+  #  - 'app/models/user.rb'
+  #  - 'app/policies/system_announcment_policy.rb'
+  #  - 'db/seeds.rb'

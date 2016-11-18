@@ -1,7 +1,6 @@
 require 'test_helper'
 
 class ClubCategoryPolicyTest < ActiveSupport::TestCase
-
   def test_scope
   end
 
