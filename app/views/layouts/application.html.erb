@@ -116,7 +116,7 @@
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
         </button>
-        <h4 id="event-modal-title"></h4>
+        <h4><p id="event-modal-title"></p></h4>
       </div>
 
       <div class="modal-body">
@@ -138,7 +138,7 @@
             <%= simple_form_for :event_response, :url => event_response_create_path, html: {id: "event-response-form"} do |f| %>
               <div class="form-inputs">
                 <%= f.input :explanation, placeholder: "Açıklama(opsiyonel)", label: false %>
-                <%= f.input :event_id, :as => :hidden, :input_html => { :class => "event-id-modal"} %>
+                <%= f.input :event_id, :as => :hidden, :input_html => { :id => "event-id-modal"} %>
                 <%= f.input :event_status_id, :as => :hidden, :input_html => { :id => "event-status-id-modal" } %>
               </div>
               <div class="form-actions">

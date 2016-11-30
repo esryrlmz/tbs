@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-
   get 'event_response/create'
 
   get 'event_response/destroy'
@@ -26,6 +25,9 @@ Rails.application.routes.draw do
   resources :assistant_consultants
   resources :club_periods do |variable|
     get 'member_list', on: :member, defaults: {format: :json}
+    get 'edit_member_list', on: :member
+    get 'change_member_status', on: :member
+    get 'member_destroy', on: :member
   end
   resources :announcements
   resources :system_announcements

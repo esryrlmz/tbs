@@ -33,12 +33,12 @@
       </div>
       <div class="panel-body">
         <% if current_user.present? && current_user.admin? %>
-          <p align="right">  
+          <p align="right">
             <%= link_to 'Yeni Etkinlik Oluştur', new_event_path, class: "btn btn-default" %>
           </p>
         <% elsif current_user.present? && current_user.president? %>
           <% if current_user.president_or_advisor_club_period.club.club_setting.is_active %>
-            <p align="right">  
+            <p align="right">
               <%= link_to 'Yeni Etkinlik Oluştur', new_event_path, class: "btn btn-default" %>
             </p>
           <% else %>
@@ -62,7 +62,7 @@
 
                 <tbody>
                   <% @pending_events.each do |event| %>
-                    <tr data-id=<%= event.id %> data-title="<%= event.title %>" data-show-footer=<%= current_user.present? && !(current_user.admin?) && current_user.president?(current_user.active_club_periods) && (event.event_responses.last.event_status.id == 5 || event.event_responses.last.event_status.id == 4 || event.event_responses.last.event_status.id == 1) ? false : true %>>
+                    <tr data-id="<%= event.id %>" data-title="<%= event.title %>" data-show-footer="<%= current_user.present? && !(current_user.admin?) && current_user.president?(current_user.active_club_periods) && (event.event_responses.last.event_status.id == 5 || event.event_responses.last.event_status.id == 4 || event.event_responses.last.event_status.id == 1) ? false : true %>">
                       <td></td>
                       <td><%= link_to event.title, event %></td>
                       <td><%= event.club_period.club.name %></td>
@@ -72,8 +72,8 @@
                         <% if current_user.present? && current_user.admin? %>
                           <%= link_to '<i class="fa fa-eye" title="Göster"></i>'.html_safe, event, :style=>'margin-right: 20px;' %><%= link_to '<i class="fa fa-pencil" title="Düzenle"></i>'.html_safe, edit_event_path(event), :style=>'margin-right: 20px;' %><%= link_to '<i class="fa fa-trash" title="Sil"></i>'.html_safe, event, method: :delete, data: { confirm: 'Etkinliği silmek istediğinize emin misiniz?' } %>
                         <% elsif current_user.present? && current_user.president?(current_user.active_club_periods) %>
-                          <%= link_to '<i class="fa fa-trash" title="Sil"></i>'.html_safe, event, method: :delete, data: { confirm: 'Etkinliği silmek istediğinize emin misiniz?' } %> 
-                        <% end %>   
+                          <%= link_to '<i class="fa fa-trash" title="Sil"></i>'.html_safe, event, method: :delete, data: { confirm: 'Etkinliği silmek istediğinize emin misiniz?' } %>
+                        <% end %>
                       </td>
                     </tr>
                   <% end %>
@@ -159,7 +159,7 @@
                     <td><%= link_to event.title, event %></td>
                     <td><%= event.club_period.club.name %></td>
                     <% if current_user.present? && current_user.admin? %>
-                      <td><a href="#" role="button" data-toggle="modal" data-target="#event-responses-modal" class="label show-event-responses label-<%= event.event_responses.last.event_status.id == 2 ? "success" : event.event_responses.last.event_status.id == 3 ? "danger" : "warning" %>"><%= event.event_responses.last.event_status.status %></td>
+                      <td><a href="#"  role="button" data-toggle="modal" data-target="#event-responses-modal" class="label show-event-responses label-<%= event.event_responses.last.event_status.id == 2 ? "success" : event.event_responses.last.event_status.id == 3 ? "danger" : "warning" %>"><%= event.event_responses.last.event_status.status %></td>
                     <% else %>
                       <td>Onaylandı</td>
                     <% end %>

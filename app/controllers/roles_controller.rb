@@ -3,7 +3,7 @@ class RolesController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @roles = Role.all
+    @roles = Role.where.not(role_type_id: [RoleType.find_by(name: 'Başkan'), RoleType.find_by(name: 'Üye')])
     authorize @roles
   end
 

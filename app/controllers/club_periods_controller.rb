@@ -1,5 +1,5 @@
 class ClubPeriodsController < ApplicationController
-  before_action :set_club_period, only: [:show, :edit, :update, :destroy, :member_list]
+  before_action :set_club_period, only: [:show, :edit, :update, :destroy, :member_list, :edit_member_list]
   before_action :authenticate_user!, only: [:new, :edit, :update, :destroy]
 
   def index
@@ -12,6 +12,23 @@ class ClubPeriodsController < ApplicationController
     respond_to do |format|
       format.json { render json: @member_list }
     end
+  end
+
+  def edit_member_list
+    @member_lists = @club_period.club_members
+  end
+
+  def change_member_status
+    @club_member = Role.find(params[:id])
+    @club_member.status = @club_member.status ? false : true
+    @club_member.save
+    redirect_to edit_member_list_club_period_path(@club_member.club_period.id)
+  end
+
+  def member_destroy
+    @club_member = Role.find(params[:id])
+    @club_member.destroy
+    redirect_to edit_member_list_club_period_path(@club_member.club_period.id)
   end
 
   def show

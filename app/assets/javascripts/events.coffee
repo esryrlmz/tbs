@@ -20,6 +20,34 @@ printDiv = (divName) ->
 
 $ ->
 
+$ ->
+  $('.show-event-responses').click ->
+    tr = $(this).closest('tr')
+    eventId = tr[0].attributes[0].value
+    $('#event-modal-title').text(tr[0].attributes[1].value)
+    if eventId != ""
+      $('#event-id-modal').val(eventId)
+      $('#event-responses-table-body').empty()
+      if(!tr[0].attributes[2].value)
+        $('#event-responses-table-footer').empty()
+      $.ajax
+          url: "/events/#{eventId}/event_responses"
+          type: 'GET'
+          dataType: 'json'
+          success: (result) ->
+            $.each result, (key, eventReponse) ->
+              explanation
+              if eventReponse.explanation == null
+                explanation = ""
+              else
+                explanation = eventReponse.explanation
+
+              date = new Date(eventReponse.created_at);
+              $('#event-responses-table-body').append "<tr><td>#{eventReponse.event_status.status}</td><td>#{explanation}</td><td>#{dateFormat(date)}</td></tr>"
+              $('.event-id-modal').val(eventId)
+          error: (error) ->
+            console.log error
+
   $('.form-response-button').click ->
     if $(this).hasClass('admin-confirm')
       $('#event-status-id-modal').val(2)
@@ -33,6 +61,7 @@ $ ->
       $('#event-status-id-modal').val(4)
     $('#event-response-form').submit()
 
+
   $('#event_locations_list').append("<option value='Diğer'>Diğer</option>")
   $('#event_locations_list').on 'select2:select', (e) ->
     selectedValue = $(this).val()
@@ -42,42 +71,6 @@ $ ->
     else
       $('#event_location').prop('readonly', false);
       $('#event_location').val('')
-
-  $('.show-event-responses').click ->
-    tr = $(this).closest('tr')
-    eventId = tr.data('id')
-    eventTitle = tr.data('title')
-    showFooter = tr.data('show-footer')
-
-    $('#event-modal-title').text(eventTitle)
-    $('#event-responses-table-body').empty()
-    if(!showFooter)
-      $('#event-responses-table-footer').empty()
-
-    url = "/events/#{eventId}/event_responses"
-    if eventId != ""
-      $.ajax
-        url: url
-        type: 'GET'
-        dataType: 'json'
-        success: (response) ->
-          $.each response, (key, eventReponse) ->
-            explanation
-            if eventReponse.explanation == null
-              explanation = ""
-            else
-              explanation = eventReponse.explanation
-
-            date = new Date(eventReponse.created_at);
-            $('#event-responses-table-body').append "<tr><td>#{eventReponse.event_status.status}</td><td>#{explanation}</td><td>#{dateFormat(date)}</td></tr>"
-            $('.event-id-modal').val(eventId)
-            # $('#event-status-id-admin-accept-modal').val(2)
-            # $('#event-status-id-admin-reject-modal').val(3)
-            $('#event-status-id-advisor-accept-modal').val(5)
-            $('#event-status-id-advisor-reject-modal').val(6)
-            $('#event-status-id-president-reject-modal').val(4)
-        error: (xhr, ajaxOptions, thrownError) ->
-          console.log(error)
 
   $('#print-event').click ->
     console.log(123)

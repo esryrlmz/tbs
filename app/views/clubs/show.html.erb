@@ -5,292 +5,237 @@
 </div>
 <div class="row">
   <div class="col-md-12">
-<ol class="breadcrumb">
-    <li><%= link_to 'Anasayfa', root_path %></li>
-    <li><%= link_to 'Topluluklar', clubs_path %></li>
-    <li class="active">Topluluk Bilgileri Detay</li>
-</ol>
-<div class="panel panel-default">
-    <div class="panel-heading">
-      <h4 class="panel-title">Topluluk Bilgileri Detay</h4>
+    <ol class="breadcrumb">
+      <li><%= link_to 'Anasayfa', root_path %></li>
+      <li><%= link_to 'Topluluklar', clubs_path %></li>
+      <li class="active">Topluluk Bilgileri Detay</li>
+    </ol>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4 class="panel-title">Topluluk Bilgileri Detay</h4>
+      </div>
+      <div class="panel-body">
+        <%= link_to 'Üyeleri', club_member_list_path(@club) %>
+        <p>
+          <strong>Topluluk Adı:</strong>
+          <%= @club.name %>
+        </p>
+
+        <p>
+          <strong>Kısa Adı:</strong>
+          <%= @club.short_name %>
+        </p>
+
+        <p>
+          <strong>Açıklama:</strong>
+          <%= @club.description %>
+        </p>
+
+        <p>
+          <strong>Kuruluş Tarihi:</strong>
+          <%= @club.creation_date %>
+        </p>
+
+        <%= link_to 'Düzenle', edit_club_path(@club), class: 'btn btn-success' %> |
+        <%= link_to 'Geri', clubs_path, class: "btn btn-info" %>
+        <br />
+      </div>
     </div>
-    <div class="panel-body">
-<%= link_to 'Üyeleri', club_member_list_path(@club) %>
-<p>
-  <strong>Topluluk Adı:</strong>
-  <%= @club.name %>
-</p>
-
-<p>
-  <strong>Kısa Adı:</strong>
-  <%= @club.short_name %>
-</p>
-
-<p>
-  <strong>Açıklama:</strong>
-  <%= @club.description %>
-</p>
-
-<p>
-  <strong>Kuruluş Tarihi:</strong>
-  <%= @club.creation_date %>
-</p>
-
-<%= link_to 'Düzenle', edit_club_path(@club), class: 'btn btn-success' %> |
-<%= link_to 'Geri', clubs_path, class: "btn btn-info" %>
-<br />
-</div>
-</div>
-</div>
+  </div>
 </div>
 <% else %>
 <div class="row">
   <%= render 'home/navbarDefault' %>
 </div>
 <div class="row">
-<div class="col-md-12">
-	<div class="panel panel-default">
-		<div class="panel-body">
-			<div class="page-header">
-			<div class="row">
-				<div class="col-md-9" style="margin-top:-50px;">
-				 	<div class="row">
-				 		<div class="col-md-2" style="margin-top: 10px">
-				 			<%= club_logo_or_not?(@club, "100x100", :class => "img-responsive img-rounded") %>
-				 		</div>
-				 		<div class="col-md-10">
-				 			<h1><%= @club.name %><br /><small><%= @club.club_category.name %></small></h1>
-				 		</div>
-				 	</div>
-				</div>
-				<div class="col-md-3" align="center" style="margin-top:-30px">
-					<% if @club_view_contact %>
-			 	 		<%= link_to '', @club.club_contact.face_url, :class =>"fa fa-facebook-official fa-2x" %>
-			 	 		<%= link_to '', @club.club_contact.tw_url, :class =>"fa fa-twitter fa-2x" %>
-			 	 		<%= link_to '', @club.club_contact.gplus_url, :class =>"fa fa-google-plus fa-2x" %>
-			 	 		<%= link_to '', @club.club_contact.linkedin_url, :class =>"fa fa-linkedin fa-2x" %>
-			 	 		<%= link_to '', @club.club_contact.youtube_url, :class =>"fa fa-youtube fa-2x" %>
-			 	 		<%= link_to '', @club.club_contact.github_url, :class =>"fa fa-github fa-2x" %>
-			 	 	<% end %>
-			 	 	<div style="margin-top: 10px">
-			 	 		<% if user_signed_in? %>
-			 	 			<% unless current_user.advisor? %>
-								<% if current_user.member?(@club_period) %>
-									<div class="row">
-										<div class="col-md-6">
-											<span class="btn btn-success btn-block">Üyesiniz</span>
-										</div>
-										<div class="col-md-6">
-											<%= link_to 'Üyelikten Çık', role_path(@role), method: :delete, data: { confirm: 'Üyelikten çıkmak istediğinize emin misin?' }, :class =>"btn btn-info btn-block" %>
-										</div>
-									</div>
-								<% elsif @club_member_count_error %>
-									<span class="btn btn-info btn-block">Üyelik Kabul Edilemiyor #ÜyeSayısı</span>
-								<% elsif @club_member_program_error %>
-									<span class="btn btn-info btn-block">Üyelik Kabul Edilemiyor<br />#ProgramKodu</span>
-								<% else %>
-									<%= link_to 'Topluluğa Katıl', "", :onclick => "$('#member_to_club').submit()", :class => "btn btn-success btn-block" %>
+  <div class="col-md-12">
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <div class="page-header">
+          <div class="row">
+            <div class="col-md-9" style="margin-top:-50px;">
+              <div class="row">
+                <div class="col-md-2" style="margin-top: 10px">
+                  <%= club_logo_or_not?(@club, "100x100", :class => "img-responsive img-rounded") %>
+                </div>
+                <div class="col-md-10">
+                  <h1><%= @club.name %><br /><small><%= @club.club_category.name %></small></h1>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3" align="center" style="margin-top:-30px">
+              <% if @club_view_contact %>
+              <%= link_to '', @club.club_contact.face_url, :class =>"fa fa-facebook-official fa-2x" %>
+              <%= link_to '', @club.club_contact.tw_url, :class =>"fa fa-twitter fa-2x" %>
+              <%= link_to '', @club.club_contact.gplus_url, :class =>"fa fa-google-plus fa-2x" %>
+              <%= link_to '', @club.club_contact.linkedin_url, :class =>"fa fa-linkedin fa-2x" %>
+              <%= link_to '', @club.club_contact.youtube_url, :class =>"fa fa-youtube fa-2x" %>
+              <%= link_to '', @club.club_contact.github_url, :class =>"fa fa-github fa-2x" %>
+              <% end %>
+              <div style="margin-top: 10px">
+                <% if user_signed_in? %>
+                <% unless current_user.advisor? %>
+                <% if current_user.member?(@club_period) %>
+                <div class="row">
+                  <div class="col-md-6">
+                    <span class="btn btn-success btn-block">Üyesiniz</span>
+                  </div>
+                  <div class="col-md-6">
+                    <%= link_to 'Üyelikten Çık', role_path(@role), method: :delete, data: { confirm: 'Üyelikten çıkmak istediğinize emin misin?' }, :class =>"btn btn-info btn-block" %>
+                  </div>
+                </div>
+                <% elsif @club_member_count_error %>
+                <span class="btn btn-info btn-block">Üyelik Kabul Edilemiyor #ÜyeSayısı</span>
+                <% elsif @club_member_program_error %>
+                <span class="btn btn-info btn-block">Üyelik Kabul Edilemiyor<br />#ProgramKodu</span>
+                <% else %>
+                <%= link_to 'Topluluğa Katıl', "", :onclick => "$('#member_to_club').submit()", :class => "btn btn-success btn-block" %>
 
-									<%= simple_form_for(@role, :html => {:id => 'member_to_club' }) do |f| %>
-									  <%= f.error_notification %>
-									    <%= f.input :role_type_id, :as => :hidden, :input_html => { :value => RoleType.find_by(name: "Üye").id }  %>
-									    <%= f.input :user_id, :as => :hidden, :input_html => { :value => current_user.id } %>
-									    <%= f.input :club_period_id, :as => :hidden, :input_html => { :value => ( @club_period.present? ? @club_period.id : nil ) } %>
-									<% end %>
-								<% end %>
-							<% end %>
-						<% else %>
-							<span class="btn btn-success btn-block" disabled="disabled">Topluluğa Katıl</span>
-							<a href="#" role="button" data-toggle="modal" data-target="#login-modal" class="label label-warning">Giriş yapmanız gerekiyor</a>
-						<% end %>
-			 	 	</div>
-				</div>
-			</div>
-			</div>
-			<% if @club.club_slides %>
-			<div class="row">
-				<div class="col-md-12 ">
-					<div id="myCarousel" class="carousel slide" data-ride="carousel">
-					  <!-- Indicators -->
-					  <ol class="carousel-indicators">
-					  <% (0..@club.club_slides.count-1).each do |i| %>
-					  	<li data-target="#myCarousel" data-slide-to='<%= i %>' > </li>
-					  <% end %>
-
-					  </ol>
-
-					  <!-- Wrapper for slides -->
-					  <div class="carousel-inner" role="listbox">
-					  	<% @club.club_slides.each_with_index do |club_slide, index| %>
-					    <div class="item <%= "active" if index == 0 %>">
-					      <%= image_tag(club_slide.file, class: "slide-image") %>
-					    </div>
-					  	<% end %>
-
-					  </div>
-					</div>
-				</div>
-			</div>
-			<% end %>
-			<br />
-			<div class="row">
-				<div class="col-md-3">
-					<div class="panel">
-						<div class="panel-heading">
-				        	<h4 class="panel-title">Topluluk Bilgileri</h4>
-				        </div>
-						<div class="panel-body">
-							<ul class="nav nav-sidebar">
-								<% if current_user.present? && current_user.admin? %>
-									<li><%= link_to "Topluluk Bilgilerini Düzenle", edit_club_path(@club) %></li>
-				          <li><%= link_to "İletişim Bilgilerini DÜzenle", @club.club_contact.present? ? edit_club_contact_path(@club.club_contact) : new_club_contact_path %></li>
-				          <li><%= link_to "Topluluk Ayarları", @club.club_setting.present? ? edit_club_setting_path(@club.club_setting) : new_club_setting_path  %></li>
-				          <li><%= link_to "Yönetim Kurulu Düzenle", @club_period.club_board_of_director.present? ? edit_club_board_of_director_path(@club_period.club_board_of_director) : new_club_board_of_director_path %></li>
-				          <li><%= link_to "Denetim Kurulu Düzenle", @club_period.club_board_of_supervisory.present? ? edit_club_board_of_supervisory_path(@club_period.club_board_of_supervisory)  : new_club_board_of_supervisory_path %></li>
-			          <% end %>
-			          <li><%= link_to "Yönetim Kurulu", '#', "data-toggle" => "collapse", 'data-target' => '#club_view_board_of_director_collapse' %></li>
-			          <li><%= link_to "Denetim Kurulu", '#', "data-toggle" => "collapse", 'data-target' => '#club_view_board_of_supervisor_collapse' %></li>
-			          <li><%= link_to "Topluluk Üyeleri", '#', "data-toggle" => "collapse", 'data-target' => '#club_users_collapse' %></li>
-			        </ul>
-						</div>
-					</div>
-					<div class="panel">
-						<div class="panel-heading">
-				        	<h4 class="panel-title">İletişim</h4>
-				        </div>
-						<div class="panel-body">
-						<% if @club_view_contact %>
-							<p><i class="fa fa-envelope fa-1x"></i> <%= @club.club_contact.email%></p>
-							<p><i class="fa fa-phone fa-1x"></i> <%= @club.club_contact.phone_number %></p>
-							<p><i class="fa fa-map-marker fa-1x"></i> <%= @club.club_contact.address %></p>
-						<% end %>
-						</div>
-					</div>
-
-				</div>
-				<div class="col-md-9">
-
-				 <% if @club_president || @club_advisor %>
-						<section class="team">
-						  <div class="container">
-						    <div class="row">
-						      <div class="col-md-9">
-						        <div class="col-lg-9">
-						          <h6 class="description">Yönetim</h6>
-						          <div class="row pt-md">
-						          	<% if @club_advisor %>
-							            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 profile">
-							              <div class="img-box">
-							                <%= avatar_or_not?(@club_advisor, nil, 150, :class => "img-responsive") %>
-							              </div>
-							              <h1><%= @club_advisor.full_name %></h1>
-							              <h2>Akademik Danışman</h2>
-							            </div>
-						            <% end %>
-                        <% if @club_vice_advisor  %>
-                          <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 profile">
-                            <div class="img-box">
-                              <%= avatar_or_not?( @club_vice_advisor , nil, 150, :class => "img-responsive") %>
+                <%= simple_form_for(@role, :html => {:id => 'member_to_club' }) do |f| %>
+                <%= f.error_notification %>
+                <%= f.input :role_type_id, :as => :hidden, :input_html => { :value => RoleType.find_by(name: "Üye").id }  %>
+                <%= f.input :user_id, :as => :hidden, :input_html => { :value => current_user.id } %>
+                <%= f.input :club_period_id, :as => :hidden, :input_html => { :value => ( @club_period.present? ? @club_period.id : nil ) } %>
+                <% end %>
+                <% end %>
+                <% end %>
+                <% else %>
+                <span class="btn btn-success btn-block" disabled="disabled">Topluluğa Katıl</span>
+                <a href="#" role="button" data-toggle="modal" data-target="#login-modal" class="label label-warning">Giriş yapmanız gerekiyor</a>
+                <% end %>
+              </div>
+            </div>
+          </div>
+        </div>
+        <% if @club.club_slides %>
+        <div class="row">
+          <div class="col-md-12 ">
+            <div id="myCarousel" class="carousel slide" data-ride="carousel">
+              <!-- Indicators -->
+              <ol class="carousel-indicators">
+                <% (0..@club.club_slides.count-1).each do |i| %>
+                <li data-target="#myCarousel" data-slide-to='<%= i %>' > </li>
+                <% end %>
+              </ol>
+              <!-- Wrapper for slides -->
+              <div class="carousel-inner" role="listbox">
+                <% @club.club_slides.each_with_index do |club_slide, index| %>
+                <div class="item <%= "active" if index == 0 %>">
+                  <%= image_tag(club_slide.file, class: "slide-image") %>
+                </div>
+                <% end %>
+              </div>
+            </div>
+          </div>
+        </div>
+        <% end %>
+        <br />
+        <div class="row">
+          <div class="col-md-3">
+            <div class="panel">
+              <div class="panel-heading">
+                <h4 class="panel-title">Topluluk Bilgileri</h4>
+              </div>
+              <div class="panel-body">
+                <ul class="nav nav-sidebar">
+                  <% if current_user.present? && current_user.admin? %>
+                  <li><%= link_to "Topluluk Bilgilerini Düzenle", edit_club_path(@club) %></li>
+                  <li></li>
+                  <li><%= link_to "Topluluk Ayarları", @club.club_setting.present? ? edit_club_setting_path(@club.club_setting) : new_club_setting_path , id: 'setting' %></li>
+                  <% end %>
+                  <li><a href="#club_director" data-toggle="pill"> Yönetim Kurulu</a></li>
+                  <li><a href="#club_supervisor" data-toggle="pill">Denetim Kurulu</a></li>
+                  <li><a href="#club_member" data-toggle="pill">Topluluk Üyeleri</a></li>
+                </ul>
+              </div>
+            </div>
+            <div class="panel">
+              <div class="panel-heading">
+                <div class="col-md-4">
+                  <h4 class="panel-title">İletişim</h4>
+                </div>
+                <div class="col-md-1">
+                  <% if current_user.present? && current_user.admin? %>
+                  <%= link_to  @club.club_contact.present? ? edit_club_contact_path(@club.club_contact) : new_club_contact_path ,title: 'İletişim Bilgilerini Düzenle', 'data-toggle' => 'tooltip', 'data-placement' => 'right' do %>
+                  <i class="fa fa-pencil-square-o panel-title" aria-hidden="true"></i>
+                  <%end%>
+                  <%end%>
+                </div>
+              </div>
+              <div class="panel-body">
+                <% if @club_view_contact %>
+                <br/>
+                <p><i class="fa fa-envelope fa-1x"></i> <%= @club.club_contact.email%></p>
+                <p><i class="fa fa-phone fa-1x"></i> <%= @club.club_contact.phone_number %></p>
+                <p><i class="fa fa-map-marker fa-1x"></i> <%= @club.club_contact.address %></p>
+                <% end %>
+              </div>
+            </div>
+          </div>
+          <div id="club_public" class="col-md-9">
+            <section class="team">
+              <div class="container">
+                <div class="row">
+                  <div class="col-md-9">
+                    <div class="col-lg-9">
+                      <h6 class="description">Hakkımızda</h6>
+                      <div class="row pt-md">
+                        <p style="padding: 20px"><%= @club.description %></p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+            <section class="team">
+              <div class="container">
+                <div class="row">
+                  <div class="col-md-9">
+                    <div class="col-lg-9">
+                      <h6 class="description">Duyurular</h6>
+                      <div class="row pt-md" style="padding: 20px">
+                        <ul class="list-group">
+                          <% if @club_announcments %>
+                          <% @club_announcements.last(3).each do |announcement| %>
+                          <li class="list-group-item"><b><%= link_to announcement.title, announcement %></b></li>
+                          <% end %>
+                          <li class="list-group-item"><button class="btn-link" data-toggle="modal" data-target="#all_announcments"><b>Tüm Duyurular</b></button></li>
+                        </ul>
+                        <div class="modal fade" id="all_announcments" tabindex="-1" role="dialog" aria-labelledby="events-label" aria-hidden="true">
+                          <div class="modal-dialog">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h4 class="modal-title" id="announcements-label">Tüm Duyurular</h4>
+                              </div>
+                              <div class="modal-body">
+                                <ul class="list-group">
+                                  <% @club_announcements.each do |announcement| %>
+                                  <li class="list-group-item"><b><%= link_to announcement.title, announcement %></b></li>
+                                  <% end %>
+                                </ul>
+                              </div>
+                              <div class="modal-footer">
+                                <button type="button" class="btn btn-primary" data-dismiss="modal">Kapat</button>
+                              </div>
                             </div>
-                            <h1><%=  @club_vice_advisor.name_surname %></h1>
-                            <h2>Akademik Danışman Yardımcısı</h2>
                           </div>
+                        </div>
                         <% end %>
-						          	<% if @club_president %>
-							            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 profile">
-							              <div class="img-box">
-							              	<%= avatar_or_not?(@club_president, nil, 150, :class => "img-responsive") %>
-							              </div>
-							              <h1><%= @club_president.name_surname %></h1>
-							              <h2>Başkan</h2>
-							            </div>
-						            <% end %>
-						          </div>
-						        </div>
-						      </div>
-						    </div>
-						  </div>
-						</section>
-					<% end %>
-
-					<section class="team">
-					  <div class="container">
-					    <div class="row">
-					      <div class="col-md-9">
-					        <div class="col-lg-9">
-					          <h6 class="description">Hakkımızda</h6>
-					          <div class="row pt-md">
-					          <p style="padding: 20px"><%= @club.description %></p>
-
-					          </div>
-					        </div>
-					      </div>
-					    </div>
-					  </div>
-					</section>
-
-					<section class="team">
-					  <div class="container">
-					    <div class="row">
-					      <div class="col-md-9">
-					        <div class="col-lg-9">
-					          <h6 class="description">Duyurular</h6>
-					          <div class="row pt-md" style="padding: 20px">
-					          	<ul class="list-group">
-								<% if @club_announcments %>
-								<% @club_announcements.last(3).each do |announcement| %>
-								<li class="list-group-item"><b><%= link_to announcement.title, announcement %></b></li>
-							    <% end %>
-							    <li class="list-group-item"><button class="btn-link" data-toggle="modal" data-target="#all_announcments"><b>Tüm Duyurular</b></button></li>
-								</ul>
-								<div class="modal fade" id="all_announcments" tabindex="-1" role="dialog" aria-labelledby="events-label" aria-hidden="true">
-									<div class="modal-dialog">
-								      <div class="modal-content">
-								        <div class="modal-header">
-								          <h4 class="modal-title" id="announcements-label">Tüm Duyurular</h4>
-								        </div>
-								        <div class="modal-body">
-								          <ul class="list-group">
-											<% @club_announcements.each do |announcement| %>
-											<li class="list-group-item"><b><%= link_to announcement.title, announcement %></b></li>
-										    <% end %>
-										   </ul>
-								        </div>
-								        <div class="modal-footer">
-								          <button type="button" class="btn btn-primary" data-dismiss="modal">Kapat</button>
-								        </div>
-								      </div>
-								    </div>
-							  	</div>
-							  	<% end %>
-					          </div>
-					        </div>
-					      </div>
-					    </div>
-					  </div>
-					</section>
-
-					<section class="team">
-              <%=render "member"%>
-					  </section>
-
-					<% if @club_view_board_of_director %>
-						<section class="team">
-             <%=render "director"%>
-						</section>
-					<% end %>
-					<% if @club_view_board_of_supervisor %>
-						<section class="team">
-                <%=render "supervisor"%>
-						</section>
-					<% end %>
-
-				</div>
-			</div>
-
-		</div>
-	</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+              <div class="tab-content" id="club_partial">
+                <div class="tab-pane" id="club_member"><%=render 'member'%></div>
+                <div class="tab-pane" id="club_supervisor"><%=render 'supervisor'%></div>
+                <div class="tab-pane" id="club_director"><%=render 'director'%></div>
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
-</div>
-
 <% end %>

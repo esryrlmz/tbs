@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-md-9">
       <div class="col-lg-9">
-        <div id="club_users_collapse" class="collapse">
+        <div >
           <h6 class="description">Topluluk Üyeleri</h6>
           <table class="table table-hover" id="club_users">
             <thead>
@@ -24,6 +24,9 @@
               <% end %>
             </tbody>
           </table>
+          <% if current_user.present? && current_user.admin? %>
+            <%= link_to "Topluluk Üyelerini Düzenle",edit_member_list_club_period_path(@club_members.first.club_period.id) %>
+         <%end%>
         </div>
       </div>
     </div>
