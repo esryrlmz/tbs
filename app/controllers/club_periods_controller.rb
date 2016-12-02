@@ -20,7 +20,7 @@ class ClubPeriodsController < ApplicationController
 
   def change_member_status
     @club_member = Role.find(params[:id])
-    @club_member.status = @club_member.status ? false : true
+    @club_member.status = !@club_member.status
     @club_member.save
     redirect_to edit_member_list_club_period_path(@club_member.club_period.id)
   end
