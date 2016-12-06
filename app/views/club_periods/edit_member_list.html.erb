@@ -1,108 +1,101 @@
-<% if @club_president || @club_advisor %>
-   <section class="team">
-     <div class="container">
-       <div class="row">
-         <div class="col-md-9">
-           <div class="col-lg-9">
-             <h6 class="description">Yönetim</h6>
-             <div class="row pt-md">
-               <% if @club_advisor %>
-                 <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 profile">
-                   <div class="img-box">
-                     <%= avatar_or_not?(@club_advisor, nil, 150, :class => "img-responsive") %>
-                   </div>
-                   <h1><%= @club_advisor.full_name %></h1>
-                   <h2>Akademik Danışman</h2>
-                 </div>
-               <% end %>
-               <% if @club_vice_advisor  %>
-                 <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 profile">
-                   <div class="img-box">
-                     <%= avatar_or_not?( @club_vice_advisor , nil, 150, :class => "img-responsive") %>
-                   </div>
-                   <h1><%=  @club_vice_advisor.name_surname %></h1>
-                   <h2>Akademik Danışman Yardımcısı</h2>
-                 </div>
-               <% end %>
-               <% if @club_president %>
-                 <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 profile">
-                   <div class="img-box">
-                     <%= avatar_or_not?(@club_president, nil, 150, :class => "img-responsive") %>
-                   </div>
-                   <h1><%= @club_president.name_surname %></h1>
-                   <h2>Başkan</h2>
-                 </div>
-               <% end %>
-             </div>
-           </div>
-         </div>
-       </div>
-     </div>
-   </section>
- <% end %>
+<div class="row">
+  <%= render 'home/navbarDefault' %>
+</div>
+<div class="row">
+  <div class="col-md-12">
+    <ol class="breadcrumb">
+        <li><%= link_to 'Anasayfa', root_path %></li>
+        <li><%= link_to 'Topluluklar', clubs_path %></li>
+        <li class="active">Topluluk Üye Listesi</li>
+    </ol>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4 class="panel-title">Topluluk Üye Listesi</h4>
+      </div>
+      <div class="panel-body">
+        <h6 class="description">
+          <%= @member_lists.first.club_period.academic_period_name%>
+            <button type="button" class="btn btn-default btn-md" style="float: right;" data-toggle="modal" data-target=".bs-ubs">
+              <i class="fa fa-user-plus" aria-hidden="true"></i></span>
+            </button>
 
-<div class="container">
-  <div class="row">
-    <div class="col-md-9">
-      <div class="col-lg-9">
-          <h6 class="description">Yönetim Kurulu</h6>
-          <div class="row pt-md">
-            <% if @club_view_board_of_director %>
-            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 profile">
-              <div class="img-box">
-                <%= avatar_or_not?(@club_period.club_board_of_director.president, nil, 150, :class => "img-responsive") %>
-              </div>
-              <h1><%= @club_period.club_board_of_director.president.name_surname %></h1>
-              <h2>Başkan</h2>
-            </div>
-            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 profile">
-              <div class="img-box">
-                <%= avatar_or_not?(@club_period.club_board_of_director.vice_president, nil, 150, :class => "img-responsive") %>
-              </div>
-              <h1><%= @club_period.club_board_of_director.vice_president.name_surname %></h1>
-              <h2>Başkan Yardımcısı</h2>
-            </div>
-            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 profile">
-              <div class="img-box">
-                <%= avatar_or_not?(@club_period.club_board_of_director.secretary, nil, 150, :class => "img-responsive") %>
-              </div>
-              <h1><%= @club_period.club_board_of_director.secretary.name_surname %></h1>
-              <h2>Sekreter</h2>
-            </div>
-            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 profile">
-              <div class="img-box">
-                <%= avatar_or_not?(@club_period.club_board_of_director.accountant, nil, 150, :class => "img-responsive") %>
-              </div>
-              <h1><%= @club_period.club_board_of_director.accountant.name_surname %></h1>
-              <h2>Sayman</h2>
-            </div>
-            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 profile">
-              <div class="img-box">
-                <%= avatar_or_not?(@club_period.club_board_of_director.member_first, nil, 150, :class => "img-responsive") %>
-              </div>
-              <h1><%= @club_period.club_board_of_director.member_first.name_surname %></h1>
-              <h2>Üye</h2>
-            </div>
-            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 profile">
-              <div class="img-box">
-                <%= avatar_or_not?(@club_period.club_board_of_director.member_second, nil, 150, :class => "img-responsive") %>
-              </div>
-              <h1><%= @club_period.club_board_of_director.member_second.name_surname %></h1>
-              <h2>Üye</h2>
-            </div>
-            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 profile">
-              <div class="img-box">
-                <%= avatar_or_not?(@club_period.club_board_of_director.member_third, nil, 150, :class => "img-responsive") %>
-              </div>
-              <h1><%= @club_period.club_board_of_director.member_third.name_surname %></h1>
-              <h2>Üye</h2>
-            </div>
-           <% end %>
-          </div>
-          <% if current_user.present? && current_user.admin? %>
-            <%= link_to "Yönetim Kurulu Düzenle", @club_period.club_board_of_director.present? ? edit_club_board_of_director_path(@club_period.club_board_of_director) : new_club_board_of_director_path %>
-         <%end%>
+        </h6>
+        <div class="row pt-md"> </div>
+        <h6><%= @member_lists.count %> Üye Bulunmaktadır.</h6>
+          <input  style="display: none;" id="club_period_id" value="<%= @member_lists.first.club_period.id%>"></input>
+      <table class="table table-hover" id="club_users">
+        <thead>
+          <tr>
+            <th></th>
+            <th>Resmi</th>
+            <th>Adı Soyadı</th>
+            <th>Rolü</th>
+            <th>Durum</th>
+            <th>Kaldır</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @member_lists.each do |role| %>
+            <tr>
+              <td></td>
+              <td ><%= avatar_or_not?(role.user, 25, 25) %></td>
+              <td ><%= role.user.name_surname %></td>
+              <td ><%= role.role_type.name %></td>
+              <td >
+                <a href="<%=change_member_status_club_period_path(role)%>" >
+                  <%if role.status%>
+                    <span class="label label-success">Aktif</span>
+                  <%else%>
+                    <span class="label label-danger">Pasif</span>
+                  <%end%>
+                </a>
+              </td>
+              <td>  <a href="<%=member_destroy_club_period_path(role)%>" ><i class="fa fa-trash" aria-hidden="true"></i> </a>  </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
       </div>
     </div>
   </div>
 </div>
+
+<div class="modal fade bs-ubs" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content ">
+      <div class="modal-header ">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
+        </button>
+        <h4 class="modal-title" id="myModalLabel">Ubs Sisteminden Öğrenci Bul</h4>
+      </div>
+      <div class="modal-body panel">
+        <div class="row ">
+          <label class="control-label col-md-3 col-sm-3 col-xs-3">Öğrenci Numarası:</label>
+          <div class="col-md-9 col-sm-9 col-xs-9">
+            <input name="ubs_no" id="ubs_no" type="text" value="">
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <label class="control-label col-md-3 col-sm-3 col-xs-3"></label>
+        <div class="col-md-9 col-sm-9 col-xs-9">
+          <button type="button" class="btn btn-default btn-md ubs_find">
+            <i class="glyphicon glyphicon-search" aria-hidden="true"></i></span> Topluluga Ekle
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+$(".ubs_find").bind('click', function(){
+    var ubs_no = document.getElementById("ubs_no").value;
+    var club_id=document.getElementById("club_period_id").value;
+    $.ajax({
+        url: '/find_ogrenci',
+        type: 'GET',
+        data: {"ubs_no": ubs_no,"club_id": club_id}
+    });
+});
+</script>
