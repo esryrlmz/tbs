@@ -1,87 +1,188 @@
-<% if user_signed_in? and current_user.admin? %>
+
 <div class="row">
   <%= render 'home/navbarDefault' %>
 </div>
-<div class="row">
-  
-<div class="col-md-12">
-<ol class="breadcrumb">
-    <li><%= link_to 'Anasayfa', root_path %></li>
-    <li class="active">Sksdb Duyuruları</li>
-  </ol>
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <h3 class="panel-title">Sksdb Duyuruları</h3>
-      </div>
-      <div class="panel-body">
-      <p align="right">  
-        <%= link_to 'Yeni Sksdb Duyurusu', new_system_announcement_path, class: 'btn btn-default' %>
-      </p>
-<table class="table table-hover system_announcments_table">
-  <thead>
-    <tr>
-      <th></th>
-      <th>Başlık</th>
-      <th>Görünür Mü?</th>
-      <th></th>
-    </tr>
-  </thead>
 
-  <tbody>
-    <% @system_announcements.each do |system_announcement| %>
-      <tr>
-        <td></td>
-        <td><%= system_announcement.title %></td>
-        <td><%= system_announcement.is_view ? "Evet" : "Hayır" %></td>
-        <td><%= link_to '<i class="fa fa-eye" title="Göster"></i>'.html_safe, system_announcement, :style=>'margin-right: 20px;' %><%= link_to '<i class="fa fa-pencil" title="Düzenle"></i>'.html_safe, edit_system_announcement_path(system_announcement), :style=>'margin-right: 20px;' %><%= link_to '<i class="fa fa-trash" title="Sil"></i>'.html_safe, system_announcement, method: :delete, data: { confirm: 'Sistem duyurusunu silmek istediğinize emin misiniz?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br />
-</div>
-</div>
-</div>
-</div>
-<% else %>
-<div class="row">
-<%= render 'home/navbarDefault' %>
-<div class="col-md-12">
 <ol class="breadcrumb">
-    <li><%= link_to 'Anasayfa', root_path %></li>
-    <li class="active">Sksdb Duyuruları</li>
+  <li><%= link_to 'Anasayfa', root_path %></li>
+  <li class="active">Sksdb Duyuruları</li>
 </ol>
-<div class="panel panel-default">
-  <div class="panel-heading">
-    <h3 class="panel-title">Sksdb Duyuruları</h3>
+<div class="row">
+
+  <div class="col-md-12 col-xs-12 col-sm-12 panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-title text-left">Duyurular / Haberler</h3>
+      <div class="text-right">
+        <% if user_signed_in? and current_user.admin? %>
+        <a href="#" data-toggle="modal" data-target=".new_announcemenet">
+          <span class="fa-stack fa-md ">
+            <i class="fa fa-plus-square-o  fa-stack-2x text-success"></i>
+          </span>
+        </a>
+        <%end%>
+        <div class="modal fade new_announcemenet" tabindex="-1" role="dialog" aria-hidden="true">
+          <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+              <div class="well">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
+                </button>
+                <%= simple_form_for(@anounc=SystemAnnouncement.new, url: system_announcements_path(@anounc), method: :post) do |f| %>
+                    <div class="">
+                      <div class="row form-group"></div>
+                      <div class="row form-group">
+                        <label class="col-md-1 col-xs-2 col-sm-2 control-label ">Başlık:</label>
+                        <div class="col-md-11 col-xs-11 col-sm-11">
+                          <%=f.input  :title, label: false, input_html: {class: "form-control"} %>
+                        </div>
+                      </div>
+                      <div class="row form-group">
+                        <label class="col-md-1 col-xs-1 col-sm-1 control-label ">İçerik:</label>
+                        <div class="col-md-11 col-xs-11 col-sm-11">
+                          <%=f.text_area  :content, label: false, id:"editor_new", input_html: {class: "form-control", :rows => 10 } %>
+                        </div>
+                      </div>
+                      <div class="row form-group">
+                        <div class="col-md-1 col-xs-1 col-sm-1">  </div>
+                        <div class="col-md-2 col-xs-2 col-sm-2">
+                          <%= f.input :status, :collection => [['onemli', '<span class="label label-danger">Önemli Duyuru</span>'.html_safe],
+                          ['genel', '<span class="label label-warning">Genel Duyuru</span>'.html_safe],
+                          ['haber', '<span class="label label-primary">Haber/Bildiri</span>'.html_safe]],
+                          :label_method => :last,
+                          :value_method => :first,
+                          :as => :radio_buttons , label: false%>
+                        </div>
+                        <div class="col-md-9 col-xs-9 col-sm-9 text-right">
+                          <div class="form-actions">
+                            <%= f.input :is_view, label: 'Görüntülensin mi?'%>
+                            <%= f.submit "Kaydet", class: "btn btn-success" %>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                <% end %>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="col-md-12 col-xs-12 col-sm-12">
+      <div class="panel-body">
+        <%@system_announcements.each do |ann|%>
+        <li class="list-group-item">
+          <div class="row">
+            <div class="col-md-1 col-xs-1 col-sm-1" >
+              <small >
+                <%if ann.onemli?%>
+                <i class="fa fa-bell-o   announce_icon fa-2x" aria-hidden="true"></i>
+                <br/><span class="label label-danger">Önemli Duyuru</span>
+                <%elsif ann.genel? %>
+                <i class="fa fa-bell-o  announce_icon fa-2x" aria-hidden="true"></i>
+                <br/> <span class="label label-warning">Genel Duyuru</span>
+                <%elsif ann.haber? %>
+                <i class="fa fa-newspaper-o announce_icon fa-2x" aria-hidden="true"></i>
+                <br/><span class="label label-primary">Haber/Bildiri</span>
+                <%end%>
+                <br/>
+                <%=ann.created_at.strftime('%d/%m/%Y').to_s%>
+              </small>
+            </div>
+            <div class="col-md-10 col-xs-10 col-sm-10">
+              <div class="col-md-1 col-xs-1 col-sm-1">
+                <div class="test"></div>
+              </div>
+              <div class="col-md-10 col-xs-10 col-sm-10">
+                <div class="row">
+                  <u><b><%=ann.title%></b></u>
+                  <br>
+                  <small >  <%= truncate(strip_tags(ann.content) , length: 100)%>   <a href="<%=system_announcement_path(ann)%>"> ..devamı</a></small >
+                  </div>
+                </div>
+
+            </div>
+            <% if user_signed_in? and current_user.admin? %>
+            <div class="col-md-1 col-xs-1 col-sm-1 text-right">
+              <%= link_to '<i class="fa fa-trash-o" aria-hidden="true"></i>'.html_safe, system_announcement_path(ann), method: :delete, data: { confirm: 'Sistem duyurusunu silmek istediğinize emin misiniz?' }%>
+              <br/>
+               <a href="#" data-toggle="modal" data-target=".edit_announcemenet<%=ann.id%>">  <i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+              <div class="modal fade edit_announcemenet<%=ann.id%>" tabindex="-1" role="dialog" aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                  <div class="modal-content">
+                    <div class="well">
+                      <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
+                      </button>
+                      <%= simple_form_for(ann, url: system_announcement_path(ann), method: :put) do |f| %>
+                          <div class="">
+                            <div class="row form-group"></div>
+                            <div class="row form-group">
+                              <label class="col-md-1 col-xs-1 col-sm-1 control-label ">Başlık:</label>
+                              <div class="col-md-11 col-xs-11 col-sm-11">
+                                <%=f.input  :title, label: false, input_html: {class: "form-control"} %>
+                              </div>
+                            </div>
+                            <div class="row form-group">
+                              <label class="col-md-1 col-xs-1 col-sm-1 control-label ">İçerik:</label>
+                              <div class="col-md-11 col-xs-11 col-sm-11">
+                                <%=f.text_area  :content, label: false, id:"editor#{ ann.id }", input_html: {class: "form-control", :rows => 10 } %>
+                              </div>
+                            </div>
+                            <div class="row form-group">
+                              <div class="col-md-1 col-xs-1 col-sm-1">  </div>
+                              <div class="col-md-2 col-xs-2 col-sm-2">
+                                <%= f.input :status, :collection => [['onemli', '<span class="label label-danger">Önemli Duyuru</span>'.html_safe],
+                                ['genel', '<span class="label label-warning">Genel Duyuru</span>'.html_safe],
+                                ['haber', '<span class="label label-primary">Haber/Bildiri</span>'.html_safe]],
+                                :label_method => :last,
+                                :value_method => :first,
+                                :as => :radio_buttons , label: false,
+                                :checked => SystemAnnouncement.statuses.find {|key, value| value ==ann[:status].to_i}[0]
+                                %>
+                              </div>
+                              <div class="col-md-9 col-xs-9 col-sm-9 text-right">
+                                <div class="form-actions">
+                                  <%= f.input :is_view, label: 'Görüntülensin mi?'%>
+                                  <%= f.submit "Kaydet", class: "btn btn-success" %>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                      <% end %>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+
+              <script>
+              CKEDITOR.replace( 'editor<%=ann.id%>' );
+              </script>
+
+              <br/>
+               <%if ann.is_view%>
+                 <i class="fa fa-eye text-success" aria-hidden="true"></i>
+               <%else%>
+                  <i class="fa fa-eye-slash text-danger" aria-hidden="true"></i>
+               <%end%>
+            </div>
+            <%end%>
+          </div>
+          </li>
+          <br/>
+          <%end%>
+             <%= paginate @system_announcements ,  window: 2%>
+        </div>
+
+      </div>
+
+
+    </div>
+
   </div>
-  <div class="panel-body">
-   <br />
-<table class="table table-hover system_announcments_table">
-  <thead>
-    <tr>
-      <th></th>
-      <th>Başlık</th>
-      <th>Tarih</th>
-      <th></th>
-    </tr>
-  </thead>
 
-  <tbody>
-    <% @system_announcements.where(is_view: true).each do |system_announcement| %>
-      <tr>
-        <td></td>
-        <td><%= link_to system_announcement.title, system_announcement %></td>
-        <td width="25%"><%= system_announcement.created_at.strftime("%d.%m.%Y") %></td>
-        <td></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-</div>
-</div>
-</div>
-</div>
 
-<% end %>
+  <script>
+  CKEDITOR.replace( 'editor_new' );
+  </script>

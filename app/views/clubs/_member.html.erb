@@ -18,7 +18,13 @@
                 <tr>
                   <td></td>
                   <td class="center"><%= avatar_or_not?(role.user, 25, 25) %></td>
-                  <td class="center"><%= role.user.name_surname %></td>
+                  <td class="center">
+                   <%if role.user.show_profile?(current_user)%>
+                    <a href="<%=profile_path(role.user.profile)%>"><%= role.user.name_surname %></a>
+                   <%else%>
+                   <%= role.user.name_surname %>
+                   <%end%>
+                  </td>
                   <td class="center"><%= role.role_type.name %></td>
                 </tr>
               <% end %>

@@ -13,7 +13,11 @@ module Ubs
 
   def self.control_user(params)
     user = User.find_by_ubs_no('o' + params['student_id'])
-    return user.profile.update(crime: params['crime'].present?) if user.present?
+    if user.present?
+      user.profile.update(crime: params['crime'].present?)
+      user.update(is_ubs_active: params['state_id'].present? && params['state_id'] == '905002')
+      return true
+    end
     names = params['full_name'].split(' ')
     if names.count == 3
       first_name = names[0] + ' ' + names[1]
@@ -29,7 +33,8 @@ module Ubs
       email: 'o' + params['student_id'] + '@ubs.com.tr',
       user_name: 'o' + params['student_id'],
       is_administrative: false,
-      ubs_no: 'o' + params['student_id']
+      ubs_no: 'o' + params['student_id'],
+      is_ubs_active: params['state_id'].present? && params['state_id'] == '905002'
     )
     user.profile = Profile.new(
       full_name: params['full_name'],
@@ -41,17 +46,30 @@ module Ubs
     )
   end
 
+  def self.active_academic_control(tc_no)
+    result = staff_info(identifyNumber: tc_no)
+    academic_user = User.find_by_idnumber(result['idnumber'])
+    return false  unless academic_user.present?
+    academic_user.update(is_ubs_active: result['state'].present? && result['state'] == '1')
+    result['state'].present? && result['state'] == '1'
+  end
+
   def self.control_academic(tc_no)
     result = staff_info(identifyNumber: tc_no)
-    return false unless result
+    return false unless result && result['state'].present? && result['state'] == '1'
+    names = result['first_name'].split(' ')
+    email_name = names.count > 1 ? names[0] + '_' + names[1] + '_' + result['last_name'] : result['first_name'] + '_' + result['last_name']
     user = User.create(
       first_name: result['first_name'].downcase,
       last_name: result['last_name'].downcase,
       password: tc_no,
-      email: result['first_name'] + '.' + result['last_name'] + '@omu.edu.tr',
+      email: email_name.downcase + '@omu.edu.tr',
       user_name: result['short_title'],
       is_administrative: false,
-      idnumber: tc_no
+      idnumber: tc_no,
+      is_academic: true,
+      degree: result['short_title'],
+      is_ubs_active: result['state'].present? && result['state'] == '1'
     )
     user.profile = Profile.new(
       full_name: result['first_name'] + ' ' + result['last_name']

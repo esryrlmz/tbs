@@ -1,0 +1,106 @@
+<div class="row">
+  <%= render 'home/navbarDefault' %>
+</div>
+
+
+
+    <div class="row"><div class="col-md-12">
+    <ol class="breadcrumb">
+      <li><%= link_to 'Üye listesi',:back %></li>
+      <li class="active">Üye Profili</li>
+    </ol></div>
+  </div>
+
+      <div class="row"><br></br></div>
+
+<div class="col-md-5 panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-title">Ubs Profili</h3>
+    </div>
+    <div class="panel-body">
+
+      <li class=list-group-item>
+       <div class="row">
+         <div class="col-md-12 " style="text-align: center">
+             <%= avatar_or_not?(current_user, nil, 200) %>
+         </div>
+       </div>
+      </li>
+      <br/>
+      <li class="list-group-item">
+        <div class="row">
+          <%if @profile.user.is_academic %>
+          <div class="col-md-5"><b>Tc Kimlik Numarası</b></div>
+          <div class="col-md-7"> <%= @profile.user.idnumber%></div>
+          <%else%>
+          <div class="col-md-5"><b>Öğrenci Numarası</b></div>
+          <div class="col-md-7"> <%= @profile.user.ubs_no%></div>
+          <%end%>
+        </div>
+      </li>
+      <br/>
+        <%if @profile.user.is_academic %>
+        <li class="list-group-item">
+         <div class="row">
+           <div class="col-md-5"><b>Unvanı:</b></div>
+           <div class="col-md-7"> <%= @profile.user.degree%></div>
+         </div>
+       </li>
+       <br/>
+        <%end%>
+      <li class="list-group-item">
+       <div class="row">
+         <div class="col-md-5"><b>Ad Soyad:</b></div>
+         <div class="col-md-7"> <%= @profile.full_name%></div>
+       </div>
+     </li>
+     <br/>
+      <li class="list-group-item">
+      <div class="row">
+        <div class="col-md-5"><b>Fakülte:</b></div>
+        <div class="col-md-7"> <%= @profile.faculty%></div>
+      </div>
+    </li>
+
+   <br/>
+    <li class="list-group-item">
+    <div class="row">
+      <div class="col-md-5"><b>Bölüm </b></div>
+      <div class="col-md-7"> <%= @profile.program%></div>
+    </div>
+  </li>
+     <br/>
+       <%if !@profile.user.is_academic %>
+  <li class="list-group-item">
+  <div class="row">
+    <div class="col-md-5"><b>Disiplin cezası var mı? </b></div>
+    <div class="col-md-7"> <%= @profile.user.crime?%></div>
+  </div>
+ </li>
+ <br/>
+ <%end%>
+ <li class="list-group-item">
+ <div class="row">
+   <div class="col-md-5"><b>Omü ubs sisteminde aktif mi?</b></div>
+   <div class="col-md-7"> <%= @profile.user.ubs_active?%></div>
+ </div>
+</li>
+
+    </div>
+</div>
+<div class="col-md-1"></div>
+<div class="col-md-5 panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-title">Üye Olduğu Topluluklar</h3>
+    </div>
+    <div class="panel-body">
+      <%@member_clubs.each do |club|%>
+      <li class="list-group-item">
+        <div class="row">
+          <div class="col-md-12">  <a href="<%=club_path(club.id)%>">  <%=club.name%></a></div>
+        </div>
+      </li>
+      <br/>
+     <%end%>
+    </div>
+</div>

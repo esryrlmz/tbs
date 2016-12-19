@@ -1,46 +1,10 @@
-<% if user_signed_in? and current_user.admin? %>
+
+<% if @system_announcement.is_view ||(user_signed_in? and current_user.admin? and !@system_announcement.is_view) %>
 <div class="row">
   <%= render 'home/navbarDefault' %>
 </div>
 <div class="row">
-  <div class="col-md-12">
-    <ol class="breadcrumb">
-    <li><%= link_to 'Anasayfa', root_path %></li>
-    <li><%= link_to 'Sksdb Duyuruları', system_announcements_path %></li>
-    <li class="active">Sksdb Duyurusu Detay</li>
-  </ol>
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <h3 class="panel-title">Sksdb Duyurusu Detay</h3>
-      </div>
-      <div class="panel-body">
-<p>
-  <strong>Başlık:</strong>
-  <%= @system_announcement.title %>
-</p>
-
-<p>
-  <strong>İçerik:</strong>
-  <%= @system_announcement.content %>
-</p>
-
-<p>
-  <strong>Görünür Mü?:</strong>
-  <%= @system_announcement.is_view %>
-</p>
-<%= link_to 'Düzenle', edit_system_announcement_path(@system_announcement), class: "btn btn-success" %> |
-<%= link_to 'Geri', system_announcements_path, class: "btn btn-info" %>
-</div>
-    </div>
-  </div>
-</div>
-<% else %>
-<% if @system_announcement.is_view %>
-<div class="row">
-  <%= render 'home/navbarDefault' %>
-</div>
-<div class="row">
-<div class="col-md-12"> 
+<div class="col-md-12 col-xs-12 col-sm-12">
 <ol class="breadcrumb">
     <li><%= link_to 'Anasayfa', root_path %></li>
     <li><%= link_to 'Sksdb Duyuruları', system_announcements_path %></li>
@@ -49,28 +13,105 @@
   <div class="panel panel-default">
     <div class="panel-body" style="margin-top: -40px;">
     <div class="row">
-      <div class="col-md-8">
+      <div class="col-md-12  col-xs-12 col-sm-12">
         <div class="page-header">
-            <h1><%= @system_announcement.title %></h1>
+            <div class="row">
+              <div class="col-md-1 col-xs-1 col-sm-1" >
+                <small >
+                  <%if  @system_announcement.onemli?%>
+                  <i class="fa fa-bell-o   announce_icon fa-2x" aria-hidden="true"></i>
+                  <br/><span class="label label-danger">Önemli Duyuru</span>
+                  <%elsif  @system_announcement.genel? %>
+                  <i class="fa fa-bell-o  announce_icon fa-2x" aria-hidden="true"></i>
+                  <br/> <span class="label label-warning">Genel Duyuru</span>
+                  <%elsif  @system_announcement.haber? %>
+                  <i class="fa fa-newspaper-o announce_icon fa-2x" aria-hidden="true"></i>
+                  <br/><span class="label label-primary">Haber/Bildiri</span>
+                  <%end%>
+                  <br/>
+                  <%= @system_announcement.created_at.strftime('%d/%m/%Y').to_s%>
+                  <%if @system_announcement.is_view%>
+                    <i class="fa fa-eye text-success" aria-hidden="true"></i>
+                  <%else%>
+                     <i class="fa fa-eye-slash text-danger" aria-hidden="true"></i>
+                  <%end%>
+                </small>
+              </div>
+              <div class="col-md-10 col-xs-10 col-sm-10">
+                <div class="col-md-1 col-xs-1 col-sm-1">
+                  <div class="test"></div>
+                </div>
+                <div class="col-md-10 col-xs-10 col-sm-10">
+                  <div class="row">
+                    <h2><%= @system_announcement.title %></h2>
+                    </div>
+
+                  </div>
+
+              </div>
+            </div>
+            <br>
          </div>
-        <p>
-          <%= @system_announcement.content %>
-        </p>
-      </div>
-      <div class="col-md-4">
-        <div class="page-header">
-            <h1>Diğerleri</h1>
+         <div class="col-md-8 col-xs-8 col-sm-8">
+           <p>
+             <%= @system_announcement.content.html_safe %>
+           </p>
          </div>
-        <ul class="list-group">
-        <% @system_announcements.each do |system_announcement| %>
-        <li class="list-group-item"><i class="fa fa-link" aria-hidden="true"></i> <%= link_to system_announcement.title, system_announcement %></li>
-        <% end %>
-        </ul>
+         <div class="col-md-4 col-xs-4 col-sm-4">
+               <ul class="list-group">
+                 <%if @system_announcement[:status]=="0"%>
+                   <%@system_announcements=SystemAnnouncement.onemli.limit(5).order('created_at DESC')%>
+                 <%elsif @system_announcement[:status]=="1"%>
+                   <%@system_announcements=SystemAnnouncement.genel.limit(5).order('created_at DESC')%>
+                 <%elsif @system_announcement[:status]=="2"%>
+                   <%@system_announcements=SystemAnnouncement.haber.limit(5).order('created_at DESC')%>
+                 <%end%>
+                 <%@system_announcements = @system_announcements.where(is_view: true) unless user_signed_in? && current_user.admin?%>
+                 <%@system_announcements = @system_announcements.to_a - [@system_announcement]%>
+                 <%if @system_announcements.count>0 %>
+                         <h4><p>Aynı Alandaki Diğer Duyurular </p></h4>
+                         <hr>
+                     <%@system_announcements.each do |system_announcement| %>
+                     <li class="list-group-item well ">
+                         <div class="row">
+                       <div class="col-md-3 col-xs-3 col-sm-3" >
+                         <small >
+                           <b>
+                             <small >
+                               <%if  system_announcement.onemli?%>
+                               <i class="fa fa-bell-o   announce_icon fa-2x" aria-hidden="true"></i>
+                               <br/><span class="label label-danger">Önemli Duyuru</span>
+                               <%elsif system_announcement.genel? %>
+                               <i class="fa fa-bell-o  announce_icon fa-2x" aria-hidden="true"></i>
+                               <br/> <span class="label label-warning">Genel Duyuru</span>
+                               <%elsif  system_announcement.haber? %>
+                               <i class="fa fa-newspaper-o announce_icon fa-2x" aria-hidden="true"></i>
+                               <br/><span class="label label-primary">Haber/Bildiri</span>
+                               <%end%>
+                               <br/>
+                             </small>
+                           <br/>
+                         </small>
+                       </b>
+                       </div>
+                       <div class="col-md-8 col-xs-8 col-sm-8" >
+                           <div class="row">
+                           <u><b><%=system_announcement.title%></b></u> <span class=time_size> <%= @system_announcement.created_at.strftime('  %d/%m/%Y').to_s%></span>
+                           <br>
+                           <small >  <%= truncate(strip_tags(system_announcement.content) , length: 40)%>   <a href="<%=system_announcement_path(system_announcement)%>"> ..devamı</a></small >
+                           </div>
+                       </div>
+                       </div>
+                       </li>
+                     <% end %>
+                  <% end %>
+
+               </ul>
+         </div>
       </div>
     </div>
     </div>
   </div>
   </div>
   </div>
-<% end %>
-<% end %>
+  <% end %>

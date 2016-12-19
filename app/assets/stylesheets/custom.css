@@ -1,0 +1,30 @@
+.announce_icon{
+    margin-left: 40%;
+}
+.test{height:50px; width:0px; border-left:1px solid gray;}
+
+.announce_title {
+    background-color: #D3D3D3;
+}
+.time_size {
+    font-size: 9px;
+}
+.past_month{
+    background: #bdbdbd !important;
+    height: 70px;
+}
+.now_month{
+    background: #E0E0E0 !important;
+    height: 80px;
+}
+.date_size{
+    font-size: 10px;
+}
+.fixed {
+    table-layout:fixed !important;
+ }
+ .mark_today{
+    border: 2px solid #1e438c;
+    border-radius: 25px;
+    padding: 2px;
+ }

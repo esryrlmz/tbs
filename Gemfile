@@ -28,6 +28,10 @@ gem "font-awesome-rails"
 gem 'devise'
 gem 'permanent_records', '~> 4.0'
 gem 'rest-client'
+gem 'kaminari'
+
+gem "simple_calendar"
+
 
 gem 'jquery-datatables-rails'
 

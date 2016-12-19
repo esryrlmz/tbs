@@ -18,9 +18,14 @@ class UsersController < ApplicationController
         'Girdiğiniz öğrenci numarası hatalı'
       elsif params['club_id'].blank?
         'Lütfen önce topluluk seçiniz'
-      else
-        'Öğrenciyi listeye eklediniz. Lütfen listeden seçiniz'
+      elsif !@user.active?
+        'Öğrenci aktif olmadığı için eklenemedi!'
       end
+    if @uyari.present?
+      flash[:error] = @uyari
+    else
+      flash[:success] = 'Öğrenciyi listeye eklediniz. Lütfen listeden seçiniz'
+    end
     flash[:error] = @uyari
     respond_to do |format|
       format.js { render inline: 'location.reload();' }
@@ -37,10 +42,14 @@ class UsersController < ApplicationController
         'Girdiğiniz Tc kimlik numarası hatalı'
       elsif params['club_id'].blank?
         'Lütfen önce topluluk seçiniz'
-      else
-        'Akademik danışmanı listeye eklediniz. Lütfen listeden seçiniz'
+      elsif User.find_by_idnumber(params['idnumber']).nil?
+        'Akademik danışman aktif olmadığı için sisteme eklenmedi!'
       end
-    flash[:error] = @uyari
+    if @uyari.present?
+      flash[:error] = @uyari
+    else
+      flash[:success] = 'Akademik danışmanı listeye eklediniz. Lütfen listeden seçiniz'
+    end
     respond_to do |format|
       format.js { render inline: 'location.reload();' }
     end

@@ -1,6 +1,7 @@
 class EventsController < ApplicationController
   before_action :set_event, only: [:show, :edit, :update, :destroy, :event_responses]
   before_action :authenticate_user!, only: [:new, :edit, :update, :destroy]
+  helper EventsHelper
 
   def index
     if current_user.present? && current_user.admin?

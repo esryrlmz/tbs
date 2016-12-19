@@ -60,7 +60,7 @@ class User < ActiveRecord::Base
   #### Yardımcı Fonksiyonlar
   def full_name
     if is_academic?
-      degree + ' ' + first_name + ' ' + last_name
+      degree.present? ? degree + ' ' + first_name + ' ' + last_name : first_name + ' ' + last_name
     else
       user_name + ' / ' + first_name + ' ' + last_name
     end
@@ -70,7 +70,15 @@ class User < ActiveRecord::Base
     profile.crime ? 'Disiplin Cezası Var, Topluluklara Üye Olamaz' : 'Disiplin Cezası Yok, Topluluklara Üye Olabilir'
   end
 
+  def ubs_active?
+    is_ubs_active ? 'Aktif' : 'Aktif Değil'
+  end
+
   def name_surname
     first_name + ' ' + last_name
+  end
+
+  def show_profile?(user)
+    user.admin? || user.advisor? || user.president? || user.vice_advisor? unless user.nil?
   end
 end

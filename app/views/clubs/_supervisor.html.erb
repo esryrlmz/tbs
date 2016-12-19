@@ -9,42 +9,78 @@
               <div class="img-box">
                 <%= avatar_or_not?(@club_period.club_board_of_supervisory.principal_member_first, nil, 150, :class => "img-responsive") %>
               </div>
-              <h1><%=  @club_period.club_board_of_supervisory.principal_member_first.name_surname %></h1>
+              <h1>
+              <% if  @club_period.club_board_of_supervisory.principal_member_first.show_profile?(current_user) %>
+                <a href="<%=profile_path(@club_period.club_board_of_supervisory.principal_member_first.profile)%>"><%=  @club_period.club_board_of_supervisory.principal_member_first.name_surname %></a>
+              <%else%>
+                <%=  @club_period.club_board_of_supervisory.principal_member_first.name_surname %>
+              <%end%>
+                </h1>
               <h2>Asıl Üye</h2>
             </div>
             <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 profile">
               <div class="img-box">
                 <%= avatar_or_not?(@club_period.club_board_of_supervisory.principal_member_second, nil, 150, :class => "img-responsive") %>
               </div>
-              <h1><%=  @club_period.club_board_of_supervisory.principal_member_second.name_surname %></h1>
+              <h1>
+                <% if  @club_period.club_board_of_supervisory.principal_member_second.show_profile?(current_user) %>
+                <a href="<%=profile_path(@club_period.club_board_of_supervisory.principal_member_second.profile)%>"><%=  @club_period.club_board_of_supervisory.principal_member_second.name_surname %></a>
+                <%else%>
+                <%=  @club_period.club_board_of_supervisory.principal_member_second.name_surname %>
+                <%end%>
+              </h1>
               <h2>Asıl Üye</h2>
             </div>
             <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 profile">
               <div class="img-box">
                 <%= avatar_or_not?(@club_period.club_board_of_supervisory.principal_member_third, nil, 150, :class => "img-responsive") %>
               </div>
-              <h1><%=  @club_period.club_board_of_supervisory.principal_member_third.name_surname %></h1>
+              <h1>
+              <%if @club_period.club_board_of_supervisory.principal_member_third.show_profile?(current_user) %>
+                <a href="<%=profile_path(@club_period.club_board_of_supervisory.principal_member_third.profile)%>"><%=  @club_period.club_board_of_supervisory.principal_member_third.name_surname %>
+                <%else%>
+                <%=  @club_period.club_board_of_supervisory.principal_member_third.name_surname %>
+                <%end%>
+                </a></h1>
               <h2>Asıl Üye</h2>
             </div>
             <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 profile">
               <div class="img-box">
                 <%= avatar_or_not?(@club_period.club_board_of_supervisory.reserve_member_first, nil, 150, :class => "img-responsive") %>
               </div>
-              <h1><%=  @club_period.club_board_of_supervisory.reserve_member_first.name_surname %></h1>
+              <h1>
+                 <%if @club_period.club_board_of_supervisory.reserve_member_first.show_profile?(current_user) %>
+                <a href="<%=profile_path(@club_period.club_board_of_supervisory.reserve_member_first.profile)%>"><%=  @club_period.club_board_of_supervisory.reserve_member_first.name_surname %></a>
+                <%else%>
+                <%=  @club_period.club_board_of_supervisory.reserve_member_first.name_surname %>
+                <%end%>
+              </h1>
               <h2>Yedek Üye</h2>
             </div>
             <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 profile">
               <div class="img-box">
                 <%= avatar_or_not?(@club_period.club_board_of_supervisory.reserve_member_second, nil, 150, :class => "img-responsive") %>
               </div>
-              <h1><%=  @club_period.club_board_of_supervisory.reserve_member_second.name_surname %></h1>
+              <h1>
+              <%if @club_period.club_board_of_supervisory.reserve_member_second.show_profile?(current_user) %>
+                  <a href="<%=profile_path(@club_period.club_board_of_supervisory.reserve_member_second.profile)%>"><%=  @club_period.club_board_of_supervisory.reserve_member_second.name_surname %></a>
+               <%else%>
+                 <%=  @club_period.club_board_of_supervisory.reserve_member_second.name_surname %>
+               <%end%>
+                </h1>
               <h2>Yedek Üye</h2>
             </div>
             <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 profile">
               <div class="img-box">
                 <%= avatar_or_not?(@club_period.club_board_of_supervisory.reserve_member_third, nil, 150, :class => "img-responsive") %>
               </div>
-              <h1><%=  @club_period.club_board_of_supervisory.reserve_member_third.name_surname %></h1>
+              <h1>
+              <%if @club_period.club_board_of_supervisory.reserve_member_third.show_profile?(current_user) %>
+                <a href="<%=profile_path(@club_period.club_board_of_supervisory.reserve_member_third.profile)%>"><%=  @club_period.club_board_of_supervisory.reserve_member_third.name_surname %></a>
+              <%else%>
+                <%=@club_period.club_board_of_supervisory.reserve_member_third.name_surname %>
+              <%end%>
+            </h1>
               <h2>Yedek Üye</h2>
             </div>
             <% end %>

@@ -1,0 +1,8 @@
+tr:
+  views:
+    pagination:
+      first: "&laquo; İlk"
+      last: "Son &raquo;"
+      previous: "&lsaquo;&lsaquo; "
+      next: "&rsaquo;&rsaquo;"
+      truncate: "&hellip;"

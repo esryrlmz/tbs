@@ -3,17 +3,12 @@ class SystemAnnouncementsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :edit, :update, :destroy]
 
   def index
-    @system_announcements =
-      if params[:search]
-        SystemAnnouncement.search(params[:search]).order('created_at DESC')
-      else
-        SystemAnnouncement.order('created_at DESC')
-      end
+    @system_announcements = SystemAnnouncement.order('created_at DESC').page params[:page]
+    @system_announcements = @system_announcements.where(is_view: true) unless user_signed_in? && current_user.admin?
     authorize @system_announcements
   end
 
   def show
-    @system_announcements = SystemAnnouncement.where(is_view: true).limit(3).order('created_at DESC')
     authorize @system_announcement
   end
 
@@ -23,6 +18,7 @@ class SystemAnnouncementsController < ApplicationController
   end
 
   def edit
+    body
   end
 
   def create
@@ -56,7 +52,7 @@ class SystemAnnouncementsController < ApplicationController
     @system_announcement.destroy
     authorize @system_announcement
     respond_to do |format|
-      format.html { redirect_to system_announcments_url, notice: 'Sistem duyurusu başarıyla silindi.' }
+      format.html { redirect_to system_announcements_path, notice: 'Sistem duyurusu başarıyla silindi.' }
       format.json { head :no_content }
     end
   end
@@ -68,6 +64,6 @@ class SystemAnnouncementsController < ApplicationController
   end
 
   def system_announcement_params
-    params.require(:system_announcement).permit(:title, :content, :is_view)
+    params.require(:system_announcement).permit(:title, :content, :is_view, :status)
   end
 end

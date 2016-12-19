@@ -39,7 +39,7 @@
             <tr>
               <td></td>
               <td ><%= avatar_or_not?(role.user, 25, 25) %></td>
-              <td ><%= role.user.name_surname %></td>
+              <td > <a href="<%=profile_path(role.user.profile)%>"><%= role.user.name_surname %></a> </td>
               <td ><%= role.role_type.name %></td>
               <td >
                 <a href="<%=change_member_status_club_period_path(role)%>" >

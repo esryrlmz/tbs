@@ -1,0 +1,62 @@
+
+  <div class="panel-heading text-center">
+    <%= link_to "<<", calendar.url_for_previous_view %>
+    <span class="calendar-title"><%= t('date.month_names')[start_date.month] %> <%= start_date.year %></span>
+    <%= link_to ">>", calendar.url_for_next_view %>
+  </div>
+  <div class="panel-body">
+
+
+
+
+  <table class="table table-striped fixed" border="1">
+    <thead>
+      <tr >
+        <% date_range.slice(0, 7).each do |day| %>
+          <th ><%= t('date.abbr_day_names')[day.wday] %></th>
+        <% end %>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% date_range.each_slice(7) do |week| %>
+        <tr >
+          <% week.each do |day| %>
+               <%if day.month == Date.today.month%>
+                   <td class="now_month ">
+                     <%if day.day==Date.today.day%>
+                        <span class="mark_today"> <%=day.day%></span>
+                     <%else%>
+                        <%=day.day%>
+                      <%end%>
+                    </br>
+                     <% calender_event.each do |event|%>
+                         <%if event.datetime.strftime("%d/%m/%y")==day.strftime("%d/%m/%y")%>
+                          <a href="<%=event_path(event)%>">
+                             <div class="date_size"><%=event.datetime.strftime('%H:%M')%><b> : </b><%=event.title%></div>                  </div>
+                           </a>
+                         <%end%>
+                     <%end%>
+                   </td>
+                <%else%>
+                   <td class="past_month ">
+                     <%=day.day%>
+                      </br>
+                     <% calender_event.each do |event|%>
+                         <%if event.datetime.strftime("%d/%m/%y")==day.strftime("%d/%m/%y")%>
+                          <a href="<%=event_path(event)%>">
+                             <div class="date_size">
+                               <%=event.datetime.strftime('%H:%M')%><b> : </b><%=event.title%>
+                             </div>
+                           </a>
+                         <%end%>
+                     <%end%>
+                   </td>
+                <%end%>
+
+          <% end %>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+    </div>

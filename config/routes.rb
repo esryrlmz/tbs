@@ -17,6 +17,7 @@ Rails.application.routes.draw do
   resources :role_types
   resources :roles_users
   devise_for :users,:controllers => {:sessions=>"sessions"}
+  resources :profiles,  only: [:show]
   resources :roles
   resources :club_contacts
   resources :club_settings
