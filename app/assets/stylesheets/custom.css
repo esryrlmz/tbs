@@ -11,14 +11,15 @@
 }
 .past_month{
     background: #bdbdbd !important;
-    height: 70px;
+    height: 90px;
 }
 .now_month{
     background: #E0E0E0 !important;
-    height: 80px;
+    height: 90px;
 }
 .date_size{
     font-size: 10px;
+    color:#b54646;
 }
 .fixed {
     table-layout:fixed !important;

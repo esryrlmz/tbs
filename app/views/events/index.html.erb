@@ -7,17 +7,15 @@
     <li><%= link_to 'Anasayfa', root_path %></li>
     <li class="active">Etkinlikler</li>
   </ol>
-  <div class="panel with-nav-tabs panel-default">
-      <%= month_calendar  do |date| %>
-
-      <% end %>
-  </div>
 
 
     <div class="panel with-nav-tabs panel-default">
       <div class="panel-heading">
         <ul class="nav nav-tabs">
           <li  class="active">
+            <a href="#events_calender" data-toggle="tab">Etkinlik Takvimi</a>
+          </li>
+          <li >
             <a href="#events" data-toggle="tab">Tüm Etkinlikler</a>
           </li>
           <% if current_user.present? && (current_user.admin? || current_user.president?(current_user.active_club_periods) || current_user.advisor?) %>
@@ -38,19 +36,6 @@
         </ul>
       </div>
       <div class="panel-body">
-        <% if current_user.present? && current_user.admin? %>
-          <p align="right">
-            <%= link_to 'Yeni Etkinlik Oluştur', new_event_path, class: "btn btn-default" %>
-          </p>
-        <% elsif current_user.present? && current_user.president? %>
-          <% if current_user.president_or_advisor_club_period.club.club_setting.is_active %>
-            <p align="right">
-              <%= link_to 'Yeni Etkinlik Oluştur', new_event_path, class: "btn btn-default" %>
-            </p>
-          <% else %>
-            <h4 align="right"><span class="label label-warning">Topluluk pasif olduğu için etkinlik oluşturamazsınız</span></h4>
-          <% end %>
-        <% end %>
         <div class="tab-content">
           <div class="tab-pane fade" id="pending_events">
             <% if current_user.present? && (current_user.admin? || current_user.president?(current_user.active_club_periods) || current_user.advisor?) %>
@@ -145,7 +130,7 @@
               </table>
             <% end %>
           </div>
-           <div class="tab-pane fade in active" id="events">
+           <div class="tab-pane fade " id="events">
             <table class="table table-hove" id="all_events">
               <thead>
                 <tr>
@@ -180,6 +165,13 @@
               </tbody>
             </table>
           </div>
+          <div class="tab-pane fade in active" id="events_calender">
+            <div class="panel panel-default">
+                <%= month_calendar  do |date| %>
+
+                <% end %>
+            </div>
+         </div>
         </div>
       </div>
     </div>
