@@ -62,7 +62,7 @@ class User < ActiveRecord::Base
     if is_academic?
       degree.present? ? degree + ' ' + first_name + ' ' + last_name : first_name + ' ' + last_name
     else
-      user_name + ' / ' + first_name + ' ' + last_name
+      first_name + ' ' + last_name
     end
   end
 
@@ -79,6 +79,6 @@ class User < ActiveRecord::Base
   end
 
   def show_profile?(user)
-    user.admin? || user.advisor? || user.president? || user.vice_advisor? unless user.nil?
+    user.admin? || user.advisor? || user.president? || user.vice_advisor? unless user.blank?
   end
 end

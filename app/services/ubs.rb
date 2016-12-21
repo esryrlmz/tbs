@@ -1,13 +1,13 @@
 module Ubs
   def self.login(user)
     result = student_login(username: user.ubs_no, password: Digest::MD5.hexdigest(user.password))
-    return false unless result
+    return unless result
     control_user(result)
   end
 
   def self.control_student(ubs_no)
     result = student_add(username: ubs_no)
-    return false unless result
+    return  unless result
     control_user(result)
   end
 
@@ -49,14 +49,14 @@ module Ubs
   def self.active_academic_control(tc_no)
     result = staff_info(identifyNumber: tc_no)
     academic_user = User.find_by_idnumber(result['idnumber'])
-    return false  unless academic_user.present?
+    return   unless academic_user.present?
     academic_user.update(is_ubs_active: result['state'].present? && result['state'] == '1')
     result['state'].present? && result['state'] == '1'
   end
 
   def self.control_academic(tc_no)
     result = staff_info(identifyNumber: tc_no)
-    return false unless result && result['state'].present? && result['state'] == '1'
+    return  unless result && result['state'].present? && result['state'] == '1'
     names = result['first_name'].split(' ')
     email_name = names.count > 1 ? names[0] + '_' + names[1] + '_' + result['last_name'] : result['first_name'] + '_' + result['last_name']
     user = User.create(

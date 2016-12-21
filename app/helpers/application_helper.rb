@@ -69,6 +69,14 @@ module ApplicationHelper
     end
   end
 
+  def profile_or_not?(record, link_attribute, name_attribute)
+    if record.show_profile?(current_user)
+      link_to record.instance_eval(link_attribute), profile_path(record.profile)
+    else
+      record.instance_eval(name_attribute)
+    end
+  end
+
   # Fotoğrafı yoksa gösterilecek imaj
   def placeholder_avatar(width, height)
     image_tag('avatar_placeholder.png', alt: 'avatar-placeholder', width: width, height: height)

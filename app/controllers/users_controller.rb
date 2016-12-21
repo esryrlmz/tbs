@@ -18,7 +18,7 @@ class UsersController < ApplicationController
         'Girdiğiniz öğrenci numarası hatalı'
       elsif params['club_id'].blank?
         'Lütfen önce topluluk seçiniz'
-      elsif !@user.active?
+      elsif !@user.is_ubs_active?
         'Öğrenci aktif olmadığı için eklenemedi!'
       end
     if @uyari.present?
@@ -42,7 +42,7 @@ class UsersController < ApplicationController
         'Girdiğiniz Tc kimlik numarası hatalı'
       elsif params['club_id'].blank?
         'Lütfen önce topluluk seçiniz'
-      elsif User.find_by_idnumber(params['idnumber']).nil?
+      elsif User.find_by_idnumber(params['idnumber']).blank?
         'Akademik danışman aktif olmadığı için sisteme eklenmedi!'
       end
     if @uyari.present?

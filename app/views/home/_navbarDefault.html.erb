@@ -35,10 +35,10 @@
                 <li role="separator" class="divider"></li>
                 <li><%= link_to "Akademik Dönem Tanımları", academic_periods_path  %></li>
               <% elsif current_user.advisor? %>
-                <li><%= link_to "Duyurular", announcments_path %></li>
+                <li><%= link_to "Duyurular", announcements_path %></li>
                 <li><%= link_to "Slide Ayarları", club_slides_path %></li>
               <% elsif current_user.president? %>
-                <li><%= link_to "Duyurular", announcments_path %></li>
+                <li><%= link_to "Duyurular", announcements_path %></li>
                 <li><%= link_to "Üyeler", club_users_path %></li>
               <% else %>
               <% end %>

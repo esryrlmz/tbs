@@ -9,7 +9,7 @@ class SessionsController < Devise::SessionsController
       @user.ubs_no = 'o' + @user.ubs_no unless @user.ubs_no.start_with? 'o'
       Ubs.login(@user)
       @user = User.find_by(ubs_no: @user.ubs_no)
-      @user.is_ubs_active ? (sign_in_and_redirect @user, event: :authentication) : (redirect_to clubs_path, alert: 'Aktif öğrenci olmadığınız için sisteme giriş yapamazsınız')
+      @user.present? && @user.is_ubs_active ? (sign_in_and_redirect @user, event: :authentication) : (redirect_to clubs_path, alert: 'Aktif öğrenci olmadığınız için sisteme giriş yapamazsınız')
     elsif @user.ubs_no.length == 11
       @db_user = User.find_by(idnumber: @user.ubs_no)
       if @db_user.present?

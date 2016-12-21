@@ -11,13 +11,7 @@
                    <div class="img-box">
                      <%= avatar_or_not?(@club_advisor, nil, 150, :class => "img-responsive") %>
                    </div>
-                   <h1>
-                    <%if @club_advisor.show_profile?(current_user)%>
-                     <a href="<%=profile_path(@club_advisor.profile)%>"><%= @club_advisor.full_name %></a>
-                     <%else%>
-                       <%= @club_advisor.full_name %>
-                     <%end%>
-                     </h1>
+                     <h1><%=profile_or_not?(@club_advisor, "full_name", "full_name") %> </h1>
                    <h2>Akademik Danışman</h2>
                  </div>
                <% end %>
@@ -26,13 +20,7 @@
                    <div class="img-box">
                      <%= avatar_or_not?( @club_vice_advisor , nil, 150, :class => "img-responsive") %>
                    </div>
-                   <h1>
-                   <%if @club_vice_advisor.show_profile?(current_user)%>
-                     <a href="<%=profile_path(@club_vice_advisor.profile)%>"><%=  @club_vice_advisor.name_surname %></a>
-                     <%else%>
-                       <%= @club_vice_advisor.full_name %>
-                     <%end%>
-                   </h1>
+                    <h1><%=profile_or_not?(@club_vice_advisor, "full_name", "full_name") %> </h1>
                    <h2>Akademik Danışman Yardımcısı</h2>
                  </div>
                <% end %>
@@ -41,13 +29,7 @@
                    <div class="img-box">
                      <%= avatar_or_not?(@club_president, nil, 150, :class => "img-responsive") %>
                    </div>
-                   <h1>
-                      <%if @club_president.show_profile?(current_user)%>
-                     <a href="<%=profile_path(@club_president.profile)%>"><%= @club_president.name_surname %></a>
-                     <%else%>
-                       <%= @club_president.full_name %>
-                     <%end%>
-                   </h1>
+                   <h1><%=profile_or_not?(@club_president, "full_name", "full_name") %> </h1>
                    <h2>Başkan</h2>
                  </div>
                <% end %>
@@ -119,7 +101,7 @@
           </div>
           <% if current_user.present? && current_user.admin? %>
             <%= link_to "Yönetim Kurulu Düzenle", @club_period.club_board_of_director.present? ? edit_club_board_of_director_path(@club_period.club_board_of_director) : new_club_board_of_director_path %>
-         <%end%>
+         <% end %>
       </div>
     </div>
   </div>
