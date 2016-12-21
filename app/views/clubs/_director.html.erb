@@ -11,7 +11,7 @@
                    <div class="img-box">
                      <%= avatar_or_not?(@club_advisor, nil, 150, :class => "img-responsive") %>
                    </div>
-                     <h1><%=profile_or_not?(@club_advisor, "full_name", "full_name") %> </h1>
+                     <h1><%=profile_or_not?(@club_advisor) %> </h1>
                    <h2>Akademik Danışman</h2>
                  </div>
                <% end %>
@@ -20,7 +20,7 @@
                    <div class="img-box">
                      <%= avatar_or_not?( @club_vice_advisor , nil, 150, :class => "img-responsive") %>
                    </div>
-                    <h1><%=profile_or_not?(@club_vice_advisor, "full_name", "full_name") %> </h1>
+                    <h1><%=profile_or_not?(@club_vice_advisor) %> </h1>
                    <h2>Akademik Danışman Yardımcısı</h2>
                  </div>
                <% end %>
@@ -29,7 +29,7 @@
                    <div class="img-box">
                      <%= avatar_or_not?(@club_president, nil, 150, :class => "img-responsive") %>
                    </div>
-                   <h1><%=profile_or_not?(@club_president, "full_name", "full_name") %> </h1>
+                   <h1><%=profile_or_not?(@club_president) %> </h1>
                    <h2>Başkan</h2>
                  </div>
                <% end %>

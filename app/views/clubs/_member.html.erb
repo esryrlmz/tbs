@@ -19,7 +19,7 @@
                   <td></td>
                   <td class="center"><%= avatar_or_not?(role.user, 25, 25) %></td>
                   <td class="center">
-                    <%=profile_or_not?(role.user, "full_name", "full_name") %>
+                    <%=profile_or_not?(role.user) %>
                   </td>
                   <td class="center"><%= role.role_type.name %></td>
                 </tr>

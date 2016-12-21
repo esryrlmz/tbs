@@ -69,9 +69,9 @@ module ApplicationHelper
     end
   end
 
-  def profile_or_not?(record, link_attribute, name_attribute)
+  def profile_or_not?(record)
     if record.show_profile?(current_user)
-      link_to record.instance_eval(link_attribute), profile_path(record.profile)
+      link_to record.full_name, profile_path(record.profile)
     else
       record.instance_eval(name_attribute)
     end
