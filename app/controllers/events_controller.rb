@@ -49,6 +49,7 @@ class EventsController < ApplicationController
 
   def new
     @event = Event.new
+    @event.datetime = params[:datetime].to_date if params[:datetime].present?
   end
 
   def edit

@@ -8,11 +8,11 @@ class ApplicationController < ActionController::Base
   def configure_devise_permitted_parameters
     registration_params = [:email, :password, :password_confirmation]
     if params[:action] == 'update'
-      devise_parameter_sanitizer.permit(:account_update) do |u|
+      devise_parameter_sanitizer.for(:account_update) do |u|
         u.permit(registration_params << :current_password, :image, :is_passive)
       end
     elsif params[:action] == 'create'
-      devise_parameter_sanitizer.permit(:sign_up) do |u|
+      devise_parameter_sanitizer.for(:sign_up) do |u|
         u.permit(registration_params)
       end
     end

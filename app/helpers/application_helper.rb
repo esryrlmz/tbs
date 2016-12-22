@@ -73,7 +73,7 @@ module ApplicationHelper
     if record.show_profile?(current_user)
       link_to record.full_name, profile_path(record.profile)
     else
-      record.instance_eval(name_attribute)
+      record.full_name
     end
   end
 

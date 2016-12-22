@@ -1,132 +1,108 @@
 
+ <% if current_user.present? && ( current_user.admin? || (current_user.president? && current_user.president_or_advisor_club_period.club.club_setting.is_active)) %>
   <div class="panel-heading text-center">
     <%= link_to "<<", calendar.url_for_previous_view %>
     <span class="calendar-title"><%= t('date.month_names')[start_date.month] %> <%= start_date.year %></span>
     <%= link_to ">>", calendar.url_for_next_view %>
   </div>
   <div class="panel-body">
-
-
-
-
-  <table class="table table-striped fixed" border="1">
-    <thead>
-      <tr >
-        <% date_range.slice(0, 7).each do |day| %>
-          <th ><%= t('date.abbr_day_names')[day.wday] %></th>
-        <% end %>
-      </tr>
-    </thead>
-
-    <tbody>
-      <% date_range.each_slice(7) do |week| %>
+    <table class="table table-striped fixed" border="1">
+      <thead>
         <tr >
-          <% week.each do |day| %>
-               <% if day.month == Date.today.month %>
-                   <td class="now_month ">
-                     <% if day.day == Date.today.day %>
-                        <span class="mark_today">
-                          <% if current_user.present? && ( current_user.admin? || (current_user.president? && current_user.president_or_advisor_club_period.club.club_setting.is_active)) %>
-                                   <a href="#" rel="tooltip" title="Yeni Etkinlik Ekle" data-toggle="modal" data-target=".new_event_chose_day<%= day %>">
-                                  <%= day.day %>
-                                </a>
-                           <% else %>
-                               <%= day.day %>
-                          <% end %>
-                        </span>
-                     <% elsif day > Date.today %>
-                         <% if current_user.present? && ( current_user.admin? ||  (current_user.president? && current_user.president_or_advisor_club_period.club.club_setting.is_active)) %>
-                                 <a href="#" rel="tooltip" title="Yeni Etkinlik Ekle" data-toggle="modal" data-target=".new_event_chose_day<%= day %>">
-                                   <%= day.day %>
-                                   </a>
-                          <% else %>
-                             <%= day.day %>
-                          <% end %>
-                      <% else %>
-                        <%= day.day %>
-                      <% end %>
-                    </br>
-                     <% calender_event.each do |event|%>
-                         <% if event.datetime.strftime("%d/%m/%y") == day.strftime("%d/%m/%y") %>
-                          <a href="<%= event_path(event) %>">
-                             <div class="date_size"><%= event.datetime.strftime('%H:%M') %><b> : </b><%= event.title %></div></div>
-                           </a>
-                         <% end %>
-                     <% end %>
-                   </td>
-                <% else %>
-                   <td class="past_month ">
-                     <% if day >= Date.today %>
-                         <% if current_user.present? && ( current_user.admin? ||  (current_user.president? && current_user.president_or_advisor_club_period.club.club_setting.is_active)) %>
-                            <a href="#" rel="tooltip" title="Yeni Etkinlik Ekle" data-toggle="modal" data-target=".new_event_chose_day<%= day %>">  <%= day.day %> </a>
-                        <% else %>
-                         <%= day.day %>
-                        <% end %>
-                     <% else %>
-                       <%= day.day %>
-                     <% end %>
-                     </br>
-                     <% calender_event.each do |event|%>
-                         <% if event.datetime.strftime("%d/%m/%y") == day.strftime("%d/%m/%y") %>
-                          <a href="<%= event_path(event) %>">
-                             <div class="date_size">
-                               <%= event.datetime.strftime('%H:%M') %><b> : </b><%= event.title %>
-                             </div>
-                           </a>
-                         <% end %>
-                     <% end %>
-                   </td>
-                <% end %>
-                <div class="modal fade new_event_chose_day<%= day %>" tabindex="-1" role="dialog" aria-hidden="true">
-                  <div class="modal-dialog modal-lg">
-                    <div class="modal-content">
-                      <div class="well">
-                        <div class="modal-header">
-                          <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
-                          </button>
-                        </div>
-                        <div class="modal-body">
-                        <%= simple_form_for(event = Event.new(datetime: day), url: events_path(event), method: :post) do |f| %>
-                          <%= f.error_notification %>
-
-                          <div class="form-inputs">
-                            <% if current_user.present? && current_user.admin? %>
-                              <%= f.input :club_period_id, collection: Club.all.flat_map { |club| [[club.name, club.active_club_period.id]] }, label: false, prompt: 'Topluluk Seçiniz', :input_html => { :id => "clubs" } %>
-                            <% elsif current_user.present? && current_user.president? %>
-                              <%= f.input :club_period_id, :as => :hidden, :input_html => { :value => current_user.president_or_advisor_club_period.id } %>
-                            <% end %>
-                            <%= f.input :event_category_id, collection: EventCategory.all.flat_map { |event_category| [[event_category.name, event_category.id]] }, label: false, prompt: 'Etkinlik Kategorisi Seçiniz' %>
-                            <%= f.input :title, label: "Etkinlik Başlığı" %>
-                            <%= f.input :speakers, label: "Konuşmacılar" %>
-                            <%= f.input :attachment, as: :file, label: "Konuşmacıların Özgeçmişleri:" %>
-                            <%= f.input :datetime, label: "Etkinlik Tarihi" %>
-                            <%= f.input :event_locations, collection: EventLocation.all.flat_map { |event_location| [[event_location.name, event_location.name]] }, label: false, prompt: 'Etkinlik Yerini Seçiniz', :input_html => {  :id => "event_locations_list" } %>
-                            <%= f.input :location, label: 'Etkinlik Yeri', :input_html => { :readonly => "readonly",:id => "event_location" } %>
-                            <%= f.input :content, label: "Etkinlik Açıklaması" %>
-                            <%= f.input :requirements, label: "Etkinlik İhtiyaçlar" %>
-                            <%= f.input :image, as: :file, label: "Etkinlik Resmi:" %>
-                          </div>
-
-                          <div class="form-actions">
-                            <%= f.submit "Kaydet", class: "btn btn-success" %>
-                          </div>
-                        <% end %>
-                        </div>
-
-                      </div>
-
-                    </div>
-                  </div>
-                </div>
-
+          <% date_range.slice(0, 7).each do |day| %>
+            <th ><%= t('date.abbr_day_names')[day.wday] %></th>
           <% end %>
         </tr>
-      <% end %>
-    </tbody>
-  </table>
-    </div>
+      </thead>
+        <% @event_list=calender_event %>
+        <tbody>
+          <% date_range.each_slice(7) do |week| %>
+            <tr >
+              <% week.each do |day| %>
+                   <% if day.month == Date.today.month %>
+                      <td class="now_month ">
+                          <% if day >= Date.today %>
+                             <a href="<%= new_event_path(:datetime=>day) %>" rel="tooltip" title="Yeni Etkinlik Ekle" >
+                               <% if day.day == Date.today.day %> <span class="mark_today"><%= day.day %></span>
+                               <% else %>  <%= day.day %>
+                               <% end %>
+                             </a>
+                          <% else %>
+                              <%= day.day %>
+                          <% end %>
+                          </br>
+                           <% @event_list.select{ |x| x.datetime.to_date == day }.each do |event| %>
+                                <a href="<%= event_path(event) %>"><div class="date_size"><%= event.datetime.strftime('%H:%M') %><b> : </b><%= event.title %></div></div></a>
+                           <% end %>
+                      </td>
+                    <% else %>
+                       <td class="past_month ">
+                         <% if day >= Date.today %>
+                            <a href="<%= new_event_path(:datetime=>day) %>" rel="tooltip" title="Yeni Etkinlik Ekle" data-toggle="modal" data-target=".new_event_chose_day<%= day %>">  <%= day.day %> </a>
+                         <% else %>
+                           <%= day.day %>
+                         <% end %>
+                         </br>
+                         <% @event_list.select{ |x| x.datetime.to_date == day }.each do |event|%>
+                              <a href="<%= event_path(event) %>"> <div class="date_size"><%= event.datetime.strftime('%H:%M') %><b> : </b><%= event.title %></div> </a>
+                         <% end %>
+                       </td>
+                    <% end %>
+                <% end %>
+            </tr>
+          <% end %>
+        </tbody>
+       </table>
+     </div>
 
-
+<% else %>
+     <div class="panel-heading text-center">
+       <%= link_to "<<", calendar.url_for_previous_view %>
+       <span class="calendar-title"><%= t('date.month_names')[start_date.month] %> <%= start_date.year %></span>
+       <%= link_to ">>", calendar.url_for_next_view %>
+     </div>
+     <div class="panel-body">
+       <table class="table table-striped fixed" border="1">
+         <thead>
+           <tr >
+             <% date_range.slice(0, 7).each do |day| %>
+               <th ><%= t('date.abbr_day_names')[day.wday] %></th>
+             <% end %>
+           </tr>
+         </thead>
+           <% @event_list=calender_event %>
+          <tbody>
+            <% date_range.each_slice(7) do |week| %>
+              <tr >
+                <% week.each do |day| %>
+                       <% if day.month == Date.today.month %>
+                           <td class="now_month ">
+                              <% if day.day == Date.today.day %>
+                                  <span class="mark_today"><%= day.day %></span>
+                              <% else %>
+                                  <%= day.day %>
+                              <% end %>
+                            </br>
+                            <% @event_list.select{ |x| x.datetime.to_date == day }.each do |event| %>
+                                <a href="<%= event_path(event) %>"> <div class="date_size"><%= event.datetime.strftime('%H:%M') %><b> : </b><%= event.title %></div> </a>
+                            <% end %>
+                           </td>
+                        <% else %>
+                           <td class="past_month ">
+                             <%= day.day %>
+                             </br>
+                             <% @event_list.select{ |x| x.datetime.to_date == day }.each do |event| %>
+                                 <a href="<%= event_path(event) %>"> <div class="date_size"><%= event.datetime.strftime('%H:%M') %><b> : </b><%= event.title %></div> </a>
+                             <% end %>
+                           </td>
+                        <% end %>
+                  <% end %>
+              </tr>
+            <% end %>
+           </tbody>
+        </table>
+     </div>
+<% end %>
 
 
     <script>

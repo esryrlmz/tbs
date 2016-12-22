@@ -83,11 +83,11 @@ Profile.create(full_name: @user_president.first_name + ' ' + @user_president.las
 Profile.create(full_name: @user_member.first_name + ' ' + @user_member.last_name, user_id: @user_member.id)
 
 # System announcement
-SystemAnnouncement.create(title: 'Duyuru 1', content: 'bu test amaçlı oluşturulmuş bir duyurudur.', is_view: true, status: '0')
-SystemAnnouncement.create(title: 'Duyuru 2', content: 'bu test amaçlı oluşturulmuş 2. duyurudur.', is_view: false, status: '1')
-SystemAnnouncement.create(title: 'Duyuru 3', content: 'bu test amaçlı oluşturulmuş 3. duyurudur.', is_view: true, status: '2')
-SystemAnnouncement.create(title: 'Duyuru 4', content: 'bu test amaçlı oluşturulmuş 4. duyurudur.', is_view: true, status: '1')
-SystemAnnouncement.create(title: 'Duyuru 5', content: 'bu test amaçlı oluşturulmuş 5. duyurudur.', is_view: true, status: '2')
+SystemAnnouncement.create(title: 'Duyuru 1', content: 'bu test amaçlı oluşturulmuş bir duyurudur.', is_view: true, status: :onemli)
+SystemAnnouncement.create(title: 'Duyuru 2', content: 'bu test amaçlı oluşturulmuş 2. duyurudur.', is_view: false, status: :genel)
+SystemAnnouncement.create(title: 'Duyuru 3', content: 'bu test amaçlı oluşturulmuş 3. duyurudur.', is_view: true, status: :haber)
+SystemAnnouncement.create(title: 'Duyuru 4', content: 'bu test amaçlı oluşturulmuş 4. duyurudur.', is_view: true, status: :haber)
+SystemAnnouncement.create(title: 'Duyuru 5', content: 'bu test amaçlı oluşturulmuş 5. duyurudur.', is_view: true, status: :onemli)
 
 # Event Status
 EventStatus.create(status: 'SKS Admin Onayı Bekleniyor')
