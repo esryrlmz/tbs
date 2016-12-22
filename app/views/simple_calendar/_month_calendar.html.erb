@@ -24,60 +24,60 @@
           <% week.each do |day| %>
                <% if day.month == Date.today.month %>
                    <td class="now_month ">
-                     <% if day.day==Date.today.day %>
+                     <% if day.day == Date.today.day %>
                         <span class="mark_today">
                           <% if current_user.present? && ( current_user.admin? || (current_user.president? && current_user.president_or_advisor_club_period.club.club_setting.is_active)) %>
-                                   <a href="#" rel="tooltip" title="Yeni Etkinlik Ekle" data-toggle="modal" data-target=".new_event_chose_day<%=day%>">
-                                  <%=day.day%>
+                                   <a href="#" rel="tooltip" title="Yeni Etkinlik Ekle" data-toggle="modal" data-target=".new_event_chose_day<%= day %>">
+                                  <%= day.day %>
                                 </a>
                            <% else %>
-                               <%=day.day%>
+                               <%= day.day %>
                           <% end %>
                         </span>
-                     <% elsif day>Date.today %>
-                         <% if current_user.present? && ( current_user.admin? ||  (current_user.president? && current_user.president_or_advisor_club_period.club.club_setting.is_active))%>
-                                 <a href="#" rel="tooltip" title="Yeni Etkinlik Ekle" data-toggle="modal" data-target=".new_event_chose_day<%=day%>">
-                                   <%=day.day%>
+                     <% elsif day > Date.today %>
+                         <% if current_user.present? && ( current_user.admin? ||  (current_user.president? && current_user.president_or_advisor_club_period.club.club_setting.is_active)) %>
+                                 <a href="#" rel="tooltip" title="Yeni Etkinlik Ekle" data-toggle="modal" data-target=".new_event_chose_day<%= day %>">
+                                   <%= day.day %>
                                    </a>
                           <% else %>
-                             <%=day.day%>
+                             <%= day.day %>
                           <% end %>
                       <% else %>
-                        <%=day.day%>
+                        <%= day.day %>
                       <% end %>
                     </br>
                      <% calender_event.each do |event|%>
-                         <% if event.datetime.strftime("%d/%m/%y")==day.strftime("%d/%m/%y") %>
-                          <a href="<%=event_path(event)%>">
-                             <div class="date_size"><%=event.datetime.strftime('%H:%M')%><b> : </b><%=event.title%></div></div>
+                         <% if event.datetime.strftime("%d/%m/%y") == day.strftime("%d/%m/%y") %>
+                          <a href="<%= event_path(event) %>">
+                             <div class="date_size"><%= event.datetime.strftime('%H:%M') %><b> : </b><%= event.title %></div></div>
                            </a>
                          <% end %>
                      <% end %>
                    </td>
                 <% else %>
                    <td class="past_month ">
-                     <% if day>=Date.today %>
+                     <% if day >= Date.today %>
                          <% if current_user.present? && ( current_user.admin? ||  (current_user.president? && current_user.president_or_advisor_club_period.club.club_setting.is_active)) %>
-                            <a href="#" rel="tooltip" title="Yeni Etkinlik Ekle" data-toggle="modal" data-target=".new_event_chose_day<%=day%>">  <%=day.day%> </a>
+                            <a href="#" rel="tooltip" title="Yeni Etkinlik Ekle" data-toggle="modal" data-target=".new_event_chose_day<%= day %>">  <%= day.day %> </a>
                         <% else %>
-                         <%=day.day%>
+                         <%= day.day %>
                         <% end %>
                      <% else %>
-                       <%=day.day%>
+                       <%= day.day %>
                      <% end %>
                      </br>
                      <% calender_event.each do |event|%>
-                         <% if event.datetime.strftime("%d/%m/%y")==day.strftime("%d/%m/%y") %>
-                          <a href="<%=event_path(event)%>">
+                         <% if event.datetime.strftime("%d/%m/%y") == day.strftime("%d/%m/%y") %>
+                          <a href="<%= event_path(event) %>">
                              <div class="date_size">
-                               <%=event.datetime.strftime('%H:%M')%><b> : </b><%=event.title%>
+                               <%= event.datetime.strftime('%H:%M') %><b> : </b><%= event.title %>
                              </div>
                            </a>
                          <% end %>
                      <% end %>
                    </td>
                 <% end %>
-                <div class="modal fade new_event_chose_day<%=day%>" tabindex="-1" role="dialog" aria-hidden="true">
+                <div class="modal fade new_event_chose_day<%= day %>" tabindex="-1" role="dialog" aria-hidden="true">
                   <div class="modal-dialog modal-lg">
                     <div class="modal-content">
                       <div class="well">
@@ -86,7 +86,7 @@
                           </button>
                         </div>
                         <div class="modal-body">
-                        <%= simple_form_for(event=Event.new(datetime: day), url: events_path(event), method: :post) do |f| %>
+                        <%= simple_form_for(event = Event.new(datetime: day), url: events_path(event), method: :post) do |f| %>
                           <%= f.error_notification %>
 
                           <div class="form-inputs">
