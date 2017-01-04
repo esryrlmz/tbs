@@ -32,7 +32,11 @@ gem 'kaminari'
 
 gem "simple_calendar"
 
+gem 'zip-zip'
+gem 'axlsx', '~> 2.0'
+gem 'axlsx_rails'
 
+gem 'bootstrap-datepicker-rails'
 gem 'jquery-datatables-rails'
 
 # Use jquery as the JavaScript library

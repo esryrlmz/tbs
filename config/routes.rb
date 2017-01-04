@@ -17,7 +17,7 @@ Rails.application.routes.draw do
   resources :role_types
   resources :roles_users
   devise_for :users,:controllers => {:sessions=>"sessions"}
-  resources :profiles,  only: [:show]
+  resources :profiles,  only: [:show, :update]
   resources :roles
   resources :club_contacts
   resources :club_settings
@@ -38,5 +38,6 @@ Rails.application.routes.draw do
   get 'club_users' => 'roles#club_users'
   get 'find_ogrenci' =>'users#find_ogrenci'
   get 'find_personel' =>'users#find_personel'
+  get 'downloud_events' => 'events#downloud_events'
   root 'clubs#index'
 end

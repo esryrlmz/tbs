@@ -75,7 +75,9 @@
               <div style="margin-top: 10px">
                 <% if user_signed_in? %>
                 <% unless current_user.advisor? %>
-                <% if current_user.member?(@club_period) %>
+                <% if !@club_period.club.club_setting.is_active %>
+                   <span class="btn btn-danger btn-block">Topluluk Aktif Değil</span>
+                <% elsif current_user.member?(@club_period) %>
                 <div class="row">
                   <div class="col-md-6">
                     <span class="btn btn-success btn-block">Üyesiniz</span>
@@ -228,9 +230,9 @@
               </div>
             </section>
               <div class="tab-content" id="club_partial">
-                <div class="tab-pane" id="club_member"><%=render 'member'%></div>
-                <div class="tab-pane" id="club_supervisor"><%=render 'supervisor'%></div>
-                <div class="tab-pane" id="club_director"><%=render 'director'%></div>
+                <div class="tab-pane" id="club_member"><%= render 'member' ,:club => @club %></div>
+                <div class="tab-pane" id="club_supervisor"><%= render 'supervisor' %></div>
+                <div class="tab-pane" id="club_director"><%= render 'director' %></div>
               </div>
           </div>
         </div>

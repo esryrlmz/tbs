@@ -15,12 +15,14 @@
 //= require jquery_ujs
 //= require dataTables/jquery.dataTables
 //= require dataTables/bootstrap/3/jquery.dataTables.bootstrap
-//= require dataTables/extras/dataTables.tableTools
-//= require dataTables/extras/dataTables.colVis
+
+
 //= require bootstrap-sprockets
+//= require bootstrap-datepicker
 //= require select2
 //= require turbolinks
 //= require_tree .
+
 
 
 window.setTimeout(function() { $(".alert.flash").alert('close'); }, 6000);

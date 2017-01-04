@@ -9,6 +9,24 @@ class ClubsController < ApplicationController
       @clubs = Club.order('name ASC')
       @clubs_of_current_user = current_user.present? && current_user.active_club_periods ? current_user.active_club_periods.map { |club_period| club_period.club if club_period.present? } : []
     end
+
+   #excel dökümü için sorgulama
+    @clubs_for_excel = Club.all
+    if params[:clup_category].present?
+      @clubs_for_excel = @clubs_for_excel.where(club_category_id: params[:clup_category])
+    end
+    if params[:clup_period].present?
+      @clubs_for_excel =   @clubs_for_excel.map { |x| x }.keep_if { |y| y.club_periods.map { |d| d }.keep_if { |z| z.academic_period_id == params[:clup_period] } }
+    end
+    if params[:state].present?
+      if params[:state] == 'true'
+        @clubs_for_excel = @clubs_for_excel.map { |x| x }.keep_if { |y| y.club_setting.is_active == true }
+      elsif params[:state] == 'false'
+        @clubs_for_excel = @clubs_for_excel.map { |x| x }.keep_if { |y| y.club_setting.is_active == false }
+      end
+    end
+
+    respond_to(:html, :xlsx)
     authorize @clubs
   end
 
@@ -60,6 +78,7 @@ class ClubsController < ApplicationController
   end
 
   def edit
+    @club.creation_date = @club.creation_date.strftime("%d.%m.%Y")
   end
 
   def create

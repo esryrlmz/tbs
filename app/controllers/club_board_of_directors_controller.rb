@@ -8,6 +8,7 @@ class ClubBoardOfDirectorsController < ApplicationController
   end
 
   def show
+    respond_to(:html, :xlsx)
   end
 
   def new
@@ -25,7 +26,10 @@ class ClubBoardOfDirectorsController < ApplicationController
       flash.now[:error] = 'Daha önce bu topluluk için Yönetim Kurulu oluşturulmuş. Lütfen onu düzenleyiniz.'
       render :new
     elsif get_duplicated_user_names(club_period).present?
-      flash.now[:error] = '#{duplicated_user_names} başka bir toplulukta yönetim kurulunda ya denetim kurulunda.'
+      flash.now[:error] = 'Eklediğiniz üye, başka bir toplulukta yönetim kurulunda ya da denetim kurulunda.'
+      render :new
+    elsif @club_board_of_director.president_id.blank? || @club_board_of_director.vice_president_id.blank? || @club_board_of_director.accountant_id.blank? || @club_board_of_director.secretary_id.blank? || @club_board_of_director.member_one.blank? || @club_board_of_director.member_two.blank? || @club_board_of_director.member_three.blank?
+      flash.now[:error] = 'Yönetim Kurulu üyelerinin tamamını seçmelisiniz.'
       render :new
     else
       authorize @club_board_of_director

@@ -14,7 +14,8 @@
       </div>
       <div class="panel-body">
         <h6 class="description">
-          <%= @member_lists.first.club_period.academic_period_name%>
+          <%= @club_period.academic_period_name%>
+          
             <button type="button" class="btn btn-default btn-md" style="float: right;" data-toggle="modal" data-target=".bs-ubs">
               <i class="fa fa-user-plus" aria-hidden="true"></i></span>
             </button>
@@ -22,7 +23,8 @@
         </h6>
         <div class="row pt-md"> </div>
         <h6><%= @member_lists.count %> Üye Bulunmaktadır.</h6>
-          <input  style="display: none;" id="club_period_id" value="<%= @member_lists.first.club_period.id%>"></input>
+
+          <input  style="display: none;" id="club_period_id" value="<%= @club_period.id%>"></input>
       <table class="table table-hover" id="club_users">
         <thead>
           <tr>

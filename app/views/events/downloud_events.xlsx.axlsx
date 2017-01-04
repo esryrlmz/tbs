@@ -1,0 +1,20 @@
+# encoding: utf-8
+# v2
+
+xlsx_package.use_autowidth = true
+workbook = xlsx_package.workbook
+
+bold_with_background = workbook.styles.add_style  b: true
+
+workbook.add_worksheet(name: "Etkinlik Listesi") do |sheet|
+  sheet.add_row ["Etkinlik Listesi"], style: [bold_with_background]
+  sheet.add_row []
+  sheet.add_row ["Başlangıç Tarihi", @start_time], style: [bold_with_background,0]
+  sheet.add_row ["Bitiş Listesi", @finish_time], style: [bold_with_background,0]
+  sheet.add_row []
+  sheet.add_row ["Adı", "Topluğuğu", "Tarihi", "Saati", "Etkinlik Yeri" ], style: [ bold_with_background,bold_with_background, bold_with_background,bold_with_background,bold_with_background]
+
+  @event_list.each do |event|
+    sheet.add_row [ event.title,  event.club_period.club.name ,event.datetime.strftime("%d/%m/%y") ,event.datetime.strftime("%H:%M"), event.location ]
+  end
+end

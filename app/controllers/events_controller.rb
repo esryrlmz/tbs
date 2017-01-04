@@ -98,6 +98,13 @@ class EventsController < ApplicationController
     end
   end
 
+  def downloud_events
+    @start_time = params[:start_date].to_date unless params[:start_date].blank?
+    @finish_time = params[:finish_date].to_date unless params[:finish_date].blank?
+    @event_list = @start_time.present? && @finish_time.present? ? Event.where('date(datetime) BETWEEN ? AND ?', @start_time, @finish_time) : Event.all
+    respond_to(:xlsx)
+  end
+
   private
 
   def set_event

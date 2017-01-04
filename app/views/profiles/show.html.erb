@@ -31,10 +31,10 @@
         <div class="row">
           <%if @profile.user.is_academic %>
           <div class="col-md-5"><b>Tc Kimlik Numarası</b></div>
-          <div class="col-md-7"> <%= @profile.user.idnumber%></div>
+          <div class="col-md-7"> <%= @profile.user.idnumber %></div>
           <%else%>
           <div class="col-md-5"><b>Öğrenci Numarası</b></div>
-          <div class="col-md-7"> <%= @profile.user.ubs_no%></div>
+          <div class="col-md-7"> <%= @profile.user.ubs_no %></div>
           <%end%>
         </div>
       </li>
@@ -43,7 +43,7 @@
         <li class="list-group-item">
          <div class="row">
            <div class="col-md-5"><b>Unvanı:</b></div>
-           <div class="col-md-7"> <%= @profile.user.degree%></div>
+           <div class="col-md-7"> <%= @profile.user.degree %></div>
          </div>
        </li>
        <br/>
@@ -51,14 +51,14 @@
       <li class="list-group-item">
        <div class="row">
          <div class="col-md-5"><b>Ad Soyad:</b></div>
-         <div class="col-md-7"> <%= @profile.full_name%></div>
+         <div class="col-md-7"> <%= @profile.full_name %></div>
        </div>
      </li>
      <br/>
       <li class="list-group-item">
       <div class="row">
         <div class="col-md-5"><b>Fakülte:</b></div>
-        <div class="col-md-7"> <%= @profile.faculty%></div>
+        <div class="col-md-7"> <%= @profile.faculty %></div>
       </div>
     </li>
 
@@ -66,7 +66,7 @@
     <li class="list-group-item">
     <div class="row">
       <div class="col-md-5"><b>Bölüm </b></div>
-      <div class="col-md-7"> <%= @profile.program%></div>
+      <div class="col-md-7"> <%= @profile.program %></div>
     </div>
   </li>
      <br/>
@@ -74,7 +74,7 @@
   <li class="list-group-item">
   <div class="row">
     <div class="col-md-5"><b>Disiplin cezası var mı? </b></div>
-    <div class="col-md-7"> <%= @profile.user.crime?%></div>
+    <div class="col-md-7"> <%= @profile.user.crime? %></div>
   </div>
  </li>
  <br/>
@@ -82,25 +82,104 @@
  <li class="list-group-item">
  <div class="row">
    <div class="col-md-5"><b>Omü ubs sisteminde aktif mi?</b></div>
-   <div class="col-md-7"> <%= @profile.user.ubs_active?%></div>
+   <div class="col-md-7"> <%= @profile.user.ubs_active? %></div>
  </div>
 </li>
 
     </div>
 </div>
 <div class="col-md-1"></div>
-<div class="col-md-5 panel panel-default">
+<div class="col-md-5 ">
+  <div class="row panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Üye Olduğu Topluluklar</h3>
+      </div>
+      <div class="panel-body">
+        <%@member_clubs.each do |club|%>
+        <li class="list-group-item">
+          <div class="row">
+            <div class="col-md-12">  <a href="<%= club_path(club.id) %>">  <%= club.name %></a></div>
+          </div>
+        </li>
+        <br/>
+       <%end%>
+      </div>
+  </div>
+        <br/>
+  <div class="row panel panel-default">
     <div class="panel-heading">
-      <h3 class="panel-title">Üye Olduğu Topluluklar</h3>
+      <h3 class="panel-title">İletişim Bilgileri
+      <% if user_signed_in? and ( current_user.admin? || current_user.advisor? || current_user.president? || current_user.vice_advisor? ) %>
+        <%= link_to '<i class="fa fa-pencil-square-o"></i>'.html_safe , "#", :class => 'btn btn-default pull-right' , "data-toggle" => "modal", 'data-target' => '.edit_contact' %>
+      <%end%>
+      </h3>
     </div>
     <div class="panel-body">
-      <%@member_clubs.each do |club|%>
       <li class="list-group-item">
-        <div class="row">
-          <div class="col-md-12">  <a href="<%=club_path(club.id)%>">  <%=club.name%></a></div>
-        </div>
-      </li>
+       <div class="row">
+         <div class="col-md-5"><b>Telefon:</b></div>
+         <div class="col-md-7"> <%= @profile.phone %></div>
+       </div>
+     </li>
       <br/>
-     <%end%>
+      <li class="list-group-item">
+       <div class="row">
+         <div class="col-md-5"><b>Email:</b></div>
+         <div class="col-md-7"> <%= @profile.email %></div>
+       </div>
+     </li>
+       <br/>
+     <li class="list-group-item">
+      <div class="row">
+        <div class="col-md-5"><b>Adres:</b></div>
+        <div class="col-md-7"> <%= @profile.adress %></div>
+      </div>
+    </li>
+      <br/>
     </div>
+  </div>
+
+</div>
+
+
+
+<div class="modal fade edit_contact" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-md">
+    <div class="panel">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
+        </button>
+
+        <%= simple_form_for(@profile, url: profile_path(@profile), method: :PATCH) do |f| %>
+            <div class="panel-body">
+              <div class="row form-group"></div>
+              <div class="row form-group">
+                <label class="col-md-2 col-xs-2 col-sm-2 control-label ">Telefon: </label>
+                <div class="col-md-10 col-xs-10 col-sm-10">
+                  <%= f.input  :phone, label: false, input_html: {class: "form-control"} %>
+                </div>
+              </div>
+              <div class="row form-group">
+                <label class="col-md-2 col-xs-2 col-sm-2 control-label ">Email:</label>
+                <div class="col-md-10 col-xs-10 col-sm-10">
+                     <%= f.input  :email, label: false, input_html: {class: "form-control"} %>
+                </div>
+              </div>
+              <div class="row form-group">
+                <label class="col-md-2 col-xs-2 col-sm-2 control-label ">Adress:</label>
+                <div class="col-md-10 col-xs-10 col-sm-10">
+                     <%= f.input  :adress, label: false, input_html: {class: "form-control"} %>
+                </div>
+              </div>
+              <div class="row form-group">
+                <div class="col-md-2 col-xs-2 col-sm-2">  </div>
+                <div class="col-md-10 col-xs-10 col-sm-10 text-right">
+                  <div class="form-actions">
+                    <%= f.submit "Kaydet", class: "btn btn-success" %>
+                  </div>
+                </div>
+              </div>
+            </div>
+        <% end %>
+    </div>
+  </div>
 </div>

@@ -20,14 +20,6 @@ $ ->
           "sNext": "Sonraki",
           "sLast": "Son" }},
     "bPaginate": true,
-    "fnDrawCallback": (oSettings) ->
-      if oSettings.bSorted or oSettings.bFiltered
-        i = 0
-        iLen = oSettings.aiDisplay.length
-        while i < iLen
-          $('td:eq(0)', oSettings.aoData[oSettings.aiDisplay[i]].nTr).html i + 1
-          i++
-      return
     "pageLength": 10,
     "bProcessing": true,
     "order": [[ 2, 'asc' ]],
@@ -37,20 +29,8 @@ $ ->
               },{
               "targets": [0,1],
               "orderable": false
-              }],
-    dom: '<"row"<"col-sm-12"C>><"row"<"col-sm-3"l><"container col-sm-9"<"row"<"col-sm-11"f><"col-sm-1"<"pull-right"T>>>>>t<"row"<"col-sm-6"i><"col-sm-6"p>>',
-    "oTableTools": {
-          "aButtons": [
-                {
-                    "sExtends": "print",
-                    "sMessage": "&nbsp;&nbsp;&nbsp;&nbsp;Topluluklar",
-                    "sButtonText": "Yazdır"
-                }
-            ]
-    },
-    "colVis": {
-            "buttonText": "Sütunları Değiştir"
-    }
+              }]
+
 
   $('#clubs_table').dataTable
     language: {
@@ -69,14 +49,6 @@ $ ->
           "sNext": "Sonraki",
           "sLast": "Son" }},
     "bPaginate": true,
-    "fnDrawCallback": (oSettings) ->
-      if oSettings.bSorted or oSettings.bFiltered
-        i = 0
-        iLen = oSettings.aiDisplay.length
-        while i < iLen
-          $('td:eq(0)', oSettings.aoData[oSettings.aiDisplay[i]].nTr).html i + 1
-          i++
-      return
     "pageLength": 10,
     "bProcessing": true,
     "order": [[ 1, 'asc' ]],
@@ -86,21 +58,7 @@ $ ->
               },{
               "targets": [0,1,6],
               "orderable": false
-              }],
-    dom: '<"row"<"col-sm-12"C>><"row"<"col-sm-3"l><"container col-sm-9"<"row"<"col-sm-11"f><"col-sm-1"<"pull-right"T>>>>>t<"row"<"col-sm-6"i><"col-sm-6"p>>',
-    "oTableTools": {
-          "aButtons": [
-                {
-                    "sExtends": "print",
-                    "sMessage": "&nbsp;&nbsp;&nbsp;&nbsp;Topluluklar",
-                    "sButtonText": "Yazdır"
-                }
-            ]
-    },
-    "colVis": {
-            "buttonText": "Sütunları Değiştir"
-    }
-
+              }]
   $('.clubs_table_member').dataTable
     language: {
           "sProcessing": "Yükleniyor...",
@@ -118,31 +76,10 @@ $ ->
           "sNext": "Sonraki",
           "sLast": "Son" }},
     "bPaginate": true,
-    "fnDrawCallback": (oSettings) ->
-      if oSettings.bSorted or oSettings.bFiltered
-        i = 0
-        iLen = oSettings.aiDisplay.length
-        while i < iLen
-          $('td:eq(0)', oSettings.aoData[oSettings.aiDisplay[i]].nTr).html i + 1
-          i++
-      return
     "pageLength": 10,
     "bProcessing": true,
     "order": [[ 1, 'asc' ]],
     "columnDefs": [{
               "targets": [1,2,3],
               "orderable": true
-              }],
-    dom: '<"row"<"col-sm-12"C>><"row"<"col-sm-3"l><"container col-sm-9"<"row"<"col-sm-11"f><"col-sm-1"<"pull-right"T>>>>>t<"row"<"col-sm-6"i><"col-sm-6"p>>',
-    "oTableTools": {
-          "aButtons": [
-                {
-                    "sExtends": "print",
-                    "sMessage": "&nbsp;&nbsp;&nbsp;&nbsp;Topluluklar",
-                    "sButtonText": "Yazdır"
-                }
-            ]
-    },
-    "colVis": {
-            "buttonText": "Sütunları Değiştir"
-    }
+              }]

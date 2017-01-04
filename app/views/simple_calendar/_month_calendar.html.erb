@@ -38,7 +38,7 @@
                     <% else %>
                        <td class="past_month ">
                          <% if day >= Date.today %>
-                            <a href="<%= new_event_path(:datetime=>day) %>" rel="tooltip" title="Yeni Etkinlik Ekle" data-toggle="modal" data-target=".new_event_chose_day<%= day %>">  <%= day.day %> </a>
+                            <a href="<%= new_event_path(:datetime=>day) %>" rel="tooltip" title="Yeni Etkinlik Ekle" >  <%= day.day %> </a>
                          <% else %>
                            <%= day.day %>
                          <% end %>

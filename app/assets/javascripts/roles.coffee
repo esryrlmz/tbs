@@ -28,14 +28,6 @@ $ ->
           "sNext": "Sonraki",
           "sLast": "Son" }},
     "bPaginate": true,
-    "fnDrawCallback": (oSettings) ->
-      if oSettings.bSorted or oSettings.bFiltered
-        i = 0
-        iLen = oSettings.aiDisplay.length
-        while i < iLen
-          $('td:eq(0)', oSettings.aoData[oSettings.aiDisplay[i]].nTr).html i + 1
-          i++
-      return
     "pageLength": 10,
     "bProcessing": true,
     "order": [[ 1, 'asc' ]],
@@ -45,20 +37,7 @@ $ ->
               },{
               "targets": [0,5],
               "orderable": false
-              }],
-    dom: '<"row"<"col-sm-12"C>><"row"<"col-sm-3"l><"container col-sm-9"<"row"<"col-sm-11"f><"col-sm-1"<"pull-right"T>>>>>t<"row"<"col-sm-6"i><"col-sm-6"p>>',
-    "oTableTools": {
-          "aButtons": [
-                {
-                    "sExtends": "print",
-                    "sMessage": "&nbsp;&nbsp;&nbsp;&nbsp;Üyeler",
-                    "sButtonText": "Yazdır"
-                }
-            ]
-    },
-    "colVis": {
-            "buttonText": "Sütunları Değiştir"
-    }
+              }]
 
   $('#club_users_index').dataTable
     language: {
@@ -77,14 +56,6 @@ $ ->
           "sNext": "Sonraki",
           "sLast": "Son" }},
     "bPaginate": true,
-    "fnDrawCallback": (oSettings) ->
-      if oSettings.bSorted or oSettings.bFiltered
-        i = 0
-        iLen = oSettings.aiDisplay.length
-        while i < iLen
-          $('td:eq(0)', oSettings.aoData[oSettings.aiDisplay[i]].nTr).html i + 1
-          i++
-      return
     "pageLength": 10,
     "bProcessing": true,
     "order": [[ 1, 'asc' ]],
@@ -94,26 +65,12 @@ $ ->
               },{
               "targets": [0,5],
               "orderable": false
-              }],
-    dom: '<"row"<"col-sm-12"C>><"row"<"col-sm-3"l><"container col-sm-9"<"row"<"col-sm-11"f><"col-sm-1"<"pull-right"T>>>>>t<"row"<"col-sm-6"i><"col-sm-6"p>>',
-    "oTableTools": {
-          "aButtons": [
-                {
-                    "sExtends": "print",
-                    "sMessage": "&nbsp;&nbsp;&nbsp;&nbsp;Topluluk Üyeleri",
-                    "sButtonText": "Yazdır"
-                }
-            ]
-    },
-    "colVis": {
-            "buttonText": "Sütunları Değiştir"
-    }
-
+              }]
 
 $ ->
 	$('#users').select2
 		theme: "bootstrap"
-	
+
 	$('#clubs').select2
 		theme: "bootstrap"
 

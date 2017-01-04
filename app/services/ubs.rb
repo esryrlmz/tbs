@@ -36,7 +36,7 @@ module Ubs
       ubs_no: 'o' + params['student_id'],
       is_ubs_active: params['state_id'].present? && params['state_id'] == '905002'
     )
-    user.profile = Profile.new(
+    user.profile = Profile.create(
       full_name: params['full_name'],
       birthday: params['birthday'].to_datetime,
       faculty: params['faculty'],
@@ -44,6 +44,7 @@ module Ubs
       program_id: params['program_id'],
       crime: params['crime'].present?
     )
+    return user
   end
 
   def self.active_academic_control(tc_no)

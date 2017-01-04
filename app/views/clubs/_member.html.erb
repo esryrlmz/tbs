@@ -3,7 +3,13 @@
     <div class="col-md-9">
       <div class="col-lg-9">
         <div >
-          <h6 class="description">Topluluk Üyeleri</h6>
+          <h6 class="description">Topluluk Üyeleri
+            <% if current_user.present? && current_user.admin? %>
+               <%= link_to '<i class="fa fa-pencil-square-o"></i>'.html_safe, edit_member_list_club_period_path(club.id), :class => 'btn btn-default pull-right' %>
+               <%= link_to '<i class="fa fa-file-excel-o"></i>'.html_safe, edit_member_list_club_period_path( @club_period.club.id, format: "xlsx"), :class => 'btn btn-default pull-right' %>
+           <%end%>
+          </h6>
+          <br/>
           <table class="table table-hover" id="club_users">
             <thead>
               <tr>
@@ -19,16 +25,13 @@
                   <td></td>
                   <td class="center"><%= avatar_or_not?(role.user, 25, 25) %></td>
                   <td class="center">
-                    <%=profile_or_not?(role.user) %>
+                    <%= profile_or_not?(role.user) %>
                   </td>
                   <td class="center"><%= role.role_type.name %></td>
                 </tr>
               <% end %>
             </tbody>
           </table>
-          <% if current_user.present? && current_user.admin? %>
-            <%= link_to "Topluluk Üyelerini Düzenle",edit_member_list_club_period_path(@club_members.first.club_period.id) %>
-         <%end%>
         </div>
       </div>
     </div>

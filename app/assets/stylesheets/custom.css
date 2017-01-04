@@ -29,3 +29,6 @@
     border-radius: 25px;
     padding: 2px;
  }
+.modal_select_tag {
+     min-width: 180px;
+ }

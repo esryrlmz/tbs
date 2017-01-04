@@ -10,6 +10,7 @@
  * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
  * file per style scope.
  *
+ *= require bootstrap-datepicker
  *= require_tree .
  *= require_self
  */
@@ -18,14 +19,12 @@
 @import "bootstrap"
 @import "font-awesome"
 @import "dataTables/bootstrap/3/jquery.dataTables.bootstrap"
-@import "dataTables/extras/dataTables.tableTools"
-@import "dataTables/extras/dataTables.colVis"
 @import "select2"
 @import "select2-bootstrap"
-.body-home 
+.body-home
   overflow: scroll
   background-color: #FFFFFF
-a:hover 
+a:hover
   background-color: white
 .image-size
   max-width: 695px

@@ -24,14 +24,6 @@ $ ->
           "sNext": "Sonraki",
           "sLast": "Son" }},
     "bPaginate": true,
-    "fnDrawCallback": (oSettings) ->
-      if oSettings.bSorted or oSettings.bFiltered
-        i = 0
-        iLen = oSettings.aiDisplay.length
-        while i < iLen
-          $('td:eq(0)', oSettings.aoData[oSettings.aiDisplay[i]].nTr).html i + 1
-          i++
-      return
     "pageLength": 10,
     "bProcessing": true,
     "order": [[ 1, 'asc' ]],

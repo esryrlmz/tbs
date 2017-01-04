@@ -33,7 +33,12 @@
               <a href="#clubs_of_member_events" data-toggle="tab">Üye Olunan Toplulukların Etkinlikleri</a>
             </li>
           <% end %>
+          <% if user_signed_in? and current_user.admin? %>
+              <%= link_to '<i class="fa fa-file-excel-o"></i>'.html_safe, "#", :class => 'btn btn-default pull-right' , "data-toggle" => "modal", 'data-target' => '.down_event' %>
+          <% end %>
         </ul>
+
+
       </div>
       <div class="panel-body">
         <div class="tab-content">
@@ -177,3 +182,59 @@
     </div>
   </div>
 </div>
+
+<div class="modal fade down_event" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-md">
+    <div class="modal-content well">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
+        </button>
+        <%= form_tag(downloud_events_path(format: "xlsx"), method: "get") do %>
+          <div class="row form-group ">
+            <div class="row"> <br/>
+            </div>
+            <div class="row">
+            <div class="col-md-1 col-xs-1 col-sm-1 "></div>
+            <div class="col-md-5 col-xs-5 col-sm-5 ">
+              <div class="row">
+                  <label class="control-label ">Başlangıç Tarihi:</label>
+                  <%= text_field_tag(:start_date,"" ,class: 'form-control')%>
+              </div>
+            </div>
+            <div class="col-md-5 col-xs-5 col-sm-5">
+              <div class="row">
+                  <label class="control-label ">Bitiş Tarihi:</label>
+                  <%= text_field_tag(:finish_date ,"" ,class: 'form-control')%>
+              </div>
+            </div>
+            </div>
+            <div class="row"> <br/>
+              <div class="col-md-11 col-xs-11 col-sm-11 text-right ">
+                <%= button_tag(type: "submit", class: "btn btn-default pull-right close_modal") do %>
+                     <%=fa_icon("file-excel-o", text: "Excel dosyasını indir") %>
+                <% end %>
+             </div>
+              <div class="col-md-1 col-xs-1 col-sm-1 "></div>
+            </div>
+          </div>
+  <% end %>
+
+    </div>
+  </div>
+</div>
+
+
+<script type="text/javascript">
+
+$('#start_date').datepicker({
+  language: 'tr'
+});
+$('#finish_date').datepicker({
+  language: 'tr'
+});
+
+$('.close_modal').click(function() {
+    $('.down_event').modal('hide');
+});
+
+
+</script>

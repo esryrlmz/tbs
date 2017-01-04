@@ -8,6 +8,7 @@ class ClubBoardOfSupervisoriesController < ApplicationController
   end
 
   def show
+    respond_to(:html, :xlsx)
   end
 
   def new
@@ -26,6 +27,9 @@ class ClubBoardOfSupervisoriesController < ApplicationController
       render :new
     elsif get_duplicated_user_names(club_period).present?
       flash.now[:error] = '#{duplicated_user_names} başka bir toplulukta yönetim kurulunda ya denetim kurulunda.'
+      render :new
+    elsif @club_board_of_supervisory.principal_member_one.blank? || @club_board_of_supervisory.principal_member_two.blank? || @club_board_of_supervisory.principal_member_three.blank? || @club_board_of_supervisory.reserve_member_one.blank? || @club_board_of_supervisory.reserve_member_two.blank? || @club_board_of_supervisory.reserve_member_three.blank?
+      flash.now[:error] = 'Denetim Kurulu üyelerinin tamamını seçmelisiniz.'
       render :new
     else
       authorize @club_board_of_supervisory

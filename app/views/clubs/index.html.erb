@@ -9,12 +9,23 @@
       <li class="active">Topluluklar</li>
     </ol>
     <div class="panel panel-default">
-      <div class="panel-heading">
-        <h3 class="panel-title">Topluluklar</h3>
+      <div class="panel-heading clearfix">
+        <h4 class="panel-title pull-left" style="padding-top: 7.5px;">Topluluklar</h4>
+        <div class="btn-group pull-right">
+
+          <%= link_to 'Yeni Topluluk Oluştur', new_club_path, class: "btn btn-default btn-sm" %>
+          <%= link_to '<i class="fa fa-file-excel-o"></i>'.html_safe, "#", :class => 'btn btn-default  btn-sm',  "data-toggle" => "modal", 'data-target' => '.down_clubs' %>
+        </div>
       </div>
+
+
+
+
       <div class="panel-body">
         <p align="right">
-          <%= link_to 'Yeni Topluluk Oluştur', new_club_path, class: "btn btn-default" %></p>
+
+
+        </p>
         <table class="table table-hover" id="clubs_table">
           <thead>
             <tr>
@@ -39,16 +50,11 @@
               <td class="center">
                 <%= club.club_category.name %></td>
               <td class="center">
-                <%if club.active_clup_period?%>
-                <%= club.active_club_period.club_members.count %></td>
-                <%else%>
-                 <p>O </p>
-                 <%end%>
+                <%= club.active_clup_period? ? club.active_club_period.club_members.count : O %>
               <td class="center">
-                <%= club.active_clup_period? ? "Aktif" : "Pasif" %></td>
+                <%= club.club_setting.is_active ? "<span class='label label-success'>Aktif</span>".html_safe : "<span class='label label-danger'>Pasif</span>".html_safe %></td>
               <td class="center">
-                <%= link_to '<i class="fa fa-trash" title="Sil"></i>
-              '.html_safe, club, method: :delete, data: { confirm: 'Topluluğu silmek istediğinize emin misiniz?' } %>
+                <%= link_to '<i class="fa fa-trash" title="Sil"></i>'.html_safe, club, method: :delete, data: { confirm: 'Topluluğu silmek istediğinize emin misiniz?' } %>
             </td>
           </tr>
           <% end %></tbody>
@@ -94,17 +100,12 @@
               </tr>
             </thead>
             <tbody>
-              <% @clubs.each do |club| %>
+              <% @clubs.select{|a| a.club_setting.is_active == true}.each do |club| %>
                 <tr>
                   <td></td>
                   <td> <%= link_to club.name, club %> </td>
                   <td> <%= club.club_category.name %> </td>
-                  <td>   <%if club.active_clup_period?%>
-                    <%= club.active_club_period.club_members.count %></td>
-                    <%else%>
-                     <p>O </p>
-                     <%end%>
-                   </td>
+                  <td> <%= club.active_clup_period? ? club.active_club_period.club_members.count : O %> </td>
                 </tr>
               <% end %>
             </tbody>
@@ -119,6 +120,7 @@
                   <th>Adı</th>
                   <th>Türü</th>
                   <th>Üye Sayısı</th>
+                  <th>Durumu</th>
                 </tr>
               </thead>
               <tbody>
@@ -127,13 +129,8 @@
                     <td></td>
                     <td> <%= link_to club.name, club %> </td>
                     <td> <%= club.club_category.name %> </td>
-                    <td>   <%if club.active_clup_period?%>
-
-                      <%= club.active_club_period.club_members.count %></td>
-                      <%else%>
-                       <p>O </p>
-                       <%end%>
-                      </td>
+                    <td> <%= club.active_clup_period? ? club.active_club_period.club_members.count : O %> </td>
+                    <td> <%= club.club_setting.is_active ? "<span class='label label-success'>Aktif</span>".html_safe : "<span class='label label-danger'>Pasif</span>".html_safe %> </td>
                   </tr>
                 <% end %>
               </tbody>
@@ -146,3 +143,68 @@
 </div>
 </div>
 <% end %>
+
+
+
+
+<div class="modal fade down_clubs" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-md">
+    <div class="panel">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
+        </button>
+        <%= form_tag(clubs_path(format: "xlsx"), method: "get") do %>
+          <div class="row form-group ">
+            <div class="row"> <br/>
+            </div>
+            <div class="row">
+            <div class="col-md-1 col-xs-1 col-sm-1 "></div>
+            <div class="col-md-4 col-xs-4 col-sm-4 ">
+              <div class="row well">
+                <label> Topluluk Durumunu Seçiniz</label>
+                <br/>
+                  <br/>
+                  <%= radio_button_tag(:state, "") %>
+                    <%= label_tag(:state_active, "Aktif ve Pasif Olanlar") %>
+                      <br/>
+                <%= radio_button_tag(:state, "true") %>
+                  <%= label_tag(:state_active, "Sadece Aktif Olanlar") %>
+                    <br/>
+                <%= radio_button_tag(:state, "false") %>
+                  <%= label_tag(:state_pasive, "Sadece Pasif Olanlar") %>
+
+              </div>
+            </div>
+                <div class="col-md-6 col-xs-6 col-sm-6 well ">
+                  <div class="row ">
+                    <label> Akademik Dönem: 	&nbsp;  </label>
+                     <%= select_tag "academic_period", options_from_collection_for_select(AcademicPeriod.all, "id", "name"), prompt: "Tüm Dönemler" , class: "modal_select_tag"%>
+                  </div>
+                </br>
+                  <div class="row">
+                    <label> Topluluk Türü: 	&nbsp;	&nbsp;	&nbsp;	&nbsp;  </label>
+                     <%= select_tag "clup_category", options_from_collection_for_select(ClubCategory.all, "id", "name"), prompt: "Tüm Kategoriler" , class: "modal_select_tag" %>
+                  </div>
+                </br>
+                </br>
+              </div>
+                <div class="row col-md-11 col-xs-11 col-sm-11">
+                  <%= button_tag(type: "submit", class: "btn btn-default pull-right close_modal") do %>
+                       <%=fa_icon("file-excel-o", text: "Excel dosyasını indir") %>
+                  <% end %>
+                </div>
+            </div>
+            </div>
+          </div>
+  <% end %>
+
+    </div>
+  </div>
+</div>
+
+
+<script type="text/javascript">
+$('.close_modal').click(function() {
+    $('.down_clubs').modal('hide');
+});
+
+</script>
