@@ -1,12 +1,10 @@
 <%= simple_form_for(@club_period) do |f| %>
-  <%= f.error_notification %>
-
-  <div class="form-inputs">
-  	<%= f.input :club_id, collection: Club.all, label: 'Topluluk Seçiniz.' %>
-  	<%= f.input :academic_period_id, collection: AcademicPeriod.all, label: 'Akademik Dönem Seçiniz.' %>
-  </div>
-
-  <div class="form-actions">
-    <%= f.submit "Kaydet", class: "btn btn-success" %>
-  </div>
+<%= f.error_notification %>
+<div class="form-inputs">
+  <%= f.input :club_id, collection: Club.all, label: 'Topluluk Seçiniz.' %>
+  <%= f.input :academic_period_id, collection: AcademicPeriod.all, label: 'Akademik Dönem Seçiniz.' %>
+</div>
+<div class="form-actions">
+  <%= f.submit "Kaydet", class: "btn btn-success" %>
+</div>
 <% end %>

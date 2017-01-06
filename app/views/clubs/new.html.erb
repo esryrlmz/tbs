@@ -3,20 +3,20 @@
 </div>
 <div class="row">
   <div class="col-md-12">
-<ol class="breadcrumb">
-    <li><%= link_to 'Anasayfa', root_path %></li>
-    <li><%= link_to 'Topluluklar', clubs_path %></li>
-    <li class="active">Yeni Topluluk</li>
-</ol>
-<div class="panel panel-default">
-    <div class="panel-heading">
-      <h3 class="panel-title">Yeni Topluluk</h3>
+    <ol class="breadcrumb">
+      <li><%= link_to 'Anasayfa', root_path %></li>
+      <li><%= link_to 'Topluluklar', clubs_path %></li>
+      <li class="active">Yeni Topluluk</li>
+    </ol>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Yeni Topluluk</h3>
+      </div>
+      <div class="panel-body">
+        <%= render 'form' %>
+        <br />
+        <%= link_to 'Geri', clubs_path, class: "btn btn-info" %>
+      </div>
     </div>
-    <div class="panel-body">
-<%= render 'form' %>
-<br />
-<%= link_to 'Geri', clubs_path, class: "btn btn-info" %>
-</div>
-</div> 
-</div>
+  </div>
 </div>

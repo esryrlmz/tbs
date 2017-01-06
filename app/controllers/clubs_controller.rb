@@ -15,17 +15,16 @@ class ClubsController < ApplicationController
     if params[:clup_category].present?
       @clubs_for_excel = @clubs_for_excel.where(club_category_id: params[:clup_category])
     end
-    if params[:clup_period].present?
-      @clubs_for_excel =   @clubs_for_excel.map { |x| x }.keep_if { |y| y.club_periods.map { |d| d }.keep_if { |z| z.academic_period_id == params[:clup_period] } }
+    if params[:academic_period].present?
+      @clubs_for_excel =   @clubs_for_excel.map { |x| x }.keep_if { |y| y.club_periods.map { |d| d }.keep_if { |z| z.academic_period_id == params[:academic_period] } }
     end
     if params[:state].present?
       if params[:state] == 'true'
-        @clubs_for_excel = @clubs_for_excel.map { |x| x }.keep_if { |y| y.club_setting.is_active == true }
+        @clubs_for_excel = @clubs_for_excel.select { |x| x.club_setting.is_active }
       elsif params[:state] == 'false'
-        @clubs_for_excel = @clubs_for_excel.map { |x| x }.keep_if { |y| y.club_setting.is_active == false }
+        @clubs_for_excel = @clubs_for_excel.select { |x| !x.club_setting.is_active }
       end
     end
-
     respond_to(:html, :xlsx)
     authorize @clubs
   end
@@ -49,8 +48,7 @@ class ClubsController < ApplicationController
       @club_view_board_of_supervisor = @club_period.club_board_of_supervisory.present? ? true : false
       @club_announcements = @club_period.announcements.where(is_view: true)
     end
-
-    @club_members = @club.active_clup_period? ? @club.active_club_period.club_members : []
+    @club_members = @club.active_club_period? ? @club.active_club_period.club_members : []
     club_members_count = @club_members.nil? ? 0 : @club_members.count
     if club_members_count < (@club.club_setting.nil? ? 150 : @club.club_setting.max_user)
       @club_member_count_error = false

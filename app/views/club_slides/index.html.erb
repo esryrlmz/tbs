@@ -6,41 +6,38 @@
     <%= render 'home/sidebarAdvisor' %>
   </div>
   <div class="col-md-9">
-  <ol class="breadcrumb">
-    <li><%= link_to 'Anasayfa', root_path %></li>
-    <li class="active">Topluluk Sayfası Slayt Alanı </li>
-  </ol>
+    <ol class="breadcrumb">
+      <li><%= link_to 'Anasayfa', root_path %></li>
+      <li class="active">Topluluk Sayfası Slayt Alanı </li>
+    </ol>
     <div class="panel panel-default">
       <div class="panel-heading">
         <h3 class="panel-title">Topluluk Sayfası Slayt Alanı</h3>
       </div>
       <div class="panel-body">
-        
-      <p align="right"><%= link_to 'Yeni Slayt', new_club_slide_path, class: "btn btn-default" %></p>
-<table class="table table-hover">
-  <thead>
-    <tr>
-      <th>Başlık</th>
-      <th>Resim</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @club_slides.each do |club_slide| %>
-      <tr>
-        <td><%= club_slide.title %></td>
-        <td><%= club_slide.file %></td>
-        <td><%= link_to 'Show', club_slide %></td>
-        <td><%= link_to 'Edit', edit_club_slide_path(club_slide) %></td>
-        <td><%= link_to 'Destroy', club_slide, method: :delete, data: { confirm: "Topluluk slide'ini silmek istediğinize emin misiniz?" } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+        <p align="right"><%= link_to 'Yeni Slayt', new_club_slide_path, class: "btn btn-default" %></p>
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th>Başlık</th>
+              <th>Resim</th>
+              <th colspan="3"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @club_slides.each do |club_slide| %>
+            <tr>
+              <td><%= club_slide.title %></td>
+              <td><%= club_slide.file %></td>
+              <td><%= link_to 'Show', club_slide %></td>
+              <td><%= link_to 'Edit', edit_club_slide_path(club_slide) %></td>
+              <td><%= link_to 'Destroy', club_slide, method: :delete, data: { confirm: "Topluluk slide'ini silmek istediğinize emin misiniz?" } %></td>
+            </tr>
+            <% end %>
+          </tbody>
+        </table>
         <br>
       </div>
-
     </div>
   </div>
 </div>

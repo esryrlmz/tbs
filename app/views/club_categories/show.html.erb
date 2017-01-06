@@ -4,22 +4,22 @@
 <div class="row">
   <div class="col-md-12">
     <ol class="breadcrumb">
-    <li><%= link_to 'Anasayfa', root_path %></li>
-    <li><%= link_to 'Topluluk Kategorileri', club_categories_path %></li>
-    <li class="active">Topluluk Kategorisi Detay</li>
-  </ol>
+      <li><%= link_to 'Anasayfa', root_path %></li>
+      <li><%= link_to 'Topluluk Kategorileri', club_categories_path %></li>
+      <li class="active">Topluluk Kategorisi Detay</li>
+    </ol>
     <div class="panel panel-default">
       <div class="panel-heading">
         <h3 class="panel-title">Topluluk Kategorisi Detay</h3>
       </div>
       <div class="panel-body">
-<p>
-  <strong>Adı:</strong>
-  <%= @club_category.name %>
-</p>
-<%= link_to 'Düzenle', edit_club_category_path(@club_category), class: "btn btn-success" %> |
-<%= link_to 'Geri', edit_club_category_path, class: "btn btn-info" %>
-    </div>
+        <p>
+          <strong>Adı:</strong>
+          <%= @club_category.name %>
+        </p>
+        <%= link_to 'Düzenle', edit_club_category_path(@club_category), class: "btn btn-success" %> |
+        <%= link_to 'Geri', edit_club_category_path, class: "btn btn-info" %>
+      </div>
     </div>
   </div>
 </div>

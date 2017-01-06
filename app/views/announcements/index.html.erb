@@ -3,45 +3,44 @@
 </div>
 <div class="row">
   <div class="col-md-12">
-  <ol class="breadcrumb">
-    <li><%= link_to 'Anasayfa', root_path %></li>
-    <li class="active">Topluluk Duyuruları</li>
-  </ol>
+    <ol class="breadcrumb">
+      <li><%= link_to 'Anasayfa', root_path %></li>
+      <li class="active">Topluluk Duyuruları</li>
+    </ol>
     <div class="panel panel-default">
       <div class="panel-heading">
         <h3 class="panel-title">Topluluk Duyuruları</h3>
       </div>
       <div class="panel-body">
-<p align="right"><%= link_to 'Yeni Duyuru Oluştur', new_announcement_path, class: 'btn btn-default' %></p>
-<table class="table table-hover">
-  <thead>
-    <tr>
-    <%if current_user.admin? %>
-      <th>Topluluk</th>
-    <% end %>
-      <th>Başlık</th>
-      <th>Görünür mü?</th>
-      <th>Akademik Danışman Onayı</th>
-      <th></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @announcements.each do |announcement| %>
-      <tr>
-        <%if current_user.admin? %>
-          <td><%= announcement.club_period.club.name %></td>
-        <% end %>
-        <td><%= link_to announcement.title, announcement %></td>
-        <td><%= announcement.is_view ? "Evet" : "Hayır" %></td>
-        <td><%= announcement.is_advisor_confirmation ? "Onaylandı" : "Onaylanmadı" %></td>
-        <td><%= link_to '<i class="fa fa-pencil" title="Düzenle"></i>'.html_safe, edit_announcement_path(announcement), :style=>'margin-right: 20px;' %><%= link_to '<i class="fa fa-trash" title="Sil"></i>'.html_safe, announcement, method: :delete, data: { confirm: 'Duyuruyu silmek istediğinize emin misiniz?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-  <br />
-  </div>
+        <p align="right"><%= link_to 'Yeni Duyuru Oluştur', new_announcement_path, class: 'btn btn-default' %></p>
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <%if current_user.admin? %>
+              <th>Topluluk</th>
+              <% end %>
+              <th>Başlık</th>
+              <th>Görünür mü?</th>
+              <th>Akademik Danışman Onayı</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @announcements.each do |announcement| %>
+            <tr>
+              <%if current_user.admin? %>
+              <td><%= announcement.club_period.club.name %></td>
+              <% end %>
+              <td><%= link_to announcement.title, announcement %></td>
+              <td><%= announcement.is_view ? "Evet" : "Hayır" %></td>
+              <td><%= announcement.is_advisor_confirmation ? "Onaylandı" : "Onaylanmadı" %></td>
+              <td><%= link_to '<i class="fa fa-pencil" title="Düzenle"></i>'.html_safe, edit_announcement_path(announcement), :style=>'margin-right: 20px;' %><%= link_to '<i class="fa fa-trash" title="Sil"></i>'.html_safe, announcement, method: :delete, data: { confirm: 'Duyuruyu silmek istediğinize emin misiniz?' } %></td>
+            </tr>
+            <% end %>
+          </tbody>
+        </table>
+        <br />
+      </div>
     </div>
   </div>
 </div>

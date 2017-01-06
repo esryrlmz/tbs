@@ -28,7 +28,7 @@ class ClubBoardOfDirectorsController < ApplicationController
     elsif get_duplicated_user_names(club_period).present?
       flash.now[:error] = 'Eklediğiniz üye, başka bir toplulukta yönetim kurulunda ya da denetim kurulunda.'
       render :new
-    elsif @club_board_of_director.president_id.blank? || @club_board_of_director.vice_president_id.blank? || @club_board_of_director.accountant_id.blank? || @club_board_of_director.secretary_id.blank? || @club_board_of_director.member_one.blank? || @club_board_of_director.member_two.blank? || @club_board_of_director.member_three.blank?
+    elsif blank_for_attributes?(@club_board_of_director)
       flash.now[:error] = 'Yönetim Kurulu üyelerinin tamamını seçmelisiniz.'
       render :new
     else

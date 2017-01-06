@@ -20,22 +20,18 @@
           <strong>Topluluk Adı:</strong>
           <%= @club.name %>
         </p>
-
         <p>
           <strong>Kısa Adı:</strong>
           <%= @club.short_name %>
         </p>
-
         <p>
           <strong>Açıklama:</strong>
           <%= @club.description %>
         </p>
-
         <p>
           <strong>Kuruluş Tarihi:</strong>
           <%= @club.creation_date %>
         </p>
-
         <%= link_to 'Düzenle', edit_club_path(@club), class: 'btn btn-success' %> |
         <%= link_to 'Geri', clubs_path, class: "btn btn-info" %>
         <br />
@@ -76,7 +72,7 @@
                 <% if user_signed_in? %>
                 <% unless current_user.advisor? %>
                 <% if !@club_period.club.club_setting.is_active %>
-                   <span class="btn btn-danger btn-block">Topluluk Aktif Değil</span>
+                <span class="btn btn-danger btn-block">Topluluk Aktif Değil</span>
                 <% elsif current_user.member?(@club_period) %>
                 <div class="row">
                   <div class="col-md-6">
@@ -229,11 +225,11 @@
                 </div>
               </div>
             </section>
-              <div class="tab-content" id="club_partial">
-                <div class="tab-pane" id="club_member"><%= render 'member' ,:club => @club %></div>
-                <div class="tab-pane" id="club_supervisor"><%= render 'supervisor' %></div>
-                <div class="tab-pane" id="club_director"><%= render 'director' %></div>
-              </div>
+            <div class="tab-content" id="club_partial">
+              <div class="tab-pane" id="club_member"><%= render 'member' ,:club => @club %></div>
+              <div class="tab-pane" id="club_supervisor"><%= render 'supervisor' %></div>
+              <div class="tab-pane" id="club_director"><%= render 'director' %></div>
+            </div>
           </div>
         </div>
       </div>

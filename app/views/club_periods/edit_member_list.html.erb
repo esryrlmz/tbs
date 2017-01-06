@@ -4,9 +4,9 @@
 <div class="row">
   <div class="col-md-12">
     <ol class="breadcrumb">
-        <li><%= link_to 'Anasayfa', root_path %></li>
-        <li><%= link_to 'Topluluklar', clubs_path %></li>
-        <li class="active">Topluluk Üye Listesi</li>
+      <li><%= link_to 'Anasayfa', root_path %></li>
+      <li><%= link_to 'Topluluklar', clubs_path %></li>
+      <li class="active">Topluluk Üye Listesi</li>
     </ol>
     <div class="panel panel-default">
       <div class="panel-heading">
@@ -15,29 +15,26 @@
       <div class="panel-body">
         <h6 class="description">
           <%= @club_period.academic_period_name%>
-          
-            <button type="button" class="btn btn-default btn-md" style="float: right;" data-toggle="modal" data-target=".bs-ubs">
-              <i class="fa fa-user-plus" aria-hidden="true"></i></span>
-            </button>
-
+          <button type="button" class="btn btn-default btn-md" style="float: right;" data-toggle="modal" data-target=".bs-ubs">
+            <i class="fa fa-user-plus" aria-hidden="true"></i></span>
+          </button>
         </h6>
         <div class="row pt-md"> </div>
         <h6><%= @member_lists.count %> Üye Bulunmaktadır.</h6>
-
-          <input  style="display: none;" id="club_period_id" value="<%= @club_period.id%>"></input>
-      <table class="table table-hover" id="club_users">
-        <thead>
-          <tr>
-            <th></th>
-            <th>Resmi</th>
-            <th>Adı Soyadı</th>
-            <th>Rolü</th>
-            <th>Durum</th>
-            <th>Kaldır</th>
-          </tr>
-        </thead>
-        <tbody>
-          <% @member_lists.each do |role| %>
+        <input  style="display: none;" id="club_period_id" value="<%= @club_period.id%>"></input>
+        <table class="table table-hover" id="club_users">
+          <thead>
+            <tr>
+              <th></th>
+              <th>Resmi</th>
+              <th>Adı Soyadı</th>
+              <th>Rolü</th>
+              <th>Durum</th>
+              <th>Kaldır</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @member_lists.each do |role| %>
             <tr>
               <td></td>
               <td ><%= avatar_or_not?(role.user, 25, 25) %></td>
@@ -46,17 +43,17 @@
               <td >
                 <a href="<%=change_member_status_club_period_path(role)%>" >
                   <%if role.status%>
-                    <span class="label label-success">Aktif</span>
+                  <span class="label label-success">Aktif</span>
                   <%else%>
-                    <span class="label label-danger">Pasif</span>
+                  <span class="label label-danger">Pasif</span>
                   <%end%>
                 </a>
               </td>
               <td>  <a href="<%=member_destroy_club_period_path(role)%>" ><i class="fa fa-trash" aria-hidden="true"></i> </a>  </td>
             </tr>
-          <% end %>
-        </tbody>
-      </table>
+            <% end %>
+          </tbody>
+        </table>
       </div>
     </div>
   </div>
@@ -92,12 +89,12 @@
 
 <script type="text/javascript">
 $(".ubs_find").bind('click', function(){
-    var ubs_no = document.getElementById("ubs_no").value;
-    var club_id=document.getElementById("club_period_id").value;
-    $.ajax({
-        url: '/find_ogrenci',
-        type: 'GET',
-        data: {"ubs_no": ubs_no,"club_id": club_id}
-    });
+  var ubs_no = document.getElementById("ubs_no").value;
+  var club_id=document.getElementById("club_period_id").value;
+  $.ajax({
+    url: '/find_ogrenci',
+    type: 'GET',
+    data: {"ubs_no": ubs_no,"club_id": club_id}
+  });
 });
 </script>

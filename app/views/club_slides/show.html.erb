@@ -7,29 +7,26 @@
   </div>
   <div class="col-md-9">
     <ol class="breadcrumb">
-    <li><%= link_to 'Anasayfa', root_path %></li>
-    <li><%= link_to 'Topluluk Sayfası Slayt Alanı', club_slides_path %></li>
-    <li class="active">Topluluk Sayfası Slayt Detay</li>
-  </ol>
+      <li><%= link_to 'Anasayfa', root_path %></li>
+      <li><%= link_to 'Topluluk Sayfası Slayt Alanı', club_slides_path %></li>
+      <li class="active">Topluluk Sayfası Slayt Detay</li>
+    </ol>
     <div class="panel panel-default">
       <div class="panel-heading">
         <h3 class="panel-title">Topluluk Sayfası Slayt Detay</h3>
       </div>
       <div class="panel-body">
-
-<p>
-  <strong>File:</strong>
-  <%= image_tag(@club_slide.file, class: "img-thumbnail") %>
-</p>
-
-<p>
-  <strong>Title:</strong>
-  <%= @club_slide.title %>
-</p>
-
-<%= link_to 'Düzenle', edit_club_slide_path(@club_slide), class: "btn btn-success" %> |
-<%= link_to 'Geri', club_slides_path, class: "btn btn-info" %>
-    </div>
+        <p>
+          <strong>File:</strong>
+          <%= image_tag(@club_slide.file, class: "img-thumbnail") %>
+        </p>
+        <p>
+          <strong>Title:</strong>
+          <%= @club_slide.title %>
+        </p>
+        <%= link_to 'Düzenle', edit_club_slide_path(@club_slide), class: "btn btn-success" %> |
+        <%= link_to 'Geri', club_slides_path, class: "btn btn-info" %>
+      </div>
     </div>
   </div>
 </div>

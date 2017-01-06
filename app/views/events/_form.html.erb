@@ -1,25 +1,23 @@
 <%= simple_form_for(@event) do |f| %>
-  <%= f.error_notification %>
-
-  <div class="form-inputs">
-    <% if current_user.present? && current_user.admin? %>
-      <%= f.input :club_period_id, collection: Club.all.flat_map { |club| [[club.name, club.active_club_period.id]] }, label: false, prompt: 'Topluluk Seçiniz', :input_html => { :id => "clubs" } %>
-    <% elsif current_user.present? && current_user.president? %>
-      <%= f.input :club_period_id, :as => :hidden, :input_html => { :value => current_user.president_or_advisor_club_period.id } %>
-    <% end %>
-    <%= f.input :event_category_id, collection: EventCategory.all.flat_map { |event_category| [[event_category.name, event_category.id]] }, label: false, prompt: 'Etkinlik Kategorisi Seçiniz', :input_html => { :class => "event" } %>
-    <%= f.input :title, label: "Etkinlik Başlığı" %>
-    <%= f.input :speakers, label: "Konuşmacılar" %>
-    <%= f.input :attachment, as: :file, label: "Konuşmacıların Özgeçmişleri:" %>
-    <%= f.input :datetime, label: "Etkinlik Tarihi" %>
-    <%= f.input :event_locations, collection: EventLocation.all.flat_map { |event_location| [[event_location.name, event_location.name]] }, label: false, prompt: 'Etkinlik Yerini Seçiniz', :input_html => { :class=> "event", :id => "event_locations_list" } %>
-    <%= f.input :location, label: 'Etkinlik Yeri', :input_html => { :readonly => "readonly",:id => "event_location" } %>
-    <%= f.input :content, label: "Etkinlik Açıklaması" %>
-    <%= f.input :requirements, label: "Etkinlik İhtiyaçlar" %>
-    <%= f.input :image, as: :file, label: "Etkinlik Resmi:" %>
-  </div>
-
-  <div class="form-actions">
-    <%= f.submit "Kaydet", class: "btn btn-success" %>
-  </div>
+<%= f.error_notification %>
+<div class="form-inputs">
+  <% if current_user.present? && current_user.admin? %>
+  <%= f.input :club_period_id, collection: Club.all.flat_map { |club| [[club.name, club.active_club_period.id]] }, label: false, prompt: 'Topluluk Seçiniz', :input_html => { :id => "clubs" } %>
+  <% elsif current_user.present? && current_user.president? %>
+  <%= f.input :club_period_id, :as => :hidden, :input_html => { :value => current_user.president_or_advisor_club_period.id } %>
+  <% end %>
+  <%= f.input :event_category_id, collection: EventCategory.all.flat_map { |event_category| [[event_category.name, event_category.id]] }, label: false, prompt: 'Etkinlik Kategorisi Seçiniz', :input_html => { :class => "event" } %>
+  <%= f.input :title, label: "Etkinlik Başlığı" %>
+  <%= f.input :speakers, label: "Konuşmacılar" %>
+  <%= f.input :attachment, as: :file, label: "Konuşmacıların Özgeçmişleri:" %>
+  <%= f.input :datetime, label: "Etkinlik Tarihi" %>
+  <%= f.input :event_locations, collection: EventLocation.all.flat_map { |event_location| [[event_location.name, event_location.name]] }, label: false, prompt: 'Etkinlik Yerini Seçiniz', :input_html => { :class=> "event", :id => "event_locations_list" } %>
+  <%= f.input :location, label: 'Etkinlik Yeri', :input_html => { :readonly => "readonly",:id => "event_location" } %>
+  <%= f.input :content, label: "Etkinlik Açıklaması" %>
+  <%= f.input :requirements, label: "Etkinlik İhtiyaçlar" %>
+  <%= f.input :image, as: :file, label: "Etkinlik Resmi:" %>
+</div>
+<div class="form-actions">
+  <%= f.submit "Kaydet", class: "btn btn-success" %>
+</div>
 <% end %>

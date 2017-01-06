@@ -1,42 +1,40 @@
 <div class="row">
   <%= render 'home/navbarDefault' %>
 </div>
-<div class="row">  
-<div class="col-md-12">
-<ol class="breadcrumb">
-    <li><%= link_to 'Anasayfa', root_path %></li>
-    <li class="active">Akademik Dönem Tanımı</li>
-  </ol>
+<div class="row">
+  <div class="col-md-12">
+    <ol class="breadcrumb">
+      <li><%= link_to 'Anasayfa', root_path %></li>
+      <li class="active">Akademik Dönem Tanımı</li>
+    </ol>
     <div class="panel panel-default">
       <div class="panel-heading">
         <h3 class="panel-title">Akademik Dönem Tanımı</h3>
       </div>
       <div class="panel-body">
-<p align="right"><%= link_to 'Yeni Akademik Dönem Tanımı', new_academic_period_path, class: 'btn btn-default' %></p>
-
-<table class="table table-hover">
-  <thead>
-    <tr>
-      <th>Adı</th>
-      <th>Aktif/Pasif</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @academic_periods.each do |academic_period| %>
-      <tr>
-        <td><%= academic_period.name %></td>
-        <td><%= academic_period.is_active ? "Aktif" : "Pasif" %></td>
-        <td><%= link_to '<i class="fa fa-eye" title="Göster"></i>'.html_safe, academic_period %></td>
-        <td><%= link_to '<i class="fa fa-pencil" title="Düzenle"></i>'.html_safe, edit_academic_period_path(academic_period), data: { confirm: 'Sadece bir tane akademik dönemi aktif edebilirsiniz. Düzenlemenizi buna göre yapınız.' } %></td>
-        <td><%= link_to '<i class="fa fa-trash" title="Sil"></i>'.html_safe, academic_period, method: :delete, data: { confirm: 'Akademik dönemi silmek istediğinize emin misiniz?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-<br />
-</div>
-</div>
-</div>
+        <p align="right"><%= link_to 'Yeni Akademik Dönem Tanımı', new_academic_period_path, class: 'btn btn-default' %></p>
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th>Adı</th>
+              <th>Aktif/Pasif</th>
+              <th colspan="3"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @academic_periods.each do |academic_period| %>
+            <tr>
+              <td><%= academic_period.name %></td>
+              <td><%= academic_period.is_active ? "Aktif" : "Pasif" %></td>
+              <td><%= link_to '<i class="fa fa-eye" title="Göster"></i>'.html_safe, academic_period %></td>
+              <td><%= link_to '<i class="fa fa-pencil" title="Düzenle"></i>'.html_safe, edit_academic_period_path(academic_period), data: { confirm: 'Sadece bir tane akademik dönemi aktif edebilirsiniz. Düzenlemenizi buna göre yapınız.' } %></td>
+              <td><%= link_to '<i class="fa fa-trash" title="Sil"></i>'.html_safe, academic_period, method: :delete, data: { confirm: 'Akademik dönemi silmek istediğinize emin misiniz?' } %></td>
+            </tr>
+            <% end %>
+          </tbody>
+        </table>
+        <br />
+      </div>
+    </div>
+  </div>
 </div>

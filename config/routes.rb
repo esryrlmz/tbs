@@ -38,6 +38,6 @@ Rails.application.routes.draw do
   get 'club_users' => 'roles#club_users'
   get 'find_ogrenci' =>'users#find_ogrenci'
   get 'find_personel' =>'users#find_personel'
-  get 'downloud_events' => 'events#downloud_events'
+  get 'download_events' => 'events#download_events'
   root 'clubs#index'
 end

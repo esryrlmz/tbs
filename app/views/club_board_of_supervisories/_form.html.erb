@@ -1,74 +1,70 @@
 <%= simple_form_for(@club_board_of_supervisory) do |f| %>
-  <%= f.error_notification %>
-
-  <div class="form-inputs">
-    <div class="row form-group">
-      <label class="control-label col-md-3 col-sm-3 col-xs-3">Topluluk Seçiniz</label>
-      <div class="col-md-6 col-sm-6 col-xs-6">
-        <%= f.input :club_period_id, collection: Club.all.flat_map { |club| [[club.name, club.active_club_period.id]] }, label: false, prompt: '', :input_html => { :id => "clubs_for_director" } %>
-      </div>
-      <div class="col-md-3 col-sm-3 col-xs-3 ">
-        <button type="button" class="btn btn-default btn-md" data-toggle="modal" data-target=".bs-ubs">
-          <i class="glyphicon glyphicon-search" aria-hidden="true"></i></span>
-        </button>
-      </div>
+<%= f.error_notification %>
+<div class="form-inputs">
+  <div class="row form-group">
+    <label class="control-label col-md-3 col-sm-3 col-xs-3">Topluluk Seçiniz</label>
+    <div class="col-md-6 col-sm-6 col-xs-6">
+      <%= f.input :club_period_id, collection: Club.all.flat_map { |club| [[club.name, club.active_club_period.id]] }, label: false, prompt: '', :input_html => { :id => "clubs_for_director" } %>
     </div>
-    <div class="row form-group">
-      <label class="control-label col-md-3 col-sm-3 col-xs-3">1. Asıl Üye</label>
-      <div class="col-md-6 col-sm-6 col-xs-6">
-        <%= f.input :principal_member_one,:collection => @club_board_of_supervisory.present? && @club_board_of_supervisory.club_period.present? ? @club_board_of_supervisory.club_period.roles.map { |role| role.user} : [],:label_method => :full_name,:value_method => :id, label: false, :include_blank => false, :input_html => { :class => "club_directors" } %>
-      </div>
-      <div class="col-md-3 col-sm-3 col-xs-3 ">
-      </div>
-    </div>
-    <div class="row form-group">
-      <label class="control-label col-md-3 col-sm-3 col-xs-3">2. Asıl Üye</label>
-      <div class="col-md-6 col-sm-6 col-xs-6">
-        <%= f.input :principal_member_two,:collection => @club_board_of_supervisory.present? && @club_board_of_supervisory.club_period.present? ? @club_board_of_supervisory.club_period.roles.map { |role| role.user} : [],:label_method => :full_name,:value_method => :id, label: false ,:include_blank => false, :input_html => { :class => "club_directors" } %>
-      </div>
-      <div class="col-md-3 col-sm-3 col-xs-3 ">
-      </div>
-    </div>
-    <div class="row form-group">
-      <label class="control-label col-md-3 col-sm-3 col-xs-3">3. Asıl Üye</label>
-      <div class="col-md-6 col-sm-6 col-xs-6">
-        <%= f.input :principal_member_three,:collection => @club_board_of_supervisory.present? && @club_board_of_supervisory.club_period.present? ? @club_board_of_supervisory.club_period.roles.map { |role| role.user} : [],:label_method => :full_name,:value_method => :id, label: false ,:include_blank => false, :input_html => { :class => "club_directors" } %>
-      </div>
-      <div class="col-md-3 col-sm-3 col-xs-3 ">
-      </div>
-    </div>
-    <div class="row form-group">
-      <label class="control-label col-md-3 col-sm-3 col-xs-3">1. Yedek Üye</label>
-      <div class="col-md-6 col-sm-6 col-xs-6">
-        <%= f.input :reserve_member_one,:collection => @club_board_of_supervisory.present? && @club_board_of_supervisory.club_period.present? ? @club_board_of_supervisory.club_period.roles.map { |role| role.user} : [],:label_method => :full_name,:value_method => :id, label: false ,:include_blank => false, :input_html => { :class => "club_directors" } %>
-      </div>
-      <div class="col-md-3 col-sm-3 col-xs-3 ">
-      </div>
-    </div>
-    <div class="row form-group">
-      <label class="control-label col-md-3 col-sm-3 col-xs-3">2. Yedek Üye</label>
-      <div class="col-md-6 col-sm-6 col-xs-6">
-        <%= f.input :reserve_member_two,:collection => @club_board_of_supervisory.present? && @club_board_of_supervisory.club_period.present? ? @club_board_of_supervisory.club_period.roles.map { |role| role.user} : [],:label_method => :full_name,:value_method => :id, label: false ,:include_blank => false, :input_html => { :class => "club_directors" } %>
-      </div>
-      <div class="col-md-3 col-sm-3 col-xs-3 ">
-      </div>
-    </div>
-    <div class="row form-group">
-      <label class="control-label col-md-3 col-sm-3 col-xs-3">3. Yedek Üye</label>
-      <div class="col-md-6 col-sm-6 col-xs-6">
-        <%= f.input :reserve_member_three,:collection => @club_board_of_supervisory.present? && @club_board_of_supervisory.club_period.present? ? @club_board_of_supervisory.club_period.roles.map { |role| role.user} : [],:label_method => :full_name,:value_method => :id, label:false ,:include_blank => false, :input_html => { :class => "club_directors" } %>
-      </div>
-      <div class="col-md-3 col-sm-3 col-xs-3 ">
-      </div>
+    <div class="col-md-3 col-sm-3 col-xs-3 ">
+      <button type="button" class="btn btn-default btn-md" data-toggle="modal" data-target=".bs-ubs">
+        <i class="glyphicon glyphicon-search" aria-hidden="true"></i></span>
+      </button>
     </div>
   </div>
-
-  <div class="form-actions">
-    <%= f.submit "Kaydet", class: "btn btn-success" %>
+  <div class="row form-group">
+    <label class="control-label col-md-3 col-sm-3 col-xs-3">1. Asıl Üye</label>
+    <div class="col-md-6 col-sm-6 col-xs-6">
+      <%= f.input :principal_member_one,:collection => @club_board_of_supervisory.present? && @club_board_of_supervisory.club_period.present? ? @club_board_of_supervisory.club_period.roles.map { |role| role.user} : [],:label_method => :full_name,:value_method => :id, label: false, :include_blank => false, :input_html => { :class => "club_directors" } %>
+    </div>
+    <div class="col-md-3 col-sm-3 col-xs-3 ">
+    </div>
   </div>
+  <div class="row form-group">
+    <label class="control-label col-md-3 col-sm-3 col-xs-3">2. Asıl Üye</label>
+    <div class="col-md-6 col-sm-6 col-xs-6">
+      <%= f.input :principal_member_two,:collection => @club_board_of_supervisory.present? && @club_board_of_supervisory.club_period.present? ? @club_board_of_supervisory.club_period.roles.map { |role| role.user} : [],:label_method => :full_name,:value_method => :id, label: false ,:include_blank => false, :input_html => { :class => "club_directors" } %>
+    </div>
+    <div class="col-md-3 col-sm-3 col-xs-3 ">
+    </div>
+  </div>
+  <div class="row form-group">
+    <label class="control-label col-md-3 col-sm-3 col-xs-3">3. Asıl Üye</label>
+    <div class="col-md-6 col-sm-6 col-xs-6">
+      <%= f.input :principal_member_three,:collection => @club_board_of_supervisory.present? && @club_board_of_supervisory.club_period.present? ? @club_board_of_supervisory.club_period.roles.map { |role| role.user} : [],:label_method => :full_name,:value_method => :id, label: false ,:include_blank => false, :input_html => { :class => "club_directors" } %>
+    </div>
+    <div class="col-md-3 col-sm-3 col-xs-3 ">
+    </div>
+  </div>
+  <div class="row form-group">
+    <label class="control-label col-md-3 col-sm-3 col-xs-3">1. Yedek Üye</label>
+    <div class="col-md-6 col-sm-6 col-xs-6">
+      <%= f.input :reserve_member_one,:collection => @club_board_of_supervisory.present? && @club_board_of_supervisory.club_period.present? ? @club_board_of_supervisory.club_period.roles.map { |role| role.user} : [],:label_method => :full_name,:value_method => :id, label: false ,:include_blank => false, :input_html => { :class => "club_directors" } %>
+    </div>
+    <div class="col-md-3 col-sm-3 col-xs-3 ">
+    </div>
+  </div>
+  <div class="row form-group">
+    <label class="control-label col-md-3 col-sm-3 col-xs-3">2. Yedek Üye</label>
+    <div class="col-md-6 col-sm-6 col-xs-6">
+      <%= f.input :reserve_member_two,:collection => @club_board_of_supervisory.present? && @club_board_of_supervisory.club_period.present? ? @club_board_of_supervisory.club_period.roles.map { |role| role.user} : [],:label_method => :full_name,:value_method => :id, label: false ,:include_blank => false, :input_html => { :class => "club_directors" } %>
+    </div>
+    <div class="col-md-3 col-sm-3 col-xs-3 ">
+    </div>
+  </div>
+  <div class="row form-group">
+    <label class="control-label col-md-3 col-sm-3 col-xs-3">3. Yedek Üye</label>
+    <div class="col-md-6 col-sm-6 col-xs-6">
+      <%= f.input :reserve_member_three,:collection => @club_board_of_supervisory.present? && @club_board_of_supervisory.club_period.present? ? @club_board_of_supervisory.club_period.roles.map { |role| role.user} : [],:label_method => :full_name,:value_method => :id, label:false ,:include_blank => false, :input_html => { :class => "club_directors" } %>
+    </div>
+    <div class="col-md-3 col-sm-3 col-xs-3 ">
+    </div>
+  </div>
+</div>
+<div class="form-actions">
+  <%= f.submit "Kaydet", class: "btn btn-success" %>
+</div>
 <% end %>
-
-
 <div class="modal fade bs-ubs" tabindex="-1" role="dialog" aria-hidden="true">
   <div class="modal-dialog modal-sm">
     <div class="modal-content ">
@@ -99,12 +95,12 @@
 
 <script type="text/javascript">
 $(".ubs_find").bind('click', function(){
-    var ubs_no = document.getElementById("ubs_no").value;
-    var club_id=document.getElementById("clubs_for_director").value;
-    $.ajax({
-          url: '/find_ogrenci',
-          type: 'GET',
-          data: {"ubs_no": ubs_no,"club_id": club_id}
-        });
+  var ubs_no = document.getElementById("ubs_no").value;
+  var club_id=document.getElementById("clubs_for_director").value;
+  $.ajax({
+    url: '/find_ogrenci',
+    type: 'GET',
+    data: {"ubs_no": ubs_no,"club_id": club_id}
+  });
 });
 </script>

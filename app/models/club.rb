@@ -15,7 +15,7 @@ class Club < ActiveRecord::Base
     club_periods.find_by(academic_period_id: AcademicPeriod.find_by(is_active: true).id)
   end
 
-  def active_clup_period?
+  def active_club_period?
     club_periods.find_by(academic_period_id: AcademicPeriod.find_by_is_active(true).id).present? ? true : false
   end
 end

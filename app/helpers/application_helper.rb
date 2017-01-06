@@ -81,4 +81,12 @@ module ApplicationHelper
   def placeholder_avatar(width, height)
     image_tag('avatar_placeholder.png', alt: 'avatar-placeholder', width: width, height: height)
   end
+
+  def blank_for_attributes?(record)
+    !record.attributes.except('id', 'created_at', 'updated_at').values.all?
+  end
+
+  def ubs_no_valid?(ogrenci_no)
+    (ogrenci_no.length == 8 && !(ogrenci_no.start_with? 'o')) || (ogrenci_no.length == 9 && (ogrenci_no.start_with? 'o'))
+  end
 end

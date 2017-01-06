@@ -13,7 +13,6 @@
       </div>
       <div class="panel-body">
         <p align="right"><%= link_to 'Yeni Rol', new_role_path, class: 'btn btn-default' %></p>
-
         <table class="table table-hover" id="roles">
           <thead>
             <tr>
@@ -25,7 +24,6 @@
               <th></th>
             </tr>
           </thead>
-
           <tbody>
             <% @roles.each do |role| %>
             <tr>

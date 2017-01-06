@@ -4,25 +4,25 @@
 <div class="row">
   <div class="col-md-12">
     <ol class="breadcrumb">
-    <li><%= link_to 'Anasayfa', root_path %></li>
-    <li><%= link_to 'Rol Tanımları', role_types_path %></li>
-    <li class="active">Rol Tanımı</li>
-  </ol>
+      <li><%= link_to 'Anasayfa', root_path %></li>
+      <li><%= link_to 'Rol Tanımları', role_types_path %></li>
+      <li class="active">Rol Tanımı</li>
+    </ol>
     <div class="panel panel-default">
       <div class="panel-heading">
         <h3 class="panel-title">Rol Tanımı</h3>
       </div>
       <div class="panel-body">
-<h1>Rol Tanımı</h1>
-<p>
-  <strong>Name:</strong>
-  <%= @role_type.name %>
-</p>
-<br />
-<%= link_to 'Edit', edit_role_type_path(@role_type), class: "btn btn-success" %> |
-<%= link_to 'Geri', role_types_path, class: "btn btn-info" %>
-<br />
-	</div>
+        <h1>Rol Tanımı</h1>
+        <p>
+          <strong>Name:</strong>
+          <%= @role_type.name %>
+        </p>
+        <br />
+        <%= link_to 'Edit', edit_role_type_path(@role_type), class: "btn btn-success" %> |
+        <%= link_to 'Geri', role_types_path, class: "btn btn-info" %>
+        <br />
+      </div>
     </div>
   </div>
 </div>

@@ -17,7 +17,6 @@ class RoleTypesController < ApplicationController
 
   def create
     @role_type = RoleType.new(role_type_params)
-
     respond_to do |format|
       if @role_type.save
         format.html { redirect_to @role_type, notice: 'Rol tipi başarıyla oluşturuldu.' }

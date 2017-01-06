@@ -4,58 +4,51 @@
 <div class="row">
   <div class="col-md-12">
     <ol class="breadcrumb">
-    <li><%= link_to 'Anasayfa', root_path %></li>
-    <li><%= link_to 'Topluluk Yönetim Kurullar', club_board_of_directors_path %></li>
-    <li class="active">Topluluk Yönetim Kurulu Detay</li>
-  </ol>
+      <li><%= link_to 'Anasayfa', root_path %></li>
+      <li><%= link_to 'Topluluk Yönetim Kurullar', club_board_of_directors_path %></li>
+      <li class="active">Topluluk Yönetim Kurulu Detay</li>
+    </ol>
     <div class="panel panel-default">
       <div class="panel-heading">
         <h3 class="panel-title">Topluluk Yönetim Kurulu Detay</h3>
       </div>
       <div class="panel-body">
-<p>
-  <strong>Topluluk Akademik Dönemi:</strong>
-  <%= @club_board_of_director.club_period.academic_period.name %>
-</p>
-
-<p>
-  <strong>Başkan:</strong>
-  <%= @club_board_of_director.president.name_surname %>
-</p>
-
-<p>
-  <strong>Başkan Yardımcısı:</strong>
-  <%= @club_board_of_director.vice_president.name_surname %>
-</p>
-
-<p>
-  <strong>Sayman:</strong>
-  <%= @club_board_of_director.accountant.name_surname %>
-</p>
-
-<p>
-  <strong>Sekreter:</strong>
-  <%= @club_board_of_director.secretary.name_surname %>
-</p>
-
-<p>
-  <strong>1. Üye:</strong>
-  <%= @club_board_of_director.member_first.name_surname %>
-</p>
-
-<p>
-  <strong>2. Üye:</strong>
-  <%= @club_board_of_director.member_second.name_surname %>
-</p>
-
-<p>
-  <strong>3. Üye:</strong>
-  <%= @club_board_of_director.member_third.name_surname %>
-</p>
-<br />
-<%= link_to 'Düzenle', edit_club_board_of_director_path(@club_board_of_director), class: "btn btn-success" %> |
-<%= link_to 'Geri', club_board_of_directors_path, class: "btn btn-info" %>
-    </div>
+        <p>
+          <strong>Topluluk Akademik Dönemi:</strong>
+          <%= @club_board_of_director.club_period.academic_period.name %>
+        </p>
+        <p>
+          <strong>Başkan:</strong>
+          <%= @club_board_of_director.president.name_surname %>
+        </p>
+        <p>
+          <strong>Başkan Yardımcısı:</strong>
+          <%= @club_board_of_director.vice_president.name_surname %>
+        </p>
+        <p>
+          <strong>Sayman:</strong>
+          <%= @club_board_of_director.accountant.name_surname %>
+        </p>
+        <p>
+          <strong>Sekreter:</strong>
+          <%= @club_board_of_director.secretary.name_surname %>
+        </p>
+        <p>
+          <strong>1. Üye:</strong>
+          <%= @club_board_of_director.member_first.name_surname %>
+        </p>
+        <p>
+          <strong>2. Üye:</strong>
+          <%= @club_board_of_director.member_second.name_surname %>
+        </p>
+        <p>
+          <strong>3. Üye:</strong>
+          <%= @club_board_of_director.member_third.name_surname %>
+        </p>
+        <br />
+        <%= link_to 'Düzenle', edit_club_board_of_director_path(@club_board_of_director), class: "btn btn-success" %> |
+        <%= link_to 'Geri', club_board_of_directors_path, class: "btn btn-info" %>
+      </div>
     </div>
   </div>
 </div>

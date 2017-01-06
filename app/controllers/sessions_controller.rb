@@ -5,7 +5,7 @@ class SessionsController < Devise::SessionsController
 
   def create
     @user = User.new(user_params)
-    if (@user.ubs_no.length == 8 && !(@user.ubs_no.start_with? 'o')) || (@user.ubs_no.length == 9 && (@user.ubs_no.start_with? 'o'))
+    if ubs_no_valid?(@user.ubs_no)
       @user.ubs_no = 'o' + @user.ubs_no unless @user.ubs_no.start_with? 'o'
       Ubs.login(@user)
       @user = User.find_by(ubs_no: @user.ubs_no)

@@ -1,8 +1,8 @@
 class UsersController < ApplicationController
   def find_ogrenci
     if params['ubs_no'].present? && params['club_id'].present?
-      if (params['ubs_no'].length == 8 && !(params['ubs_no'].start_with? 'o')) || (params['ubs_no'].length == 9 && (params['ubs_no'].start_with? 'o'))
-        params['ubs_no'] = 'o' + params['ubs_no'] unless params['ubs_no'].start_with? 'o'
+      if ubs_no_valid?(params['ubs_no']) && !(params['ubs_no'].start_with? 'o')
+        params['ubs_no'] = 'o' + params['ubs_no']
       end
       if params['ubs_no'].length == 9 && (params['ubs_no'].start_with? 'o')
         @user = User.find_by_ubs_no(params['ubs_no'])
@@ -17,7 +17,7 @@ class UsersController < ApplicationController
       end
     end
     @uyari =
-      if !params['ubs_no'].present? || (params['ubs_no'].present? && (params['ubs_no'].length == 9 && !(params['ubs_no'].start_with? 'o') || (params['ubs_no'].length != 9)))
+      if !params['ubs_no'].present? || !ubs_no_valid?(params['ubs_no'])
         'Girdiğiniz öğrenci numarası hatalı'
       elsif params['club_id'].blank?
         'Lütfen önce topluluk seçiniz'
