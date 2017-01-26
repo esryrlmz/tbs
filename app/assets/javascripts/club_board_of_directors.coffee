@@ -21,7 +21,7 @@ $ ->
         dataType: 'json'
         success: (response) ->
           $('.club_directors').empty()
-          html = ''
+          html = "<option value='0'>Seçiniz</option>"
           $.each response, (key, value) ->
             html += "<option value='#{value.id}'>#{value.first_name} #{value.last_name}</option>"
             return
@@ -58,5 +58,3 @@ $ ->
               "targets": [3],
               "orderable": false
               }],
-
-

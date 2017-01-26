@@ -29,10 +29,12 @@ Rails.application.routes.draw do
     get 'edit_member_list', on: :member
     get 'change_member_status', on: :member
     get 'member_destroy', on: :member
+    get 'club_type', on: :member, defaults: {format: :json}
   end
   resources :announcements
   resources :system_announcements
   resources :clubs
+  resources :faculties
   resources :club_categories
   get 'unsubscribe_request' => 'roles#unsubscribe_request'
   get 'club_users' => 'roles#club_users'

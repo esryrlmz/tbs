@@ -19,27 +19,27 @@
         </p>
         <p>
           <strong>1. Asıl Üye:</strong>
-          <%= @club_board_of_supervisory.principal_member_first.name_surname %>
+          <%=  blank_for_attribute(@club_board_of_supervisory.principal_member_first,"name_surname" )%>
         </p>
         <p>
           <strong>2. Asıl Üye:</strong>
-          <%= @club_board_of_supervisory.principal_member_second.name_surname %>
+          <%=  blank_for_attribute(@club_board_of_supervisory.principal_member_second,"name_surname") %>
         </p>
         <p>
           <strong>3. Asıl Üye:</strong>
-          <%= @club_board_of_supervisory.principal_member_third.name_surname %>
+          <%= blank_for_attribute( @club_board_of_supervisory.principal_member_third,"name_surname") %>
         </p>
         <p>
           <strong>1. Yedek Üye:</strong>
-          <%= @club_board_of_supervisory.reserve_member_first.name_surname %>
+          <%= blank_for_attribute( @club_board_of_supervisory.reserve_member_first,"name_surname" )%>
         </p>
         <p>
           <strong>2. Yedek Üye:</strong>
-          <%= @club_board_of_supervisory.reserve_member_second.name_surname %>
+          <%=  blank_for_attribute(@club_board_of_supervisory.reserve_member_second,"name_surname") %>
         </p>
         <p>
           <strong>3. Yedek Üye:</strong>
-          <%= @club_board_of_supervisory.reserve_member_third.name_surname %>
+          <%=  blank_for_attribute(@club_board_of_supervisory.reserve_member_third,"name_surname") %>
         </p>
         <br />
         <%= link_to 'Düzenle', edit_club_board_of_supervisory_path(@club_board_of_supervisory), class: "btn btn-success" %> |

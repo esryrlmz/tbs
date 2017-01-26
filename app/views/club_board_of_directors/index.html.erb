@@ -23,10 +23,10 @@
             </tr>
           </thead>
           <tbody>
-            <% @club_board_of_directors.each do |club_board_of_director| %>
+            <% @club_board_of_directors.select { |x| x unless x.club_period.blank? }.each do |club_board_of_director| %>
             <tr>
               <td><%= link_to club_board_of_director.club_period.club.name, club_board_of_director %></td>
-              <td><%= club_board_of_director.president.name_surname %></td>
+              <td><%= blank_for_attribute(club_board_of_director.president ,"name_surname") %></td>
               <td><%= club_board_of_director.club_period.academic_period.name %></td>
               <td><%= link_to '<i class="fa fa-trash" title="Sil"></i>'.html_safe, club_board_of_director, method: :delete, data: { confirm: 'Yönetim kurulunu silmek istediğinize emin misiniz?' } %></td>
             </tr>
@@ -34,7 +34,7 @@
           </tbody>
         </table>
         <br>
-      </div>      
+      </div>
     </div>
   </div>
 </div>

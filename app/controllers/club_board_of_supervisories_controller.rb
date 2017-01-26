@@ -28,9 +28,6 @@ class ClubBoardOfSupervisoriesController < ApplicationController
     elsif get_duplicated_user_names(club_period).present?
       flash.now[:error] = '#{duplicated_user_names} başka bir toplulukta yönetim kurulunda ya denetim kurulunda.'
       render :new
-    elsif blank_for_attributes?(@club_board_of_supervisory)
-      flash.now[:error] = 'Denetim Kurulu üyelerinin tamamını seçmelisiniz.'
-      render :new
     else
       authorize @club_board_of_supervisory
       respond_to do |format|
@@ -85,8 +82,8 @@ class ClubBoardOfSupervisoriesController < ApplicationController
 
   # Başka toplulukta yönetim kurulunda ya da denetim kurulunda olanların tespiti
   def get_duplicated_user_names(club_period, action = '')
-    all_club_board_of_directors = ClubBoardOfDirector.where(id: ClubBoardOfDirector.select { |cbod| cbod.id if cbod.club_period.academic_period.is_active })
-    all_club_board_of_supervisories = ClubBoardOfSupervisory.where(id: ClubBoardOfSupervisory.select { |cbos| cbos.id if cbos.club_period.academic_period.is_active })
+    all_club_board_of_directors = ClubBoardOfDirector.where(id: ClubBoardOfDirector.select { |cbod| cbod.id if cbos.club_period && cbod.club_period.academic_period.is_active })
+    all_club_board_of_supervisories = ClubBoardOfSupervisory.where(id: ClubBoardOfSupervisory.select { |cbos| cbos.id if cbod.club_period && cbos.club_period.academic_period.is_active })
     all_club_board_of_supervisories_except = action == 'update' ? all_club_board_of_supervisories.where.not(club_period: club_period) : all_club_board_of_supervisories
     all_board_users = all_club_board_of_directors + all_club_board_of_supervisories_except
     duplicated_users = []

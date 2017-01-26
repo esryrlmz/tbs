@@ -19,31 +19,31 @@
         </p>
         <p>
           <strong>Başkan:</strong>
-          <%= @club_board_of_director.president.name_surname %>
+          <%= blank_for_attribute(@club_board_of_director.president,"name_surname") %>
         </p>
         <p>
           <strong>Başkan Yardımcısı:</strong>
-          <%= @club_board_of_director.vice_president.name_surname %>
+          <%=blank_for_attribute( @club_board_of_director.vice_president,"name_surname" )%>
         </p>
         <p>
           <strong>Sayman:</strong>
-          <%= @club_board_of_director.accountant.name_surname %>
+          <%=blank_for_attribute( @club_board_of_director.accountant,"name_surname") %>
         </p>
         <p>
           <strong>Sekreter:</strong>
-          <%= @club_board_of_director.secretary.name_surname %>
+          <%=blank_for_attribute( @club_board_of_director.secretary, "name_surname") %>
         </p>
         <p>
           <strong>1. Üye:</strong>
-          <%= @club_board_of_director.member_first.name_surname %>
+          <%= blank_for_attribute(@club_board_of_director.member_first,"name_surname") %>
         </p>
         <p>
           <strong>2. Üye:</strong>
-          <%= @club_board_of_director.member_second.name_surname %>
+          <%= blank_for_attribute(@club_board_of_director.member_second,"name_surname" )%>
         </p>
         <p>
           <strong>3. Üye:</strong>
-          <%= @club_board_of_director.member_third.name_surname %>
+          <%=  blank_for_attribute(@club_board_of_director.member_third,"name_surname" )%>
         </p>
         <br />
         <%= link_to 'Düzenle', edit_club_board_of_director_path(@club_board_of_director), class: "btn btn-success" %> |

@@ -121,6 +121,9 @@
                       <button type="button" class="btn btn-success pull-right form-response-button admin-confirm">Onayla</button>
                       <% elsif current_user.president? %>
                       <button type="button" class="btn btn-success pull-right form-response-button president-resend">Onay için yeniden gönder</button>
+                      <% elsif current_user.dean? %>
+                      <button type="button" class="btn btn-danger pull-right form-response-button dean-reject">Reddet</button>
+                      <button type="button" class="btn btn-success pull-right form-response-button dean-confirm">Onayla</button>
                       <% elsif current_user.advisor? %>
                       <button type="button" class="btn btn-danger pull-right form-response-button advisor-reject">Reddet</button>
                       <button type="button" class="btn btn-success pull-right form-response-button advisor-confirm">Onayla</button>

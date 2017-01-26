@@ -7,16 +7,10 @@
     <%= f.input :short_name, label: "Kısa Adı:"  %>
     <%= f.input :description, label: "Açıklaması:" %>
     <label >Kuruluş Tarihi:   </label>
-    <br/> <%= f.text_field :creation_date, id: "club_set_date" %>
+    <br/>  <%= f.input :creation_date,  as: :date,  label: false   %>
   </div>
   <br/>
   <div class="form-actions">
     <%= f.submit 'Kaydet', class: "btn btn-success" %>
   </div>
 <% end %>
-
-<script type="text/javascript">
-$('#club_set_date').datepicker({
-  language: 'tr'
-});
-</script>

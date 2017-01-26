@@ -31,7 +31,7 @@ gem 'rest-client'
 gem 'kaminari'
 
 gem "simple_calendar"
-
+gem 'dotenv-rails'
 gem 'zip-zip'
 gem 'axlsx', '~> 2.0'
 gem 'axlsx_rails'

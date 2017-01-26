@@ -4,6 +4,7 @@ class Event < ActiveRecord::Base
   belongs_to :event_category
   belongs_to :club_period
   has_many :event_responses
+  belongs_to :faculty
 
   attr_accessor :event_locations
 end

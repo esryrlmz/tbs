@@ -18,7 +18,7 @@
           <table class="table table-bordered">
             <tr>
               <td width="25%"><b>TOPLULUK ADI</b></td>
-              <td colspan="3"><%= @event.club_period.club.name %></td>
+              <td colspan="3"><%= @event.club_period.club.name unless @event.club_period.blank? %></td>
             </tr>
             <tr>
               <td><b>ETKİNLİK ADI</b></td>
@@ -40,7 +40,7 @@
             </tr>
             <tr>
               <td><b>ETKİNLİK TÜRÜ</b></td>
-              <td colspan="3"><%= @event.event_category.name %></td>
+              <td colspan="3"><%= @event.event_category.name  unless @event.event_category.blank?%></td>
             </tr>
             <tr>
               <td><b>ETKİNLİK YERİ</b></td>
@@ -64,8 +64,8 @@
             </tr>
             <tr>
               <td>Ad-Soyadı</td>
-              <td><%= @event.club_period.president.present? ? @event.club_period.president.full_name : "" %></td>
-              <td colspan="2"><%= @event.club_period.advisor.present? ? @event.club_period.advisor.full_name : "" %></td>
+              <td><%= (@event.club_period.president.present? ? @event.club_period.president.full_name : "" ) unless @event.club_period.blank? %></td>
+              <td colspan="2"><%= (@event.club_period.advisor.present? ? @event.club_period.advisor.full_name : "" ) unless @event.club_period.blank?%></td>
             </tr>
             <tr>
               <td></td>
@@ -85,7 +85,7 @@
         <% end %>
         <br />
         <%= link_to 'Yazdır', '', class: "btn btn-warning no-print", id: "print-event" %>
-        <% if current_user.present? && (current_user.admin? || (current_user.president?(@event.club_period.id) && (@event.event_responses.last.event_status.id == 3 || @event.event_responses.last.event_status.id == 4 || @event.event_responses.last.event_status.id == 6))) %>
+        <% if current_user.present? && (current_user.admin? || (@event.club_period.present? && current_user.president?(@event.club_period.id) && (@event.event_responses.last.event_status.id == 3 || @event.event_responses.last.event_status.id == 4 || @event.event_responses.last.event_status.id == 6))) %>
         <%= link_to 'Düzenle', edit_event_path(@event), class: "btn btn-success no-print" %>
         <% end %>
         <%= link_to 'Geri', :back, class: "btn btn-info no-print" %>

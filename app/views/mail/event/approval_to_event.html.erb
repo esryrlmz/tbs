@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta content=("text/html; charset=UTF-8") http-equiv="Content-Type">
+</head>
+  <body>
+    <p>
+      SAYIN <%=@user.name_surname.upcase %>
+      <br>
+      <br>
+      Sağlık kültür spor daire başkanlığında hazırlanan aşağıdaki etkinlik için onayınız gerekmektedir.
+    </p>
+    <p>
+          <b> Etkinlik Bilgileri:</b><br/>
+          <br/>
+           <b> Etkinlik Adı: </b>
+           <%= @event.title%><br/>
+           <b> Etkinlik Topluluğu: </b>
+           <%= @event.club_period.club.name%><br/>
+           <b> Etkinlik Zamanı: </b>
+           <%= @event.datetime.strftime("%d.%m.%Y - %H:%M")%><br/>
+           <b> Etkinlik Yeri: </b>
+           <%= @event.location%><br/>
+         </p>
+</body>
+</html>

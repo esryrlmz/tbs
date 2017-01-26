@@ -3,7 +3,7 @@ class ClubBoardOfDirectorsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :edit, :update, :destroy]
 
   def index
-    @club_board_of_directors = ClubBoardOfDirector.all
+    @club_board_of_directors = ClubBoardOfDirector
     authorize @club_board_of_directors
   end
 
@@ -28,13 +28,15 @@ class ClubBoardOfDirectorsController < ApplicationController
     elsif get_duplicated_user_names(club_period).present?
       flash.now[:error] = 'Eklediğiniz üye, başka bir toplulukta yönetim kurulunda ya da denetim kurulunda.'
       render :new
-    elsif blank_for_attributes?(@club_board_of_director)
-      flash.now[:error] = 'Yönetim Kurulu üyelerinin tamamını seçmelisiniz.'
-      render :new
     else
       authorize @club_board_of_director
       respond_to do |format|
         if @club_board_of_director.save
+          if @club_board_of_director.president.present?
+            role_type = RoleType.find_by(name: 'Baskan')
+            has_president = Role.where(club_period_id: @club_board_of_director.club_period_id, role_type_id: role_type.id).first
+            has_president.present? ? has_president.update(user_id: @club_board_of_director.president.id) : Role.create(club_period_id: @club_board_of_director.club_period_id, role_type_id: role_type.id, user_id: @club_board_of_director.president.id, status: true)
+          end
           format.html { redirect_to @club_board_of_director, notice: 'Yönetim kurulu başarıyla oluşturuldu.' }
           format.json { render :show, status: :created, location: @club_board_of_director }
         else
@@ -54,6 +56,11 @@ class ClubBoardOfDirectorsController < ApplicationController
     else
       respond_to do |format|
         if @club_board_of_director.update(club_board_of_director_params)
+          if @club_board_of_director.president.present?
+            role_type = RoleType.find_by(name: 'Baskan')
+            has_president = Role.where(club_period_id: @club_board_of_director.club_period_id, role_type_id: role_type.id).first
+            has_president.present? ? has_president.update(user_id: @club_board_of_director.president.id) : Role.create(club_period_id: @club_board_of_director.club_period_id, role_type_id: role_type.id, user_id: @club_board_of_director.president.id, status: true)
+          end
           format.html { redirect_to @club_board_of_director, notice: 'Yönetim kurulu başarıyla güncellendi.' }
           format.json { render :show, status: :ok, location: @club_board_of_director }
         else
@@ -85,8 +92,8 @@ class ClubBoardOfDirectorsController < ApplicationController
 
   # Başka toplulukta yönetim kurulunda ya da denetim kurulunda olanların tespiti
   def get_duplicated_user_names(club_period, action = '')
-    all_club_board_of_supervisories = ClubBoardOfSupervisory.where(id: ClubBoardOfSupervisory.select { |cbos| cbos.id if cbos.club_period.academic_period.is_active })
-    all_club_board_of_directors = ClubBoardOfDirector.where(id: ClubBoardOfDirector.select { |cbod| cbod.id if cbod.club_period.academic_period.is_active })
+    all_club_board_of_supervisories = ClubBoardOfSupervisory.where(id: ClubBoardOfSupervisory.select { |cbos| cbos.id if cbos.club_period && cbos.club_period.academic_period.is_active })
+    all_club_board_of_directors = ClubBoardOfDirector.where(id: ClubBoardOfDirector.select { |cbod| cbod.id if cbod.club_period && cbod.club_period.academic_period.is_active })
     all_club_board_of_directors_except = action == 'update' ? all_club_board_of_directors.where.not(club_period: club_period) : all_club_board_of_directors
     all_board_users = all_club_board_of_supervisories + all_club_board_of_directors_except
     duplicated_users = []

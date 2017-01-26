@@ -25,6 +25,7 @@ class User < ActiveRecord::Base
         roles.where(club_period_id: club_period_id, role_type_id: @role_type_id, status: true).present? ? true : false
       end
     else
+      @role_type_id = RoleType.find_by_name('Akademik Danışman').id
       roles.where(club_period_id: club_period_id, role_type_id: @role_type_id, status: true).present? ? true : false
     end
   end
@@ -44,6 +45,11 @@ class User < ActiveRecord::Base
     roles.where(club_period_id: club_period_id, role_type_id: @role_type_id, status: true).present? ? true : false
   end
 
+  def dean?
+    @role_type_id = RoleType.find_by_name('Dekan').id
+    roles.where(role_type_id: @role_type_id, status: true).present? ? true : false
+  end
+
   def owner_of_role?(role)
     id == role.user.id ? true : false
   end
@@ -54,7 +60,7 @@ class User < ActiveRecord::Base
 
   def president_or_advisor_club_period
     return nil unless president? || advisor?
-    roles.select { |role| role.club_period.academic_period.is_active && (role.role_type.name == 'Başkan' || role.role_type.name == 'Akademik Danışman') }.first.club_period
+    roles.select { |role| (role.club_period.academic_period.is_active unless role.club_period.blank?) && (role.role_type.name == 'Başkan' || role.role_type.name == 'Akademik Danışman') }.first.club_period
   end
 
   #### Yardımcı Fonksiyonlar

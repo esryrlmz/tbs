@@ -7,26 +7,31 @@ class EventsController < ApplicationController
     if current_user.present? && current_user.admin?
       @events = Event.all
       # Admin ve Akademik Danışman onayı bekleyen etkinlikler
-      @pending_events = Event.select { |event| event.event_responses.any? && (event.event_responses.last.event_status_id == 1 || event.event_responses.last.event_status_id == 4 || event.event_responses.last.event_status_id == 5) }
+      @pending_events = Event.select { |event| event.event_responses.any? && (event.event_responses.last.event_status_id == 1 || event.event_responses.last.event_status_id == 4 || event.event_responses.last.event_status_id == 5 || event.event_responses.last.event_status_id == 8) }
       @clubs_of_member_events = []
       @club_events = []
     elsif current_user.present? && current_user.advisor?
       club_period = ClubPeriod.find_by(id: current_user.active_club_periods.select { |clubperiod| clubperiod.id if current_user.advisor?(clubperiod) })
-      @events = Event.select { |event| event.event_responses.any? && event.event_responses.last.event_status_id == 2 }
-      @pending_events = club_period.events.select { |event| event.event_responses.any? && event.event_responses.last.event_status_id != 2 && event.event_responses.last.event_status_id == 4 }
+      @events = Event.select { |event| event.event_responses.any? && (event.event_responses.last.event_status_id == 2) }
+      @pending_events = club_period.events.select { |event| event.event_responses.any? && event.event_responses.last.event_status_id != 2 && (event.event_responses.last.event_status_id == 4 || event.event_responses.last.event_status_id == 9) }
       @clubs_of_member_events = []
       @club_events = []
     elsif current_user.present? && current_user.president?
-      club_period = ClubPeriod.find_by(id: current_user.active_club_periods.select { |clubperiod| clubperiod.id if current_user.president?(clubperiod) })
+      club_period = ClubPeriod.find_by(id: current_user.active_club_periods.compact.select { |clubperiod| clubperiod.id if current_user.president?(clubperiod) })
       @events = Event.select { |event| event.event_responses.any? && event.event_responses.last.event_status_id == 2 }
       @club_events = club_period.events.select { |event| event.event_responses.any? && event.event_responses.last.event_status_id == 2 }
       @pending_events = club_period.events.select { |event| event.event_responses.any? && (event.event_responses.last.event_status_id != 2 || event.event_responses.last.event_status_id == 5) }
-      @clubs_of_member_events = current_user.active_club_periods.map { |clubperiod| Event.where(id: clubperiod.events.select { |event| event.id if event.event_responses.any? && event.event_responses.last.event_status_id == 2 }.compact) }.flatten
+      @clubs_of_member_events = current_user.active_club_periods.compact.map { |clubperiod| Event.where(id: clubperiod.events.select { |event| event.id if event.event_responses.any? && event.event_responses.last.event_status_id == 2 }.compact) }.flatten
     elsif current_user.present? && current_user.member?
-      @clubs_of_member_events = current_user.active_club_periods.map { |clubperiod| Event.where(id: clubperiod.events.select { |event| event.id if event.event_responses.any? && event.event_responses.last.event_status_id == 2 }.compact) }.flatten
+      @clubs_of_member_events = current_user.active_club_periods.compact.map { |clubperiod| Event.where(id: clubperiod.events.select { |event| event.id if event.event_responses.any? && event.event_responses.last.event_status_id == 2 }.compact) }.flatten
       @club_events = []
       @pending_events = []
       @events = []
+    elsif current_user.present? && current_user.dean?
+      @clubs_of_member_events = []
+      @club_events = []
+      @pending_events = Event.select { |event| event.event_responses.any? && (event.event_responses.last.event_status_id == 8) }
+      @events = Event.select { |event| event.event_responses.any? && (event.event_responses.last.event_status_id == 2 || event.event_responses.last.event_status_id == 8) }
     else
       @events = Event.select { |event| event.event_responses.any? && event.event_responses.last.event_status_id == 2 }
       @club_events = []
@@ -57,12 +62,11 @@ class EventsController < ApplicationController
 
   def create
     @event = Event.new(event_params)
-    # Aktif/Pasif durumunu burda da kontrol et
-    # Pundit ayarlamalarını yap (event/eventlocation)
     respond_to do |format|
       if @event.save
         # Akademik Danışman Onayı Bekleniyor
         event_response = EventResponse.create(event_id: @event.id, event_status_id: 4)
+        EventMailer.approval_to_event(@event.club_period.advisor, @event).deliver_now unless @event.club_period.advisor.blank? # akademik danışmana mail gidiyor
         if event_response
           format.html { redirect_to @event, notice: 'Etkinlik başarıyla oluşturuldu.' }
           format.json { render :show, status: :created, location: @event }
@@ -111,6 +115,12 @@ class EventsController < ApplicationController
       else
         Event.all
       end
+    @event_list = @event_list.where(club_period_id: params[:club_period_id].to_i) unless params[:club_period_id].blank?
+    if params[:state] == 'onay'
+      @event_list = @event_list.select { |x| x.event_responses.last.event_status_id == 2 }
+    elsif params[:state] == 'wait'
+      @event_list = @event_list.select { |x| x.event_responses.last.event_status_id != 2 }
+    end
     respond_to(:xlsx)
   end
 
@@ -121,6 +131,6 @@ class EventsController < ApplicationController
   end
 
   def event_params
-    params.fetch(:event, {}).permit(:club_period_id, :event_category_id, :title, :speakers, :datetime, :location, :content, :requirements, :image, :attachment, :is_admin_confirmation_ok, :is_advisor_confirmation_ok)
+    params.fetch(:event, {}).permit(:club_period_id, :event_category_id, :faculty_id, :title, :speakers, :datetime, :location, :content, :requirements, :image, :attachment, :is_admin_confirmation_ok, :is_advisor_confirmation_ok)
   end
 end

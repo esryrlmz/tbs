@@ -1,0 +1,120 @@
+<div class="row">
+  <%= render 'home/navbarDefault' %></div>
+<div class="row">
+  <div class="col-md-12">
+    <ol class="breadcrumb">
+      <li>
+        <%= link_to 'Anasayfa', root_path %></li>
+      <li class="active">Fakulteler</li>
+    </ol>
+    <div class="panel panel-default">
+      <div class="panel-heading clearfix">
+        <h4 class="panel-title pull-left" style="padding-top: 7.5px;">Fakulteler</h4>
+        <div class="btn-group pull-right">
+          <a href="#" data-toggle="modal" data-target=".faculty_modal" class="pull-right"><i class="fa fa-plus fa-lg" aria-hidden="true"></i>   &nbsp;&nbsp;</a>
+
+           <div class="modal fade faculty_modal" tabindex="-1" role="dialog" aria-hidden="true">
+             <div class="modal-dialog modal-md">
+               <div class="modal-content ">
+                 <div class="modal-header ">
+                   <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
+                   </button>
+                   <h4 class="modal-title" id="myModalLabel">Yeni Fakülte Ekle</h4>
+                 </div>
+                 <div class="modal-body ">
+                   <div class="row ">
+                     <%= simple_form_for( @faculty = Faculty.new, url: faculties_path(@faculty) , method: :post) do |g| %>
+                             <div class="row">
+                                  <div class="col-md-1 "></div>
+                                   <label class="col-md-1 label-style">Fakulte:</label>
+                                   <div class="col-md-7">
+                                       <%= g.text_field :name,  :class => "form-control", label: false%>
+                                   </div>
+                                 <div class="col-md-2">
+                                   <div class="actions">
+                                      <%= g.submit "Ekle", :class => "btn btn-primary submit"%>
+                                   </div>
+                                 </div>
+                                    <div class="col-md-1 "></div>
+                               </div>
+                               <br/>
+                     <%end%>
+                   </div>
+                 </div>
+
+               </div>
+             </div>
+           </div>
+
+
+        </div>
+      </div>
+      <div class="panel-body">
+        <p align="right">
+        </p>
+        <div class="col-md-1"> </div>
+          <div class="col-md-10">
+        <table class="table table-hover" >
+          <thead>
+            <tr>
+              <th></th>
+              <th>Adı</th>
+              <th></th>
+              <th></th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @faculties.each do |faculty| %>
+            <tr>
+              <td></td>
+              <td class="center"> <%= faculty.name %></td>
+
+             <td>
+              <td class="center">
+                  <a href="#" data-toggle="modal" data-target=".faculty_modal_edit<%=faculty.id%>" <i class="fa fa-pencil-square-o " aria-hidden="true"></i>   &nbsp;&nbsp;</a>
+
+                  <div class="modal fade faculty_modal_edit<%=faculty.id%>" tabindex="-1" role="dialog" aria-hidden="true">
+                    <div class="modal-dialog modal-md">
+                      <div class="modal-content ">
+                        <div class="modal-header ">
+                          <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
+                          </button>
+                        </div>
+                        <div class="modal-body ">
+                          <div class="row ">
+                            <%= simple_form_for( faculty, url: faculty_path(faculty) , method: :put) do |g| %>
+                                    <div class="row">
+                                         <div class="col-md-1 "></div>
+                                          <label class="col-md-1 label-style">Fakulte:</label>
+                                          <div class="col-md-7">
+                                              <%= g.text_field :name,  :class => "form-control", label: false%>
+                                          </div>
+                                        <div class="col-md-2">
+                                          <div class="actions">
+                                             <%= g.submit "Değiştir", :class => "btn btn-primary submit"%>
+                                          </div>
+                                        </div>
+                                           <div class="col-md-1 "></div>
+                                      </div>
+                                      <br/>
+                            <%end%>
+                          </div>
+                        </div>
+
+                      </div>
+                    </div>
+                  </div>
+                 <%= link_to '<i class="fa fa-trash " title="Sil"></i>'.html_safe, faculty, method: :delete, data: { confirm: 'Fakulteyi silmek istediğinize emin misiniz?' } %>
+            </td>
+            <td>   </td>
+          </tr>
+          <% end %></tbody>
+        </table>
+      </div>
+            <div class="col-md-1"> </div>
+      <br />
+    </div>
+  </div>
+</div>
+</div>

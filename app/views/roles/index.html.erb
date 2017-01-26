@@ -20,6 +20,7 @@
               <th>Kullanıcı Adı</th>
               <th>Rol Tipi</th>
               <th>Topluluk</th>
+              <th>Atanma Tarihi</th>
               <th>Dönem</th>
               <th></th>
             </tr>
@@ -43,6 +44,7 @@
                 <%end%>
               </td>
               <td><%= role.club_period.club.name if role.club_period.present? %></td>
+                <td><%= role.appointment_date.strftime("%d.%m.%Y") unless role.appointment_date.blank? %></td>
               <td><%= role.club_period.academic_period.name if role.club_period.present? %></td>
               <td><%= link_to '<i class="fa fa-trash" title="Sil"></i>'.html_safe, role, method: :delete, data: { confirm: 'Bu rolü silmek istediğinize emin misiniz?' } %></td>
             </tr>

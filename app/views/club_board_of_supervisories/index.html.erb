@@ -24,11 +24,11 @@
             </tr>
           </thead>
           <tbody>
-            <% @club_board_of_supervisories.each do |club_board_of_supervisory| %>
+            <% @club_board_of_supervisories.select { |x| x unless x.club_period.blank? }.each do |club_board_of_supervisory| %>
             <tr>
               <td><%= link_to club_board_of_supervisory.club_period.club.name, club_board_of_supervisory %></td>
-              <td><%= club_board_of_supervisory.principal_member_first.name_surname %></td>
-              <td><%= club_board_of_supervisory.principal_member_second.name_surname %></td>
+              <td><%=blank_for_attribute( club_board_of_supervisory.principal_member_first,"name_surname") %></td>
+              <td><%= blank_for_attribute(club_board_of_supervisory.principal_member_second,"name_surname") %></td>
               <td><%= club_board_of_supervisory.club_period.academic_period.name %></td>
               <td><%= link_to '<i class="fa fa-trash" title="Sil"></i>'.html_safe, club_board_of_supervisory, method: :delete, data: { confirm: 'Denetim kurulunu silmek istediğinize emin misiniz?' } %></td>
             </tr>

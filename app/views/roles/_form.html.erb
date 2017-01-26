@@ -10,6 +10,7 @@
         <div class="col-md-3 col-sm-3 col-xs-3 ">
         </div>
       </div>
+
       <div class="row form-group">
         <label class="control-label col-md-3 col-sm-3 col-xs-3">Kullanıcı Seçiniz</label>
         <div class="col-md-6 col-sm-6 col-xs-6">
@@ -24,7 +25,23 @@
       <div class="row form-group">
         <label class="control-label col-md-3 col-sm-3 col-xs-3">Yetki  Seçiniz</label>
         <div class="col-md-6 col-sm-6 col-xs-6">
-          <%= f.input :role_type_id, collection: RoleType.all.where.not(name: "Başkan").where.not(name:"üye"), label: false,  :input_html => { :id => "academic_role" } %>
+          <%= f.input :role_type_id, collection: RoleType.all.where.not(name: "Başkan").where.not(name:"üye"), label: false,  :input_html => { :id => "academic_role",:onchange=>"Secim()" } %>
+        </div>
+        <div class="col-md-3 col-sm-3 col-xs-3 ">
+        </div>
+      </div>
+      <div id=fakulte  style="display:none" class="row form-group">
+        <label class="control-label col-md-3 col-sm-3 col-xs-3">Fakülte  Seçiniz</label>
+        <div class="col-md-6 col-sm-6 col-xs-6">
+          <%= f.input :faculty_id, collection: Faculty.all.flat_map { |fac| [[fac.name, fac.id]] }, label: false,  :input_html => { :id => "faculty_list" } %>
+        </div>
+        <div class="col-md-3 col-sm-3 col-xs-3 ">
+        </div>
+      </div>
+      <div  class="row form-group">
+        <label class="control-label col-md-3 col-sm-3 col-xs-3">Atanma Tarihi</label>
+        <div class="col-md-6 col-sm-6 col-xs-6">
+          <%= f.input :appointment_date,  as: :date,  label: false   %>
         </div>
         <div class="col-md-3 col-sm-3 col-xs-3 ">
         </div>
@@ -44,6 +61,8 @@
     <%= f.submit "Kaydet", class: "btn btn-success" %>
   </div>
 <% end %>
+
+
 <div class="modal fade bs-ubs" tabindex="-1" role="dialog" aria-hidden="true">
   <div class="modal-dialog modal-sm">
     <div class="modal-content ">
@@ -72,6 +91,8 @@
   </div>
 </div>
 
+
+
 <script type="text/javascript">
 $(".ubs_find").bind('click', function(){
   var idnumber = document.getElementById("idnumber").value;
@@ -82,4 +103,15 @@ $(".ubs_find").bind('click', function(){
     data: {"idnumber": idnumber,"club_id": club_id}
   });
 });
+document.getElementById('fakulte').style.display = 'none';
+function Secim() {
+  var role = document.getElementById("academic_role").options[document.getElementById("academic_role").selectedIndex].text;
+  if (role=='Dekan') {
+    document.getElementById('fakulte').style.display = '';
+    document.getElementById("faculty_list").selectedIndex = 0;
+  } else {
+    document.getElementById('fakulte').style.display = 'none';
+  }
+}
+
 </script>

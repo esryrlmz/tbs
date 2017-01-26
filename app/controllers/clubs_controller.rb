@@ -7,7 +7,7 @@ class ClubsController < ApplicationController
       @clubs = Club.search(params[:search]).order('name ASC')
     else
       @clubs = Club.order('name ASC')
-      @clubs_of_current_user = current_user.present? && current_user.active_club_periods ? current_user.active_club_periods.map { |club_period| club_period.club if club_period.present? } : []
+      @clubs_of_current_user = current_user.present? && current_user.active_club_periods ? current_user.active_club_periods.compact.map { |club_period| club_period.club if club_period.present? } : []
     end
 
    #excel dökümü için sorgulama
@@ -87,6 +87,8 @@ class ClubsController < ApplicationController
         club_period = ClubPeriod.create(club_id: @club.id, academic_period_id: AcademicPeriod.find_by(is_active: true).id)
         club_setting = ClubSetting.create(club_id: @club.id, max_user: 150)
         if club_period && club_setting
+          ClubBoardOfDirector.create(club_period_id: club_period.id)
+          ClubBoardOfSupervisory.create(club_period_id: club_period.id)
           format.html { redirect_to @club, notice: 'Topluluk başarıyla oluşturuldu.' }
           format.json { render :show, status: :created, location: @club }
         else

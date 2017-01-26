@@ -33,6 +33,13 @@ class ClubPeriodsController < ApplicationController
     redirect_to edit_member_list_club_period_path(@club_member.club_period.id)
   end
 
+  def club_type
+    @club_category = ClubPeriod.find(params[:id]).club.club_category.name
+    respond_to do |format|
+      format.json { render :json => @club_category.to_json }
+    end
+  end
+
   def show
   end
 

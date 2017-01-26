@@ -1,10 +1,24 @@
 <%= simple_form_for(@club_board_of_supervisory) do |f| %>
 <%= f.error_notification %>
 <div class="form-inputs">
+  <% if @club_board_of_supervisory %>
+      <%= f.input :club_period_id , :as => :hidden, :input_html => { :id => "clubs_for_director" }%>
+  <% else %>
+      <div class="row form-group">
+        <label class="control-label col-md-3 col-sm-3 col-xs-3">Topluluk Seçiniz</label>
+        <div class="col-md-6 col-sm-6 col-xs-6">
+          <%= f.input :club_period_id, collection: Club.all.flat_map { |club| [[club.name, club.active_club_period.id]] }, label: false, prompt: '', :input_html => { :id => "clubs_for_director" } %>
+        </div>
+        <div class="col-md-3 col-sm-3 col-xs-3 ">
+
+        </div>
+      </div>
+  <% end %>
+  <% @club_member_list = @club_board_of_supervisory.present? && @club_board_of_supervisory.club_period.present? ? @club_board_of_supervisory.club_period.roles.map { |role| [role.user.name_surname, role.user.id]} : []%>
   <div class="row form-group">
-    <label class="control-label col-md-3 col-sm-3 col-xs-3">Topluluk Seçiniz</label>
+    <label class="control-label col-md-3 col-sm-3 col-xs-3">1. Asıl Üye</label>
     <div class="col-md-6 col-sm-6 col-xs-6">
-      <%= f.input :club_period_id, collection: Club.all.flat_map { |club| [[club.name, club.active_club_period.id]] }, label: false, prompt: '', :input_html => { :id => "clubs_for_director" } %>
+      <%= f.input :principal_member_one,:collection => @club_member_list,  label: false,  :input_html => { :class => "club_directors" } %>
     </div>
     <div class="col-md-3 col-sm-3 col-xs-3 ">
       <button type="button" class="btn btn-default btn-md" data-toggle="modal" data-target=".bs-ubs">
@@ -13,17 +27,9 @@
     </div>
   </div>
   <div class="row form-group">
-    <label class="control-label col-md-3 col-sm-3 col-xs-3">1. Asıl Üye</label>
-    <div class="col-md-6 col-sm-6 col-xs-6">
-      <%= f.input :principal_member_one,:collection => @club_board_of_supervisory.present? && @club_board_of_supervisory.club_period.present? ? @club_board_of_supervisory.club_period.roles.map { |role| role.user} : [],:label_method => :full_name,:value_method => :id, label: false, :include_blank => false, :input_html => { :class => "club_directors" } %>
-    </div>
-    <div class="col-md-3 col-sm-3 col-xs-3 ">
-    </div>
-  </div>
-  <div class="row form-group">
     <label class="control-label col-md-3 col-sm-3 col-xs-3">2. Asıl Üye</label>
     <div class="col-md-6 col-sm-6 col-xs-6">
-      <%= f.input :principal_member_two,:collection => @club_board_of_supervisory.present? && @club_board_of_supervisory.club_period.present? ? @club_board_of_supervisory.club_period.roles.map { |role| role.user} : [],:label_method => :full_name,:value_method => :id, label: false ,:include_blank => false, :input_html => { :class => "club_directors" } %>
+      <%= f.input :principal_member_two,:collection => @club_member_list, label: false , :input_html => { :class => "club_directors" } %>
     </div>
     <div class="col-md-3 col-sm-3 col-xs-3 ">
     </div>
@@ -31,7 +37,7 @@
   <div class="row form-group">
     <label class="control-label col-md-3 col-sm-3 col-xs-3">3. Asıl Üye</label>
     <div class="col-md-6 col-sm-6 col-xs-6">
-      <%= f.input :principal_member_three,:collection => @club_board_of_supervisory.present? && @club_board_of_supervisory.club_period.present? ? @club_board_of_supervisory.club_period.roles.map { |role| role.user} : [],:label_method => :full_name,:value_method => :id, label: false ,:include_blank => false, :input_html => { :class => "club_directors" } %>
+      <%= f.input :principal_member_three,:collection => @club_member_list, label: false , :input_html => { :class => "club_directors" } %>
     </div>
     <div class="col-md-3 col-sm-3 col-xs-3 ">
     </div>
@@ -39,7 +45,7 @@
   <div class="row form-group">
     <label class="control-label col-md-3 col-sm-3 col-xs-3">1. Yedek Üye</label>
     <div class="col-md-6 col-sm-6 col-xs-6">
-      <%= f.input :reserve_member_one,:collection => @club_board_of_supervisory.present? && @club_board_of_supervisory.club_period.present? ? @club_board_of_supervisory.club_period.roles.map { |role| role.user} : [],:label_method => :full_name,:value_method => :id, label: false ,:include_blank => false, :input_html => { :class => "club_directors" } %>
+      <%= f.input :reserve_member_one,:collection => @club_member_list, label: false , :input_html => { :class => "club_directors" } %>
     </div>
     <div class="col-md-3 col-sm-3 col-xs-3 ">
     </div>
@@ -47,7 +53,7 @@
   <div class="row form-group">
     <label class="control-label col-md-3 col-sm-3 col-xs-3">2. Yedek Üye</label>
     <div class="col-md-6 col-sm-6 col-xs-6">
-      <%= f.input :reserve_member_two,:collection => @club_board_of_supervisory.present? && @club_board_of_supervisory.club_period.present? ? @club_board_of_supervisory.club_period.roles.map { |role| role.user} : [],:label_method => :full_name,:value_method => :id, label: false ,:include_blank => false, :input_html => { :class => "club_directors" } %>
+      <%= f.input :reserve_member_two,:collection => @club_member_list, label: false , :input_html => { :class => "club_directors" } %>
     </div>
     <div class="col-md-3 col-sm-3 col-xs-3 ">
     </div>
@@ -55,7 +61,7 @@
   <div class="row form-group">
     <label class="control-label col-md-3 col-sm-3 col-xs-3">3. Yedek Üye</label>
     <div class="col-md-6 col-sm-6 col-xs-6">
-      <%= f.input :reserve_member_three,:collection => @club_board_of_supervisory.present? && @club_board_of_supervisory.club_period.present? ? @club_board_of_supervisory.club_period.roles.map { |role| role.user} : [],:label_method => :full_name,:value_method => :id, label:false ,:include_blank => false, :input_html => { :class => "club_directors" } %>
+      <%= f.input :reserve_member_three,:collection => @club_member_list, label:false , :input_html => { :class => "club_directors" } %>
     </div>
     <div class="col-md-3 col-sm-3 col-xs-3 ">
     </div>
@@ -96,7 +102,9 @@
 <script type="text/javascript">
 $(".ubs_find").bind('click', function(){
   var ubs_no = document.getElementById("ubs_no").value;
+    alert(ubs_no);
   var club_id=document.getElementById("clubs_for_director").value;
+
   $.ajax({
     url: '/find_ogrenci',
     type: 'GET',

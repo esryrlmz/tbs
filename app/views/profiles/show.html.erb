@@ -88,12 +88,14 @@
     </div>
     <div class="panel-body">
       <%@member_clubs.each do |club|%>
-      <li class="list-group-item">
-        <div class="row">
-          <div class="col-md-12">  <a href="<%= club_path(club.id) %>">  <%= club.name %></a></div>
-        </div>
-      </li>
-      <br/>
+        <%if club %>
+        <li class="list-group-item">
+          <div class="row">
+            <div class="col-md-12">  <a href="<%= club_path(club.id) %>">  <%= club.name %></a></div>
+          </div>
+        </li>
+        <br/>
+      <%end%>
       <%end%>
     </div>
   </div>

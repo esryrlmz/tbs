@@ -86,7 +86,15 @@ module ApplicationHelper
     !record.attributes.except('id', 'created_at', 'updated_at').values.all?
   end
 
+  def blank_for_attribute(record, name_attribute)
+    record.instance_eval(name_attribute) unless record.blank?
+  end
+
   def ubs_no_valid?(ogrenci_no)
     (ogrenci_no.length == 8 && !(ogrenci_no.start_with? 'o')) || (ogrenci_no.length == 9 && (ogrenci_no.start_with? 'o'))
+  end
+
+  def admin_users
+    User.where(id: RoleType.find_by(name: 'Admin').roles.pluck(:user_id)).map { |x| x.profile.email }
   end
 end

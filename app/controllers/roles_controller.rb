@@ -34,6 +34,7 @@ class RolesController < ApplicationController
     @role = Role.new(role_params)
     authorize @role
     role_type_president = RoleType.find_by(name: 'Başkan')
+    role_type_dean = RoleType.find_by(name: 'Dekan')
     if @role.role_type == role_type_president
       has_another_president_role = Role.where(role_type_id: role_type_president.id).map { |role| role.user.id }.include?(@role.user.id)
       # Başka bir toplulukta başkan mı? kontrolü
@@ -50,6 +51,15 @@ class RolesController < ApplicationController
         else
           create_role(@role)
         end
+      end
+    elsif @role.role_type == role_type_dean
+
+      has_another_dean_role = Role.where(role_type_id: role_type_dean.id, faculty_id: @role.faculty_id).map { |role| role.user.id }.include?(@role.user.id)
+      if has_another_dean_role
+        flash.now[:error] = "#{@role.user.name_surname} başka bir fakültede dekan. Dekanlık için başka bir Fakülte seçiniz."
+        render :new
+      else
+        create_role(@role)
       end
     else
       create_role(@role)
@@ -94,7 +104,7 @@ class RolesController < ApplicationController
   end
 
   def role_params
-    params.require(:role).permit(:user_id, :club_period_id, :role_type_id, :status, :explanation)
+    params.require(:role).permit(:user_id, :faculty_id, :appointment_date, :club_period_id, :role_type_id, :status, :explanation)
   end
 
   def create_role(role)

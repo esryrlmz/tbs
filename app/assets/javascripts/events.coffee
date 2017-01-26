@@ -59,6 +59,10 @@ $ ->
       $('#event-status-id-modal').val(6)
     else if $(this).hasClass('president-resend')
       $('#event-status-id-modal').val(4)
+    else if $(this).hasClass('dean-reject')
+      $('#event-status-id-modal').val(9)
+    else if $(this).hasClass('dean-confirm')
+      $('#event-status-id-modal').val(7)
     $('#event-response-form').submit()
 
 

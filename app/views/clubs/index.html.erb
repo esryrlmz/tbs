@@ -96,7 +96,7 @@
                   <td></td>
                   <td> <%= link_to club.name, club %> </td>
                   <td> <%= club.club_category.name %> </td>
-                  <td> <%= club.active_club_period? ? club.active_club_period.club_members.count : O %> </td>
+                  <td> <%= club.active_club_period? ? club.active_club_period.club_members.count : "O" %> </td>
                 </tr>
               <% end %>
             </tbody>

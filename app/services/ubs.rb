@@ -21,7 +21,7 @@ module Ubs
     names = params['full_name'].split(' ')
     if names.count == 3
       first_name = names[0] + ' ' + names[1]
-      last_name = names[3]
+      last_name = names[2]
     else
       first_name = names[0]
       last_name = names[1]
@@ -73,7 +73,8 @@ module Ubs
       is_ubs_active: result['state'].present? && result['state'] == '1'
     )
     user.profile = Profile.new(
-      full_name: result['first_name'] + ' ' + result['last_name']
+      full_name: result['first_name'] + ' ' + result['last_name'],
+      email: result['email']
     )
   end
 

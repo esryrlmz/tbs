@@ -17,14 +17,21 @@
           <strong>Adı:</strong>
           <%= @role.role_type.name %>
         </p>
+        <%if @role.role_type.name=="Dekan" %>
+        <p>
+          <strong>Fakulte:</strong>
+          <%= @role.faculty.name %>
+        </p>
+        <% else %>
         <p>
           <strong>Topluluk:</strong>
-          <%= @role.club_period.club.name %>
+          <%= @role.club_period.club.name unless @role.club_period.blank?%>
         </p>
         <p>
           <strong>Topluluk Akademik Dönem:</strong>
-          <%= @role.club_period.academic_period.name %>
+          <%= @role.club_period.academic_period.name unless @role.club_period.blank? %>
         </p>
+        <% end %>
         <%= link_to 'Düzenle', edit_role_path(@role), class: "btn btn-success" %> |
         <%= link_to 'Geri', :back, class: "btn btn-info" %>
       </div>
