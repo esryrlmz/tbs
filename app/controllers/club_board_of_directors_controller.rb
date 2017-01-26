@@ -3,7 +3,7 @@ class ClubBoardOfDirectorsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :edit, :update, :destroy]
 
   def index
-    @club_board_of_directors = ClubBoardOfDirector
+    @club_board_of_directors = ClubBoardOfDirector.all
     authorize @club_board_of_directors
   end
 
