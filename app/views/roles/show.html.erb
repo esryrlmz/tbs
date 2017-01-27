@@ -17,7 +17,7 @@
           <strong>Adı:</strong>
           <%= @role.role_type.name %>
         </p>
-        <%if @role.role_type.name=="Dekan" %>
+        <% if @role.role_type.name == "Dekan" %>
         <p>
           <strong>Fakulte:</strong>
           <%= @role.faculty.name %>
@@ -25,7 +25,7 @@
         <% else %>
         <p>
           <strong>Topluluk:</strong>
-          <%= @role.club_period.club.name unless @role.club_period.blank?%>
+          <%= @role.club_period.club.name unless @role.club_period.blank? %>
         </p>
         <p>
           <strong>Topluluk Akademik Dönem:</strong>

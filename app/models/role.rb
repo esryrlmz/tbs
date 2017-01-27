@@ -14,4 +14,8 @@ class Role < ActiveRecord::Base
       role_type.name
     end
   end
+
+  def self.president?(club_period_id)
+    Role.find_by(club_period_id: club_period_id, role_type_id: RoleType.find_by(name: 'Baskan').id)
+  end
 end
